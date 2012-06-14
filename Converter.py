@@ -18,8 +18,50 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-class IllustrateActivity(activity.Activity):
+import json
+
+from gettext import gettext as _
+import gtk
+
+from sugar import profile
+from sugar import mime
+from sugar.activity import activity
+from sugar.activity.widgets import StopButton
+from sugar.activity.widgets import ActivityToolbarButton
+from sugar.activity.widgets import ToolbarButton
+from sugar.graphics.icon import Icon
+from sugar.graphics.colorbutton import ColorToolButton
+from sugar.graphics.toolbarbox import ToolbarBox
+from sugar.graphics.toolbutton import ToolButton
+from sugar.graphics.radiotoolbutton import RadioToolButton
+from sugar.graphics.objectchooser import ObjectChooser
+from sugar.graphics.alert import Alert, NotifyAlert
+
+class Activity(activity.Activity):
     def __init__(self, handle):
         activity.Activity.__init__(self, handle, True)
 
-        pass
+        toolbarbox = ToolbarBox()
+
+        activity_button = ActivityToolbarButton(self)
+
+        toolbarbox.toolbar.insert(activity_button, 0)
+
+        separator = gtk.SeparatorToolItem()
+        separator.set_expand(False)
+        separator.set_draw(True)
+        toolbarbox.toolbar.insert(separator, -1)
+
+
+
+        stopbtn = StopButton(self)
+        toolbarbox.toolbar.insert(stopbtn, -1)
+
+        self.set_toolbar_box(toolbarbox)
+
+        #Canvas
+        canvas = gtk.VBox()
+
+        self.set_canvas(canvas)
+
+        self.show_all()
