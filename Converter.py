@@ -52,7 +52,27 @@ class Activity(activity.Activity):
         separator.set_draw(True)
         toolbarbox.toolbar.insert(separator, -1)
 
+        # RadioToolButton
+        self._long_btn = RadioToolButton()
+        self._long_btn.props.icon_name = "long"
 
+        self._vol_btn = RadioToolButton()
+        self._vol_btn.props.icon_name = "vol"
+        self._vol_btn.props.group = self._long_btn
+
+        self._area_btn = RadioToolButton()
+        self._area_btn.props.icon_name = "area"
+        self._area_btn.props.group = self._long_btn
+
+        toolbarbox.toolbar.insert(self._long_btn, -1)
+        toolbarbox.toolbar.insert(self._vol_btn, -1)
+        toolbarbox.toolbar.insert(self._area_btn, -1)
+
+        #
+        separator = gtk.SeparatorToolItem()
+        separator.set_expand(True)
+        separator.set_draw(False)
+        toolbarbox.toolbar.insert(separator, -1)
 
         stopbtn = StopButton(self)
         toolbarbox.toolbar.insert(stopbtn, -1)
