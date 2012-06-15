@@ -64,9 +64,24 @@ class Activity(activity.Activity):
         self._area_btn.props.icon_name = "area"
         self._area_btn.props.group = self._long_btn
 
+        self._peso_btn = RadioToolButton()
+        self._peso_btn.props.icon_name = "area"
+        self._peso_btn.props.group = self._long_btn
+
+        self._vel_btn = RadioToolButton()
+        self._vel_btn.props.icon_name = "vel"
+        self._vel_btn.props.group = self._long_btn
+
+        self._time_btn = RadioToolButton()
+        self._time_btn.props.icon_name = "time"
+        self._time_btn.props.group = self._long_btn
+
         toolbarbox.toolbar.insert(self._long_btn, -1)
         toolbarbox.toolbar.insert(self._vol_btn, -1)
         toolbarbox.toolbar.insert(self._area_btn, -1)
+        toolbarbox.toolbar.insert(self._peso_btn, -1)
+        toolbarbox.toolbar.insert(self._vel_btn, -1)
+        toolbarbox.toolbar.insert(self._time_btn, -1)
 
         #
         separator = gtk.SeparatorToolItem()
