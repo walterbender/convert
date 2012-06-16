@@ -65,7 +65,7 @@ class Activity(activity.Activity):
         self._area_btn.props.group = self._long_btn
 
         self._peso_btn = RadioToolButton()
-        self._peso_btn.props.icon_name = "area"
+        self._peso_btn.props.icon_name = "peso"
         self._peso_btn.props.group = self._long_btn
 
         self._vel_btn = RadioToolButton()
