@@ -23,6 +23,8 @@ import json
 from gettext import gettext as _
 import gtk
 
+from Converter import Converter
+
 from sugar import profile
 from sugar import mime
 from sugar.activity import activity
@@ -95,7 +97,7 @@ class Activity(activity.Activity):
         self.set_toolbar_box(toolbarbox)
 
         #Canvas
-        canvas = gtk.VBox()
+        canvas = Converter
 
         self.set_canvas(canvas)
 
