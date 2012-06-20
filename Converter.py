@@ -20,21 +20,3 @@
 
 import gtk
 
-class Converter(gtk.VBox):
-
-    def __init__(self):
-        gtk.VBox.__init__(self)
-
-        self._hbox = gtk.VBox()
-
-        self.combo1 = gtk.Combo()
-
-        self.combo2 = gtk.Combo()
-
-        self.add(gtk.Label("Comvertir"))
-        self._hbox(gtk.Label("De "))
-        self._hbox.add(self.combo1)
-        self._hbox.add(gtk.Label(" a "))
-        self._hbox.add(self.combo2)
-
-        self.add(self._hbox)
