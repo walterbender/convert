@@ -18,5 +18,8 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import gtk
+class convert():
+
+    def __init__(self, num, uni1, uni2 type_u, ):
+        super(convert, self).__init__()
 
