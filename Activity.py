@@ -97,14 +97,14 @@ class Activity(activity.Activity):
         self.set_toolbar_box(toolbarbox)
 
         #Canvas
-        canvas = Converter
+        canvas = Canvas()
 
         self.set_canvas(canvas)
 
         self.show_all()
 
 
-class Converter(gtk.VBox):
+class Canvas(gtk.VBox):
     def __init__(self):
         gtk.VBox.__init__(self)
 
@@ -121,3 +121,5 @@ class Converter(gtk.VBox):
         self._hbox.add(self.combo2)
 
         self.add(self._hbox)
+
+        self.show_all()
