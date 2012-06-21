@@ -19,7 +19,15 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 class convert():
-
-    def __init__(self, num, uni1, uni2 type_u, ):
+    def __init__(self, number, uni1, uni2, type_u, ):
         super(convert, self).__init__()
 
+        self.list = {"long": {},
+                     "vol": {},
+                     "area": {},
+                     "peso": {},
+                     "vel": {},
+                     "time": {}}
+
+        self.a = number * self.list[type_u][uni1]
+        return self.a * self.list[type_u][uni2]
