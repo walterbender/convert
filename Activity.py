@@ -107,8 +107,8 @@ class Canvas(gtk.VBox):
         gtk.VBox.__init__(self)
 
         self._hbox = gtk.HBox()
-        self.combo1 = gtk.Combo_box_new_text()
-        self.combo2 = gtk.Combo_box_new_text()
+        self.combo1 = gtk.Combo()
+        self.combo2 = gtk.Combo()
 
         self._hbox.add(gtk.Label("Of "))
         self._hbox.add(self.combo1)
@@ -116,4 +116,3 @@ class Canvas(gtk.VBox):
         self._hbox.add(self.combo2)
 
         self.show_all()
-
