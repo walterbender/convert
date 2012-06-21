@@ -116,3 +116,4 @@ class Canvas(gtk.VBox):
         self._hbox.add(self.combo2)
 
         self.show_all()
+
