@@ -107,12 +107,13 @@ class Canvas(gtk.VBox):
         gtk.VBox.__init__(self)
 
         self._hbox = gtk.HBox()
-        self.combo1 = gtk.Combo()
-        self.combo2 = gtk.Combo()
+        self.combo1 = gtk.ComboBox()
+        self.combo2 = gtk.ComboBox()
 
-        self._hbox.add(gtk.Label("Of "))
-        self._hbox.add(self.combo1)
-        self._hbox.add(gtk.Label("to"))
-        self._hbox.add(self.combo2)
+        self._hbox.pack_start(gtk.Label("Of "), True)
+        self._hbox.pack_start(self.combo1, True)
+        self._hbox.pack_start(gtk.Label("to"), True)
+        self._hbox.pack_start(self.combo2, True)
 
+        self.pack_start(self._hbox, False)
         self.show_all()
