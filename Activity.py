@@ -120,19 +120,26 @@ class Canvas(gtk.VBox):
         adjustment = gtk.Adjustment(value=1.0, lower=0.0, upper=0.0,
                                     step_incr=0.5, page_incr=1.0, page_size=0.0)
 
-        self.spin_btn1 = gtk.SpinButton(adjustment, 1.0, 0)
-        self._hbox2.pack_start(self.spin_btn1, False)
+
         self.spin_btn2 = gtk.SpinButton(adjustment, 1.0, 0)
         self._hbox2.pack_start(self.spin_btn2, False)
 
         self.separator1 = gtk.VSeparator()
-        self.separator1.set_expand(True)
-        self.separator1.set_draw(False)
         self._hbox2.pack_start(self.separator1, True)
 
+        self.spin_btn1 = gtk.SpinButton(adjustment, 1.0, 0)
+        self._hbox2.pack_start(self.spin_btn1, False)
+
         self.separator2 = gtk.VSeparator()
-        self.separator2.set_expand(True)
-        self.separator2.set_draw(False)
         self._hbox2.pack_start(self.separator2, True)
 
+        self.spin_btn1 = gtk.SpinButton(adjustment, 1.0, 0)
+        self._hbox2.pack_start(self.spin_btn1, False)
+
+        self.separator3 = gtk.VSeparator()
+        self._hbox2.pack_start(self.separator3, True)
+
         self.show_all()
+        self.separator1.hide()
+        self.separator2.hide()
+        self.separator3.hide()
