@@ -108,29 +108,29 @@ class Canvas(gtk.VBox):
 
         self._hbox1 = gtk.HBox()
         self._hbox2 = gtk.HBox()
-        self.combo1 = gtk.ComboBox()
-        self.combo2 = gtk.ComboBox()
-        adjustment = gtk.Adjustment(value=1.0, lower=0.0, upper=0.0,
-                                    step_incr=0.5, page_incr=1.0, page_size=0.0)
-                                    #commit arregle un error con adjusment
-        self.spin_btn1 = gtk.SpinButton(adjustment, 1.0, 0)
-        self.spin_btn2 = gtk.SpinButton(adjustment, 1.0, 0)
-        #self.separator1 = gtk.VSeparator()
-        #self.separator1.set_expand(True)
-        #self.separator1.set_draw(False)
-        #self.separator2 = gtk.VSeparator()
-        #self.separator2.set_expand(True)
-        #self.separator2.set_draw(False)
-
         self._hbox1.pack_start(gtk.Label("Of "), True)
+        self.combo1 = gtk.ComboBox()
         self._hbox1.pack_start(self.combo1, True)
         self._hbox1.pack_start(gtk.Label("to"), True)
+        self.combo2 = gtk.ComboBox()
         self._hbox1.pack_start(self.combo2, True)
+        adjustment = gtk.Adjustment(value=1.0, lower=0.0, upper=0.0,
+                                    step_incr=0.5, page_incr=1.0, page_size=0.0)
 
-        #self._hbox2.pack_start(self.separator1, True)
+        self.spin_btn1 = gtk.SpinButton(adjustment, 1.0, 0)
         self._hbox2.pack_start(self.spin_btn1, False)
-        #self._hbox2.pack_start(self.separator2, True)
+        self.spin_btn2 = gtk.SpinButton(adjustment, 1.0, 0)
         self._hbox2.pack_start(self.spin_btn2, False)
+
+        self.separator1 = gtk.VSeparator()
+        self.separator1.set_expand(True)
+        self.separator1.set_draw(False)
+        self._hbox2.pack_start(self.separator1, True)
+
+        self.separator2 = gtk.VSeparator()
+        self.separator2.set_expand(True)
+        self.separator2.set_draw(False)
+        self._hbox2.pack_start(self.separator2, True)
 
         self.pack_start(self._hbox1, False)
         self.pack_start(self._hbox2, False)
