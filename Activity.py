@@ -106,40 +106,21 @@ class Canvas(gtk.VBox):
     def __init__(self):
         gtk.VBox.__init__(self)
 
-        self._hbox1 = gtk.HBox()
-        self.pack_start(self._hbox1, False)
-        self._hbox2 = gtk.HBox()
-        self.pack_start(self._hbox2, False)
+        self.table = gtk.Table(rows=2, columns=4, homogeneous=False)
+        self.pack_start(self.table, False)
 
-        self._hbox1.pack_start(gtk.Label("Of "), True)
+        self.table.attach(gtk.Label("Of "), 0, 1, 0, 1)
         self.combo1 = gtk.ComboBox()
-        self._hbox1.pack_start(self.combo1, True)
-        self._hbox1.pack_start(gtk.Label("to"), True)
+        self.table.attach(self.combo1, 1, 2, 0, 1)
+        self.table.attach(gtk.Label("to"), 2, 3, 0, 1)
         self.combo2 = gtk.ComboBox()
-        self._hbox1.pack_start(self.combo2, True)
-        adjustment = gtk.Adjustment(value=1.0, lower=0.0, upper=0.0,
-                                    step_incr=0.5, page_incr=1.0, page_size=0.0)
+        self.table.attach(self.combo2, 3, 4, 0, 1)
 
+        adjustment = gtk.Adjustment(value=1.0, lower=0.0, upper=0.0,
+                                    step_incr=0.5, page_incr=1.0,
+                                    page_size=0.0)
+        self.spin_btn1 = gtk.SpinButton(adjustment, 1.0, 0)
+        self.table.attach(self.spin_btn1, 1, 2, 1, 2)
 
         self.spin_btn2 = gtk.SpinButton(adjustment, 1.0, 0)
-        self._hbox2.pack_start(self.spin_btn2, False)
-
-        self.separator1 = gtk.VSeparator()
-        self._hbox2.pack_start(self.separator1, True)
-
-        self.spin_btn1 = gtk.SpinButton(adjustment, 1.0, 0)
-        self._hbox2.pack_start(self.spin_btn1, False)
-
-        self.separator2 = gtk.VSeparator()
-        self._hbox2.pack_start(self.separator2, True)
-
-        self.spin_btn1 = gtk.SpinButton(adjustment, 1.0, 0)
-        self._hbox2.pack_start(self.spin_btn1, False)
-
-        self.separator3 = gtk.VSeparator()
-        self._hbox2.pack_start(self.separator3, True)
-
-        self.show_all()
-        self.separator1.hide()
-        self.separator2.hide()
-        self.separator3.hide()
+        self.table.attach(self.spin_btn2, 3, 4, 1, 2)
