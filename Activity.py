@@ -107,7 +107,10 @@ class Canvas(gtk.VBox):
         gtk.VBox.__init__(self)
 
         self._hbox1 = gtk.HBox()
+        self.pack_start(self._hbox1, False)
         self._hbox2 = gtk.HBox()
+        self.pack_start(self._hbox2, False)
+
         self._hbox1.pack_start(gtk.Label("Of "), True)
         self.combo1 = gtk.ComboBox()
         self._hbox1.pack_start(self.combo1, True)
@@ -132,6 +135,4 @@ class Canvas(gtk.VBox):
         self.separator2.set_draw(False)
         self._hbox2.pack_start(self.separator2, True)
 
-        self.pack_start(self._hbox1, False)
-        self.pack_start(self._hbox2, False)
         self.show_all()
