@@ -18,10 +18,12 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+import sys
 
 class convert():
     def __init__(self, number, uni1, uni2, type_u):
-        super(convert, self).__init__()
+
+        self.dic = {}
 
         self.long = {}
         self.vol = {}
@@ -43,6 +45,11 @@ class convert():
         elif type_u == "time":
             self.dic = self.time
 
-        self.a = number * self.dic[uni1]
+        self.unidad = number * self.dic[uni1]
 
-        return self.a * self.dic[uni2]
+        return self.unidad * self.dic[uni2]
+
+def main():
+    print convert(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4])
+
+main()
