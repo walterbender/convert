@@ -98,7 +98,6 @@ class Canvas(gtk.VBox):
         self.table = gtk.Table(rows=2, columns=4, homogeneous=False)
         self.pack_start(self.table, False)
 
-        self.table.attach(gtk.Label("Of "), 0, 1, 0, 1)
         self.combo1 = gtk.ComboBox()
         self.table.attach(self.combo1, 1, 2, 0, 1)
         self.table.attach(gtk.Label("to"), 2, 3, 0, 1)
