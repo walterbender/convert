@@ -15,39 +15,32 @@
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
+# adic_long with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import sys
+def convert(number, uni1, uni2, type_u):
+    dic = {}
 
-def convert(self, number, uni1, uni2, type_u):
-    self.dic = {}
+    dic_long = {"Metro": 1, "Yarda": 1.09361, "Pie": 3.28084, "Brazas": 0.5468}
+    vol = {}
+    area = {}
+    peso = {}
+    vel = {}
+    time = {}
 
-    self.long = {}
-    self.vol = {}
-    self.area = {}
-    self.peso = {}
-    self.vel = {}
-    self.time = {}
-
-    if type_u == "long":
-        self.dic = self.long
+    if type_u == "dic_long":
+        dic = dic_long
     elif type_u == "vol":
-        self.dic = self.vol
+        dic = vol
     elif type_u == "area":
-        self.dic = self.area
+        dic = area
     elif type_u == "peso":
-        self.dic = self.peso
+        dic = peso
     elif type_u == "vel":
-        self.dic = self.vel
+        dic = vel
     elif type_u == "time":
-        self.dic = self.time
+        dic = time
 
-    self.unidad = number * self.dic[uni1]
+    unidad = number * dic[uni1]
 
-    return self.unidad * self.dic[uni2]
-
-def main():
-    print convert(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4])
-
-main()
+    return unidad * dic[uni2]
