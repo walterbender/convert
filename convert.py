@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# Comverter.py by:
+# comverter.py by:
 #	Cristhofer Travieso <cristhofert97@gmail.com>
 
 # This program is free software; you can redistribute it and/or modify
