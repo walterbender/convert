@@ -20,34 +20,32 @@
 
 import sys
 
-class convert():
-    def __init__(self, number, uni1, uni2, type_u):
+def convert(self, number, uni1, uni2, type_u):
+    self.dic = {}
 
-        self.dic = {}
+    self.long = {}
+    self.vol = {}
+    self.area = {}
+    self.peso = {}
+    self.vel = {}
+    self.time = {}
 
-        self.long = {}
-        self.vol = {}
-        self.area = {}
-        self.peso = {}
-        self.vel = {}
-        self.time = {}
+    if type_u == "long":
+        self.dic = self.long
+    elif type_u == "vol":
+        self.dic = self.vol
+    elif type_u == "area":
+        self.dic = self.area
+    elif type_u == "peso":
+        self.dic = self.peso
+    elif type_u == "vel":
+        self.dic = self.vel
+    elif type_u == "time":
+        self.dic = self.time
 
-        if type_u == "long":
-            self.dic = self.long
-        elif type_u == "vol":
-            self.dic = self.vol
-        elif type_u == "area":
-            self.dic = self.area
-        elif type_u == "peso":
-            self.dic = self.peso
-        elif type_u == "vel":
-            self.dic = self.vel
-        elif type_u == "time":
-            self.dic = self.time
+    self.unidad = number * self.dic[uni1]
 
-        self.unidad = number * self.dic[uni1]
-
-        return self.unidad * self.dic[uni2]
+    return self.unidad * self.dic[uni2]
 
 def main():
     print convert(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4])
