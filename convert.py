@@ -18,16 +18,16 @@
 # adic_long with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+dic = {}
+
+dic_long = {"Metro": 1, "Yarda": 1.09361, "Pie": 3.28084, "Brazas": 0.5468}
+vol = {}
+area = {}
+peso = {}
+vel = {}
+time = {}
+
 def convert(number, uni1, uni2, type_u):
-    dic = {}
-
-    dic_long = {"Metro": 1, "Yarda": 1.09361, "Pie": 3.28084, "Brazas": 0.5468}
-    vol = {}
-    area = {}
-    peso = {}
-    vel = {}
-    time = {}
-
     if type_u == "dic_long":
         dic = dic_long
     elif type_u == "vol":
@@ -44,3 +44,19 @@ def convert(number, uni1, uni2, type_u):
     unidad = number * dic[uni1]
 
     return unidad * dic[uni2]
+
+def return_list(type_u):
+    if type_u == "dic_long":
+        dic = dic_long
+    elif type_u == "vol":
+        dic = vol
+    elif type_u == "area":
+        dic = area
+    elif type_u == "peso":
+        dic = peso
+    elif type_u == "vel":
+        dic = vel
+    elif type_u == "time":
+        dic = time
+
+    return dic.key()

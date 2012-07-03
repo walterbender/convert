@@ -19,6 +19,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import gtk
+import convert
 
 from sugar.activity import activity
 from sugar.activity.widgets import StopButton
@@ -112,3 +113,7 @@ class Canvas(gtk.VBox):
 
         self.spin_btn2 = gtk.SpinButton(adjustment, 1.0, 0)
         self.table.attach(self.spin_btn2, 3, 4, 1, 2)
+
+    def update_combo(self, type_u):
+        self.combo1.set_popdown_strings(convert.return_list)
+        self.combo2.set_popdown_strings(convert.return_list)
