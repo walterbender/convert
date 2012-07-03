@@ -18,24 +18,13 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import json
-
-from gettext import gettext as _
 import gtk
 
-from sugar import profile
-from sugar import mime
 from sugar.activity import activity
 from sugar.activity.widgets import StopButton
 from sugar.activity.widgets import ActivityToolbarButton
-from sugar.activity.widgets import ToolbarButton
-from sugar.graphics.icon import Icon
-from sugar.graphics.colorbutton import ColorToolButton
 from sugar.graphics.toolbarbox import ToolbarBox
-from sugar.graphics.toolbutton import ToolButton
 from sugar.graphics.radiotoolbutton import RadioToolButton
-from sugar.graphics.objectchooser import ObjectChooser
-from sugar.graphics.alert import Alert, NotifyAlert
 
 class Activity(activity.Activity):
     def __init__(self, handle):
