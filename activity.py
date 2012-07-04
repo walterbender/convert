@@ -44,35 +44,42 @@ class Activity(activity.Activity):
 
         # RadioToolButton
         self._long_btn = RadioToolButton()
+        self._long_btn.connect("clicked", self.update_combo, "long")
         self._long_btn.set_tooltip("long")
         self._long_btn.props.icon_name = "long"
 
         self._vol_btn = RadioToolButton()
+        self._vol_btn.connect("clicked", self.update_combo, "vol")
         self._vel_btn.set_tooltip("vol")
         self._vol_btn.props.icon_name = "vol"
         self._vol_btn.props.group = self._long_btn
 
         self._area_btn = RadioToolButton()
+        self._area_btn.connect("clicked", self.update_combo, "area")
         self._area_btn.set_tooltip("area")
         self._area_btn.props.icon_name = "area"
         self._area_btn.props.group = self._long_btn
 
         self._peso_btn = RadioToolButton()
+        self._peso_btn.connect("clicked", self.update_combo, "peso")
         self._peso_btn.set_tooltip("peso")
         self._peso_btn.props.icon_name = "peso"
         self._peso_btn.props.group = self._long_btn
 
         self._vel_btn = RadioToolButton()
+        self._vel_btn.connect("clicked", self.update_combo, "vel")
         self._vel_btn.set_tooltip("vel")
         self._vel_btn.props.icon_name = "vel"
         self._vel_btn.props.group = self._long_btn
 
         self._time_btn = RadioToolButton()
+        self._time_btn.connect("clicked", self.update_combo, "time")
         self._time_btn.set_tooltip("time")
         self._time_btn.props.icon_name = "time"
         self._time_btn.props.group = self._long_btn
 
         self._temp_btn = RadioToolButton()
+        self._temp_btn.connect("clicked", self.update_combo, "temp")
         self._temp_btn.props.icon_name = "temp"
         self._temp_btn.props.group = self._long_btn
         self._temp_btn.set_tooltip("temp")
@@ -125,6 +132,6 @@ class Canvas(gtk.VBox):
         self.spin_btn2 = gtk.SpinButton(adjustment, 1.0, 0)
         self.table.attach(self.spin_btn2, 3, 4, 1, 2)
 
-    def update_combo(self, type_u):
-        self.combo1.set_popdown_strings(convert.return_list)
-        self.combo2.set_popdown_strings(convert.return_list)
+    def update_combo(self, widget, data):
+        self.combo1.set_popdown_strings(convert.return_list(data))
+        self.combo2.set_popdown_strings(convert.return_list(data))
