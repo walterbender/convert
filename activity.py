@@ -27,7 +27,7 @@ from sugar.activity.widgets import ActivityToolbarButton
 from sugar.graphics.toolbarbox import ToolbarBox
 from sugar.graphics.radiotoolbutton import RadioToolButton
 
-class Activity(activity.Activity):
+class ConvertActivity(activity.Activity):
     def __init__(self, handle):
         activity.Activity.__init__(self, handle, True)
 
@@ -44,14 +44,14 @@ class Activity(activity.Activity):
 
         # RadioToolButton
         self._long_btn = RadioToolButton()
-        self._long_btn.connect("clicked", self.update_combo, "long")
-        self._long_btn.set_tooltip("long")
-        self._long_btn.props.icon_name = "long"
+        self._long_btn.connect("clicked", self.update_combo, "lenght")
+        self._long_btn.set_tooltip("lenght")
+        self._long_btn.props.icon_name = "lenght"
 
         self._vol_btn = RadioToolButton()
-        self._vol_btn.connect("clicked", self.update_combo, "vol")
-        self._vel_btn.set_tooltip("vol")
-        self._vol_btn.props.icon_name = "vol"
+        self._vol_btn.connect("clicked", self.update_combo, "volume")
+        self._vol_btn.set_tooltip("volume")
+        self._vol_btn.props.icon_name = "volume"
         self._vol_btn.props.group = self._long_btn
 
         self._area_btn = RadioToolButton()
@@ -67,9 +67,9 @@ class Activity(activity.Activity):
         self._peso_btn.props.group = self._long_btn
 
         self._vel_btn = RadioToolButton()
-        self._vel_btn.connect("clicked", self.update_combo, "vel")
-        self._vel_btn.set_tooltip("vel")
-        self._vel_btn.props.icon_name = "vel"
+        self._vel_btn.connect("clicked", self.update_combo, "speed")
+        self._vel_btn.set_tooltip("speed")
+        self._vel_btn.props.icon_name = "speed"
         self._vel_btn.props.group = self._long_btn
 
         self._time_btn = RadioToolButton()
@@ -110,6 +110,11 @@ class Activity(activity.Activity):
         self.show_all()
 
 
+    def update_combo(self, widget, data):
+        self.combo1.set_popdown_strings(convert.return_list(data))
+        self.combo2.set_popdown_strings(convert.return_list(data))
+
+
 class Canvas(gtk.VBox):
     def __init__(self):
         gtk.VBox.__init__(self)
@@ -123,15 +128,11 @@ class Canvas(gtk.VBox):
         self.combo2 = gtk.ComboBox()
         self.table.attach(self.combo2, 3, 4, 0, 1)
 
-        adjustment = gtk.Adjustment(value=1.0, lower=0.0, upper=0.0,
-                                    step_incr=0.5, page_incr=1.0,
-                                    page_size=0.0)
-        self.spin_btn1 = gtk.SpinButton(adjustment, 1.0, 0)
+        adjustment = gtk.Adjustment(1.0, 0.1, 1000, 0.1, 0.1, 0.1)
+        self.spin_btn1 = gtk.SpinButton(adjustment, 1.0, 1)
         self.table.attach(self.spin_btn1, 1, 2, 1, 2)
 
-        self.spin_btn2 = gtk.SpinButton(adjustment, 1.0, 0)
-        self.table.attach(self.spin_btn2, 3, 4, 1, 2)
+        adjustment = gtk.Adjustment(1.0, 0.1, 1000, 0.1, 0.1, 0.1)
 
-    def update_combo(self, widget, data):
-        self.combo1.set_popdown_strings(convert.return_list(data))
-        self.combo2.set_popdown_strings(convert.return_list(data))
+        self.spin_btn2 = gtk.SpinButton(adjustment, 1.0, 1)
+        self.table.attach(self.spin_btn2, 3, 4, 1, 2)

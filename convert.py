@@ -15,47 +15,66 @@
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# adic_long with this program; if not, write to the Free Software
+# alenght with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 dic = {}
 
-dic_long = {"Metro": 1, "Yarda": 1.09361, "Pie": 3.28084, "Brazas": 0.5468}
-vol = {}
+lenght = {"Metro": 1, "Yarda": 1.09361, "Pie": 3.28084, "Brazas": 0.5468}
+speed = {}
 area = {}
-peso = {}
-vel = {}
+weight = {}
+volume = {}
 time = {}
 
-def convert(number, uni1, uni2, type_u):
-    if type_u == "dic_long":
-        dic = dic_long
-    elif type_u == "vol":
-        dic = vol
-    elif type_u == "area":
-        dic = area
-    elif type_u == "peso":
-        dic = peso
-    elif type_u == "vel":
-        dic = vel
-    elif type_u == "time":
-        dic = time
 
-    unidad = number * dic[uni1]
+def conver_lenght(number, unit, to_unit):
 
-    return unidad * dic[uni2]
+    _unit = number * lenght[unit]
+    return _unit * lenght[unit]
+
+
+def conver_time(number, unit, to_unit):
+
+    _unit = number * time[unit]
+    return _unit * time[unit]
+
+
+def conver_volume(number, unit, to_unit):
+
+    _unit = number * volume[unit]
+    return _unit * volume[unit]
+
+
+def conver_area(number, unit, to_unit):
+
+    _unit = number * area[unit]
+    return _unit * area[unit]
+
+
+def conver_weight(number, unit, to_unit):
+
+    _unit = number * weight[unit]
+    return _unit * weight[unit]
+
+
+def conver_speed(number, unit, to_unit):
+
+    _unit = number * speed[unit]
+    return _unit * speed[unit]
+
 
 def return_list(type_u):
-    if type_u == "dic_long":
-        dic = dic_long
-    elif type_u == "vol":
-        dic = vol
+    if type_u == "lenght":
+        dic = lenght
+    elif type_u == "volume":
+        dic = volume
     elif type_u == "area":
         dic = area
-    elif type_u == "peso":
-        dic = peso
-    elif type_u == "vel":
-        dic = vel
+    elif type_u == "weight":
+        dic = weight
+    elif type_u == "speed":
+        dic = speed
     elif type_u == "time":
         dic = time
 

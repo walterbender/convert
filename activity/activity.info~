@@ -1,8 +1,0 @@
-[Activity]
-name = Converter
-activity_version = 1
-show_launcher = 1
-bundle_id = org.ceibaljam.Converter
-exec = sugar-activity Activity.Activity -s
-icon = icon
-license = GPLv3+
