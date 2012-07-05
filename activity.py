@@ -43,52 +43,52 @@ class ConvertActivity(activity.Activity):
         toolbarbox.toolbar.insert(separator, -1)
 
         # RadioToolButton
-        self._long_btn = RadioToolButton()
-        self._long_btn.connect("clicked", self.update_combo, "lenght")
-        self._long_btn.set_tooltip("lenght")
-        self._long_btn.props.icon_name = "lenght"
+        self._lenght_btn = RadioToolButton()
+        self._lenght_btn.connect("clicked", self.update_combo, "lenght")
+        self._lenght_btn.set_tooltip("lenght")
+        self._lenght_btn.props.icon_name = "lenght"
 
-        self._vol_btn = RadioToolButton()
-        self._vol_btn.connect("clicked", self.update_combo, "volume")
-        self._vol_btn.set_tooltip("volume")
-        self._vol_btn.props.icon_name = "volume"
-        self._vol_btn.props.group = self._long_btn
+        self._volume_btn = RadioToolButton()
+        self._volume_btn.connect("clicked", self.update_combo, "volume")
+        self._volume_btn.set_tooltip("volume")
+        self._volume_btn.props.icon_name = "volume"
+        self._volume_btn.props.group = self._lenght_btn
 
         self._area_btn = RadioToolButton()
         self._area_btn.connect("clicked", self.update_combo, "area")
         self._area_btn.set_tooltip("area")
         self._area_btn.props.icon_name = "area"
-        self._area_btn.props.group = self._long_btn
+        self._area_btn.props.group = self._lenght_btn
 
-        self._peso_btn = RadioToolButton()
-        self._peso_btn.connect("clicked", self.update_combo, "peso")
-        self._peso_btn.set_tooltip("peso")
-        self._peso_btn.props.icon_name = "peso"
-        self._peso_btn.props.group = self._long_btn
+        self._weight_btn = RadioToolButton()
+        self._weight_btn.connect("clicked", self.update_combo, "peso")
+        self._weight_btn.set_tooltip("peso")
+        self._weight_btn.props.icon_name = "weight"
+        self._weight_btn.props.group = self._lenght_btn
 
-        self._vel_btn = RadioToolButton()
-        self._vel_btn.connect("clicked", self.update_combo, "speed")
-        self._vel_btn.set_tooltip("speed")
-        self._vel_btn.props.icon_name = "speed"
-        self._vel_btn.props.group = self._long_btn
+        self._speed_btn = RadioToolButton()
+        self._speed_btn.connect("clicked", self.update_combo, "speed")
+        self._speed_btn.set_tooltip("speed")
+        self._speed_btn.props.icon_name = "speed"
+        self._speed_btn.props.group = self._lenght_btn
 
         self._time_btn = RadioToolButton()
         self._time_btn.connect("clicked", self.update_combo, "time")
         self._time_btn.set_tooltip("time")
         self._time_btn.props.icon_name = "time"
-        self._time_btn.props.group = self._long_btn
+        self._time_btn.props.group = self._lenght_btn
 
         self._temp_btn = RadioToolButton()
         self._temp_btn.connect("clicked", self.update_combo, "temp")
         self._temp_btn.props.icon_name = "temp"
-        self._temp_btn.props.group = self._long_btn
-        self._temp_btn.set_tooltip("temp")
+        self._temp_btn.props.group = self._lenght_btn
+        self._temp_btn.set_tooltip("temperature")
 
-        toolbarbox.toolbar.insert(self._long_btn, -1)
-        toolbarbox.toolbar.insert(self._vol_btn, -1)
+        toolbarbox.toolbar.insert(self._lenght_btn, -1)
+        toolbarbox.toolbar.insert(self._volume_btn, -1)
         toolbarbox.toolbar.insert(self._area_btn, -1)
-        toolbarbox.toolbar.insert(self._peso_btn, -1)
-        toolbarbox.toolbar.insert(self._vel_btn, -1)
+        toolbarbox.toolbar.insert(self._weight_btn, -1)
+        toolbarbox.toolbar.insert(self._speed_btn, -1)
         toolbarbox.toolbar.insert(self._time_btn, -1)
 
         #
@@ -109,7 +109,6 @@ class ConvertActivity(activity.Activity):
 
         self.show_all()
 
-
     def update_combo(self, widget, data):
         self.combo1.set_popdown_strings(convert.return_list(data))
         self.combo2.set_popdown_strings(convert.return_list(data))
@@ -129,10 +128,10 @@ class Canvas(gtk.VBox):
         self.table.attach(self.combo2, 3, 4, 0, 1)
 
         adjustment = gtk.Adjustment(1.0, 0.1, 1000, 0.1, 0.1, 0.1)
-        self.spin_btn1 = gtk.SpinButton(adjustment, 1.0, 1)
-        self.table.attach(self.spin_btn1, 1, 2, 1, 2)
+        self.spin_btn = gtk.SpinButton(adjustment, 1.0, 1)
+        self.table.attach(self.spin_btn, 1, 2, 1, 2)
 
-        adjustment = gtk.Adjustment(1.0, 0.1, 1000, 0.1, 0.1, 0.1)
+        self.Flip_btn = gtk.Button()
+        self.table.attach(self.Flit_btn, 2, 3, 1, 2)
 
-        self.spin_btn2 = gtk.SpinButton(adjustment, 1.0, 1)
-        self.table.attach(self.spin_btn2, 3, 4, 1, 2)
+        self.table.attach(gtk.Label("x"), 3, 4, 1, 2)

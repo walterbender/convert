@@ -20,7 +20,8 @@
 
 dic = {}
 
-lenght = {"Metro": 1, "Yarda": 1.09361, "Pie": 3.28084, "Brazas": 0.5468}
+lenght = {"Metro": 1, "Km": 1000, "cm": 0.01, "Yarda": 1.09361, "Pie": 3.28084,
+          "Brazas": 0.5468}
 speed = {}
 area = {}
 weight = {}
@@ -28,40 +29,40 @@ volume = {}
 time = {}
 
 
-def conver_lenght(number, unit, to_unit):
+def convert_lenght(number, unit, to_unit):
 
     _unit = number * lenght[unit]
-    return _unit * lenght[unit]
+    return _unit * lenght[to_unit]
 
 
-def conver_time(number, unit, to_unit):
+def convert_time(number, unit, to_unit):
 
     _unit = number * time[unit]
-    return _unit * time[unit]
+    return _unit * time[to_unit]
 
 
-def conver_volume(number, unit, to_unit):
+def convert_volume(number, unit, to_unit):
 
     _unit = number * volume[unit]
-    return _unit * volume[unit]
+    return _unit * volume[to_unit]
 
 
-def conver_area(number, unit, to_unit):
+def convert_area(number, unit, to_unit):
 
     _unit = number * area[unit]
-    return _unit * area[unit]
+    return _unit * area[to_unit]
 
 
-def conver_weight(number, unit, to_unit):
+def convert_weight(number, unit, to_unit):
 
     _unit = number * weight[unit]
-    return _unit * weight[unit]
+    return _unit * weight[to_unit]
 
 
-def conver_speed(number, unit, to_unit):
+def convert_speed(number, unit, to_unit):
 
-    _unit = number * speed[unit]
-    return _unit * speed[unit]
+    _unit = number * speed[to_unit]
+    return _unit * speed[to_unit]
 
 
 def return_list(type_u):
