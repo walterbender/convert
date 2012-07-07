@@ -19,6 +19,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import gtk
+import pango
 import convert
 
 from sugar.activity import activity
@@ -26,6 +27,7 @@ from sugar.activity.widgets import StopButton
 from sugar.activity.widgets import ActivityToolbarButton
 from sugar.graphics.toolbarbox import ToolbarBox
 from sugar.graphics.radiotoolbutton import RadioToolButton
+
 
 class ConvertActivity(activity.Activity):
     def __init__(self, handle):
@@ -118,20 +120,21 @@ class Canvas(gtk.VBox):
     def __init__(self):
         gtk.VBox.__init__(self)
 
-        self.table = gtk.Table(rows=2, columns=4, homogeneous=False)
-        self.pack_start(self.table, False)
-
+        hbox = gtk.HBox()
+        self.pack_start(hbox, False, padding=5)
         self.combo1 = gtk.ComboBox()
-        self.table.attach(self.combo1, 1, 2, 0, 1)
-        self.table.attach(gtk.Label("to"), 2, 3, 0, 1)
+        hbox.pack_start(self.combo1, False, True, 2)
+        flip_btn = gtk.Button('Hola')
+        hbox.pack_start(flip_btn, True, False)
         self.combo2 = gtk.ComboBox()
-        self.table.attach(self.combo2, 3, 4, 0, 1)
+        hbox.pack_end(self.combo2, False, True, 2)
 
         adjustment = gtk.Adjustment(1.0, 0.1, 1000, 0.1, 0.1, 0.1)
+        spin_box = gtk.HBox()
         self.spin_btn = gtk.SpinButton(adjustment, 1.0, 1)
-        self.table.attach(self.spin_btn, 1, 2, 1, 2)
+        spin_box.pack_start(self.spin_btn, True, False)
+        self.pack_start(spin_box, False, False, 5)
 
-        self.Flip_btn = gtk.Button()
-        self.table.attach(self.Flit_btn, 2, 3, 1, 2)
-
-        self.table.attach(gtk.Label("x"), 3, 4, 1, 2)
+        label = gtk.Label("000")
+        label.modify_font(pango.FontDescription('120'))
+        self.pack_start(label, True, True, 5)
