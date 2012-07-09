@@ -20,7 +20,6 @@
 
 import gtk
 import pango
-import convert
 
 from sugar.activity import activity
 from sugar.activity.widgets import StopButton
@@ -28,6 +27,16 @@ from sugar.activity.widgets import ActivityToolbarButton
 from sugar.graphics.toolbarbox import ToolbarBox
 from sugar.graphics.toolbutton import ToolButton
 from sugar.graphics.radiotoolbutton import RadioToolButton
+
+dic = {}
+
+lenght = {"Metro": 1, "Km": 1000, "cm": 0.01, "Yarda": 1.09361, "Pie": 3.28084,
+          "Brazas": 0.5468}
+speed = {}
+area = {}
+weight = {}
+volume = {}
+time = {}
 
 
 class ConvertActivity(activity.Activity):
@@ -142,3 +151,8 @@ class Canvas(gtk.VBox):
         label = gtk.Label("000")
         label.modify_font(pango.FontDescription('120'))
         self.pack_start(label, True, True, 5)
+
+
+def convert(number, unit, to_unit):
+    _unit = number * dic[unit]
+    return _unit * dic[to_unit]
