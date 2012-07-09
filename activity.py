@@ -26,6 +26,7 @@ from sugar.activity import activity
 from sugar.activity.widgets import StopButton
 from sugar.activity.widgets import ActivityToolbarButton
 from sugar.graphics.toolbarbox import ToolbarBox
+from sugar.graphics.toolbutton import ToolButton
 from sugar.graphics.radiotoolbutton import RadioToolButton
 
 
@@ -124,7 +125,10 @@ class Canvas(gtk.VBox):
         self.pack_start(hbox, False, padding=5)
         self.combo1 = gtk.ComboBox()
         hbox.pack_start(self.combo1, False, True, 2)
-        flip_btn = gtk.Button('Hola')
+        flip_btn = gtk.Button()
+        flip_image = gtk.Image()
+        flip_image.set_from_file("/icon/to")
+        flip_btn.add(flip_image)
         hbox.pack_start(flip_btn, True, False)
         self.combo2 = gtk.ComboBox()
         hbox.pack_end(self.combo2, False, True, 2)
