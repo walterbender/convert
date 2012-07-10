@@ -31,12 +31,13 @@ dic = {}
 
 lenght = {"Metro": 1, "Km": 1000, "cm": 0.01, "Yarda": 1.09361, "Pie": 3.28084,
           "Brazas": 0.5468}
-speed = {}
-area = {}
-weight = {}
-volume = {}
-time = {}
-temp = {}
+speed = {"km/hs": 1}
+area = {"m2": 1}
+weight = {"g": 1, "Kg": 1000}
+volume = {"m3": 1}
+time = {"hs": 1}
+temp = {"C": 1}
+
 
 class ConvertActivity(activity.Activity):
     def __init__(self, handle):
@@ -55,45 +56,45 @@ class ConvertActivity(activity.Activity):
 
         # RadioToolButton
         self._lenght_btn = RadioToolButton()
-        self._lenght_btn.connect("clicked", Canvas.update_combo, lenght)
+        self._lenght_btn.connect("clicked", self.update_combo, lenght)
         self._lenght_btn.set_tooltip("lenght")
         self._lenght_btn.props.icon_name = "lenght"
 
         self._volume_btn = RadioToolButton()
-        self._volume_btn.connect("clicked", Canvas.update_combo, volume)
+        self._volume_btn.connect("clicked", self.update_combo, volume)
         self._volume_btn.set_tooltip("volume")
         self._volume_btn.props.icon_name = "volume"
         self._volume_btn.props.group = self._lenght_btn
 
         self._area_btn = RadioToolButton()
-        self._area_btn.connect("clicked", Canvas.update_combo, area)
+        self._area_btn.connect("clicked", self.update_combo, area)
         self._area_btn.set_tooltip("area")
         self._area_btn.props.icon_name = "area"
         self._area_btn.props.group = self._lenght_btn
 
         self._weight_btn = RadioToolButton()
-        self._weight_btn.connect("clicked", Canvas.update_combo, weight)
-        self._weight_btn.set_tooltip("peso")
+        self._weight_btn.connect("clicked", self.update_combo, weight)
+        self._weight_btn.set_tooltip("weight")
         self._weight_btn.props.icon_name = "weight"
         self._weight_btn.props.group = self._lenght_btn
 
         self._speed_btn = RadioToolButton()
-        self._speed_btn.connect("clicked", Canvas.update_combo, speed)
+        self._speed_btn.connect("clicked", self.update_combo, speed)
         self._speed_btn.set_tooltip("speed")
         self._speed_btn.props.icon_name = "speed"
         self._speed_btn.props.group = self._lenght_btn
 
         self._time_btn = RadioToolButton()
-        self._time_btn.connect("clicked", Canvas.update_combo, time)
+        self._time_btn.connect("clicked", self.update_combo, time)
         self._time_btn.set_tooltip("time")
         self._time_btn.props.icon_name = "time"
         self._time_btn.props.group = self._lenght_btn
 
         self._temp_btn = RadioToolButton()
-        self._temp_btn.connect("clicked", Canvas.update_combo, temp)
+        self._temp_btn.connect("clicked", self.update_combo, temp)
+        self._temp_btn.set_tooltip("temperature")
         self._temp_btn.props.icon_name = "temp"
         self._temp_btn.props.group = self._lenght_btn
-        self._temp_btn.set_tooltip("temperature")
 
         toolbarbox.toolbar.insert(self._lenght_btn, -1)
         toolbarbox.toolbar.insert(self._volume_btn, -1)
@@ -101,6 +102,7 @@ class ConvertActivity(activity.Activity):
         toolbarbox.toolbar.insert(self._weight_btn, -1)
         toolbarbox.toolbar.insert(self._speed_btn, -1)
         toolbarbox.toolbar.insert(self._time_btn, -1)
+        toolbarbox.toolbar.insert(self._temp_btn, -1)
 
         #
         separator = gtk.SeparatorToolItem()
@@ -114,46 +116,44 @@ class ConvertActivity(activity.Activity):
         self.set_toolbar_box(toolbarbox)
 
         #Canvas
-        canvas = Canvas()
+        self.canvas = gtk.VBox()
 
-        self.set_canvas(canvas)
-
-        self.show_all()
-
-
-class Canvas(gtk.VBox):
-    def __init__(self):
-        gtk.VBox.__init__(self)
+        self.set_canvas(self.canvas)
 
         hbox = gtk.HBox()
-        self.pack_start(hbox, False, padding=5)
-        self.combo1 = gtk.ComboBox()
+        self.canvas.pack_start(hbox, False, padding=5)
+        self.combo1 = gtk.combo_box_new_text()
         hbox.pack_start(self.combo1, False, True, 2)
+
         flip_btn = gtk.Button()
         flip_image = gtk.Image()
         flip_image.set_from_file("to.svg")
         flip_btn.add(flip_image)
         hbox.pack_start(flip_btn, True, False)
-        self.combo2 = gtk.ComboBox()
+
+        self.combo2 = gtk.combo_box_new_text()
         hbox.pack_end(self.combo2, False, True, 2)
 
         adjustment = gtk.Adjustment(1.0, 0.1, 1000, 0.1, 0.1, 0.1)
         spin_box = gtk.HBox()
         self.spin_btn = gtk.SpinButton(adjustment, 1.0, 1)
         spin_box.pack_start(self.spin_btn, True, False)
-        self.pack_start(spin_box, False, False, 5)
+        self.canvas.pack_start(spin_box, False, False, 5)
 
         label = gtk.Label(str(self.spin_btn.get_value()) + " ~ 000")
         label.modify_font(pango.FontDescription('80'))
-        self.pack_start(label, True, True, 5)
+        self.canvas.pack_start(label, True, True, 5)
 
         label_info = gtk.Label("   Convert \n000 x 000 = 000")
-        self.pack_start(label_info, True, True, 5)
+        self.canvas.pack_start(label_info, True, True, 5)
 
-    def update_combo(self, wifget, data):
-        for x in data.key():
+        self.show_all()
+
+    def update_combo(self, widget, data):
+        for x in data.keys():
             self.combo1.append_text(x)
             self.combo2.append_text(x)
+        self.show_all()
 
 
 def convert(_number, unit, to_unit):
