@@ -127,9 +127,7 @@ class ConvertActivity(activity.Activity):
         hbox.pack_start(self.combo1, False, True, 2)
 
         flip_btn = gtk.Button()
-        flip_image = gtk.Image()
-        flip_image.set_from_file("to.svg")
-        flip_btn.add(flip_image)
+	flip_btn.add(gtk.image_new_from_file("icons/flip.svg"))
         hbox.pack_start(flip_btn, True, False)
 
         self.combo2 = gtk.combo_box_new_text()
