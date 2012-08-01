@@ -28,7 +28,7 @@ from sugar.graphics.toolbarbox import ToolbarBox
 from sugar.graphics.radiotoolbutton import RadioToolButton
 
 
-lenght = {"Meter": 1, "Kilometer": 0.001, "Centimeter": 0.01, "Yard": 1.09361,
+lenght = {"Meter": 1, "Kilometer": 0.001, "Centimeter": 100, "Yard": 1.09361,
           "Foot": 3.28084, "Fathoms": 0.5468}
 speed = {"Km/H": 1}
 area = {"M2": 1}
@@ -52,30 +52,34 @@ class ConvertActivity(activity.Activity):
         hbox = gtk.HBox()
         self.canvas.pack_start(hbox, False, padding=5)
         self.combo1 = gtk.combo_box_new_text()
-        hbox.pack_start(self.combo1, False, True, 2)
+        self.combo1.connect('changed', lambda w: self._update_label())
+        hbox.pack_start(self.combo1, False, True, 20)
 
         flip_btn = gtk.Button()
         flip_btn.add(gtk.image_new_from_file("icons/flip.svg"))
+        flip_btn.connect('clicked', self._flip)
         hbox.pack_start(flip_btn, True, False)
 
         self.combo2 = gtk.combo_box_new_text()
-        hbox.pack_end(self.combo2, False, True, 2)
+        self.combo2.connect('changed', lambda w: self._update_label())
+        hbox.pack_end(self.combo2, False, True, 20)
 
-        adjustment = gtk.Adjustment(1.0, 0.1, 1000, 0.1, 0.1, 0.1)
+        adjustment = gtk.Adjustment(1.0, 0.1, 1000000, 0.1, 0.1, 0.1)
         spin_box = gtk.HBox()
         self.spin_btn = gtk.SpinButton(adjustment, 1.0, 1)
-        self.spin_btn.connect("value-changed", self._update_label)
+        self.spin_btn.connect("value-changed", lambda w: self._update_label())
         spin_box.pack_start(self.spin_btn, True, False)
         self.canvas.pack_start(spin_box, False, False, 5)
 
         self.label = gtk.Label()
         self.label.set_text("%s ~ %s" % (str(self.spin_btn.get_value()),
                             str(self.spin_btn.get_value())))
-        self.label.modify_font(pango.FontDescription('80'))
+        self.label.modify_font(pango.FontDescription('60'))
         self.canvas.pack_start(self.label, True, True, 5)
 
         self.label_info = gtk.Label("   Convert \n000 x 000 = 000")
-        self.canvas.pack_start(self.label_info, True, True, 5)
+        self.label_info.modify_font(pango.FontDescription('12'))
+        self.canvas.pack_end(self.label_info, 0, True, 30)
 
         #Toolbar
         toolbarbox = ToolbarBox()
@@ -159,9 +163,9 @@ class ConvertActivity(activity.Activity):
         self._update_combo(lenght)
         self.show_all()
 
-    def _update_label(self, widget):
-        self.label.set_text("%s ~ %s" % (str(widget.get_value()),
-                            self._convert()))
+    def _update_label(self):
+        self.label.set_text("%s ~ %s" % (str(self.spin_btn.get_value()),
+                            str(self._convert())))
 
     def _update_combo(self, data):
         for x in self.dic.keys():
@@ -174,6 +178,7 @@ class ConvertActivity(activity.Activity):
         self.combo1.set_active(0)
         self.combo2.set_active(0)
         self.show_all()
+        self._update_label()
 
     def _get_active_text(self, combobox):
         model = combobox.get_model()
@@ -182,13 +187,20 @@ class ConvertActivity(activity.Activity):
             return None
         return model[active][0]
 
+    #idea para cambiar los valores de los combos
+    def _flip(self, widget):
+        active_combo1 = self.combo1.get_active()
+        active_combo2 = self.combo2.get_active()
+        self.combo1.set_active(active_combo2)
+        self.combo2.set_active(active_combo1)
+
     def _update_label_info(self, igual=False, text1=None, text2=None):
         if igual:
             value = 1
         else:
-            value = self.dic[text1] * self.dic[text2]
-        self.label_info.set_text("%s x %s = %s" % (str(text1), str(value),
-                                                 str(text2)))
+            value = round(self.dic[text1] * self.dic[text2], 2)
+        self.label_info.set_text("   Convert \n %s x %s = %s" % (str(text1),
+                                 str(value), str(text2)))
 
     def _convert(self):
         number = self.spin_btn.get_value()
@@ -196,7 +208,10 @@ class ConvertActivity(activity.Activity):
         to_unit = self._get_active_text(self.combo2)
         if unit == to_unit:
             self._update_label_info(igual=True, text1=unit, text2=to_unit)
-            return number
+            return round(number, 2)
         else:
             self._update_label_info(igual=False, text1=unit, text2=to_unit)
-            return number * self.dic[unit] * self.dic[to_unit]
+            return round(number * self.dic[unit] * self.dic[to_unit], 2)
+
+#    def _set_size(self):
+#
