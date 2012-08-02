@@ -71,12 +71,14 @@ class ConvertActivity(activity.Activity):
         spin_box.pack_start(self.spin_btn, True, False)
         self.canvas.pack_start(spin_box, False, False, 5)
 
+        scroll = gtk.ScrolledWindow()
+        scroll.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
         self.label = gtk.Label()
         self.label.set_text("%s ~ %s" % (str(self.spin_btn.get_value()),
                             str(self.spin_btn.get_value())))
         self.label.modify_font(pango.FontDescription('60'))
-        self.canvas.pack_start(self.label, True, True, 5)
-
+        scroll.add_with_viewport(self.label)
+        self.canvas.add(scroll)
         self.label_info = gtk.Label("   Convert \n000 x 000 = 000")
         self.label_info.modify_font(pango.FontDescription('12'))
         self.canvas.pack_end(self.label_info, 0, True, 30)
@@ -193,6 +195,8 @@ class ConvertActivity(activity.Activity):
         active_combo2 = self.combo2.get_active()
         self.combo1.set_active(active_combo2)
         self.combo2.set_active(active_combo1)
+        self.spin_btn.set_value(float(self.label.get_text().split(' ~ ')[1]))
+        self._update_label()
 
     def _update_label_info(self, igual=False, text1=None, text2=None):
         if igual:
@@ -208,10 +212,20 @@ class ConvertActivity(activity.Activity):
         to_unit = self._get_active_text(self.combo2)
         if unit == to_unit:
             self._update_label_info(igual=True, text1=unit, text2=to_unit)
-            return round(number, 2)
+            return self._round(number)
         else:
             self._update_label_info(igual=False, text1=unit, text2=to_unit)
-            return round(number * self.dic[unit] * self.dic[to_unit], 2)
+            return self._round(number * self.dic[unit] * self.dic[to_unit])
+
+    def _round(self, num):
+        num = str(num)
+        before_dot = num.split(".")[0]
+        then_dot = num.split(".")[1]
+
+        short_num = before_dot + "." + then_dot[:2]
+        print short_num
+
+        return float(short_num)
 
 #    def _set_size(self):
 #
