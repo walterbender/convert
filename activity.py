@@ -28,14 +28,29 @@ from sugar.graphics.toolbarbox import ToolbarBox
 from sugar.graphics.radiotoolbutton import RadioToolButton
 
 
-lenght = {"Meter": 1, "Kilometer": 0.001, "Centimeter": 100, "Yard": 1.09361,
-          "Foot": 3.28084, "Fathoms": 0.5468}
-speed = {"Km/H": 1}
-area = {"M2": 1}
-weight = {"Gram": 1, "Kilogram": 1000}
-volume = {"M3": 1}
-time = {"Hour": 1}
-temp = {"Celsius": 1}
+lenght = {'Meter': 1, 'Kilometer': 0.001, 'Centimeter': 100, 'Yard': 1.09361,
+          'Foot': 3.28084, 'Fathoms': 0.5468, 'mm': 1000, 'dm': 10, 'dam': 0.1,
+          'hm': 0.01}
+
+speed = {'Km/H': 1}
+
+area = {'Meter2': 1, 'Kilometer2': 0.001, 'Centimeter2': 100, 'Yard2': 1.09361,
+        'Foot2': 3.28084, 'Fathoms2': 0.5468, 'mm2': 1000, 'dm2': 10,
+        'dam2': 0.1, 'hm2': 0.01}
+
+weight = {'Gram': 1, 'hg': 0.01, 'dag': 0.1, 'dg': 10, 'cg': 100, 'mg': 1000,
+          'Kilogram': 1000}
+
+volume = {'Meter3': 1, 'Kilometer3': 0.001, 'Centimeter3': 100,
+          'Yard3': 1.09361, 'Foot3': 3.28084, 'Fathoms3': 0.5468, 'mm3': 1000,
+          'dm3': 10, 'dam3': 0.1, 'hm3': 0.01}
+
+time = {'Hour': 1}
+
+temp = {'Celsius': 1}
+
+liquid = {'Liter': 1, 'Kiloliter': 0.001, 'Centiliter': 100,
+          'ml': 1000, 'dl': 10, 'dal': 0.1, 'hl': 0.01}
 
 
 class ConvertActivity(activity.Activity):
@@ -56,7 +71,7 @@ class ConvertActivity(activity.Activity):
         hbox.pack_start(self.combo1, False, True, 20)
 
         flip_btn = gtk.Button()
-        flip_btn.add(gtk.image_new_from_file("icons/flip.svg"))
+        flip_btn.add(gtk.image_new_from_file('icons/flip.svg'))
         flip_btn.connect('clicked', self._flip)
         hbox.pack_start(flip_btn, True, False)
 
@@ -67,19 +82,19 @@ class ConvertActivity(activity.Activity):
         adjustment = gtk.Adjustment(1.0, 0.1, 1000000, 0.1, 0.1, 0.1)
         spin_box = gtk.HBox()
         self.spin_btn = gtk.SpinButton(adjustment, 1.0, 1)
-        self.spin_btn.connect("value-changed", lambda w: self._update_label())
+        self.spin_btn.connect('value-changed', lambda w: self._update_label())
         spin_box.pack_start(self.spin_btn, True, False)
         self.canvas.pack_start(spin_box, False, False, 5)
 
         scroll = gtk.ScrolledWindow()
         scroll.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
         self.label = gtk.Label()
-        self.label.set_text("%s ~ %s" % (str(self.spin_btn.get_value()),
+        self.label.set_text('%s ~ %s' % (str(self.spin_btn.get_value()),
                             str(self.spin_btn.get_value())))
         self.label.modify_font(pango.FontDescription('60'))
         scroll.add_with_viewport(self.label)
         self.canvas.add(scroll)
-        self.label_info = gtk.Label("   Convert \n000 x 000 = 000")
+        self.label_info = gtk.Label('   Convert \n000 x 000 = 000')
         self.label_info.modify_font(pango.FontDescription('12'))
         self.canvas.pack_end(self.label_info, 0, True, 30)
 
@@ -97,57 +112,65 @@ class ConvertActivity(activity.Activity):
 
         # RadioToolButton
         self._lenght_btn = RadioToolButton()
-        self._lenght_btn.connect("clicked",
+        self._lenght_btn.connect('clicked',
                                  lambda w: self._update_combo(lenght))
-        self._lenght_btn.set_tooltip("Lenght")
-        self._lenght_btn.props.icon_name = "lenght"
+        self._lenght_btn.set_tooltip('Lenght')
+        self._lenght_btn.props.icon_name = 'lenght'
 
         self._volume_btn = RadioToolButton()
-        self._volume_btn.connect("clicked",
+        self._volume_btn.connect('clicked',
                                  lambda w: self._update_combo(volume))
-        self._volume_btn.set_tooltip("Volume")
-        self._volume_btn.props.icon_name = "volume"
+        self._volume_btn.set_tooltip('Volume')
+        self._volume_btn.props.icon_name = 'volume'
         self._volume_btn.props.group = self._lenght_btn
 
         self._area_btn = RadioToolButton()
-        self._area_btn.connect("clicked",
+        self._area_btn.connect('clicked',
                                lambda w: self._update_combo(area))
-        self._area_btn.set_tooltip("Area")
-        self._area_btn.props.icon_name = "area"
+        self._area_btn.set_tooltip('Area')
+        self._area_btn.props.icon_name = 'area'
         self._area_btn.props.group = self._lenght_btn
 
         self._weight_btn = RadioToolButton()
-        self._weight_btn.connect("clicked",
+        self._weight_btn.connect('clicked',
                                  lambda w: self._update_combo(weight))
-        self._weight_btn.set_tooltip("Weight")
-        self._weight_btn.props.icon_name = "weight"
+        self._weight_btn.set_tooltip('Weight')
+        self._weight_btn.props.icon_name = 'weight'
         self._weight_btn.props.group = self._lenght_btn
 
+        self._liquid_btn = RadioToolButton()
+        self._liquid_btn.connect('clicked',
+                                 lambda w: self._update_combo(liquid))
+        self._liquid_btn.set_tooltip('Liquid')
+        self._liquid_btn.props.icon_name = 'liquid'
+        self._liquid_btn.props.group = self._lenght_btn
+
         self._speed_btn = RadioToolButton()
-        self._speed_btn.connect("clicked",
+        self._speed_btn.connect('clicked',
                                 lambda w: self._update_combo(speed))
-        self._speed_btn.set_tooltip("Speed")
-        self._speed_btn.props.icon_name = "speed"
+        self._speed_btn.set_tooltip('Speed')
+        self._speed_btn.props.icon_name = 'speed'
         self._speed_btn.props.group = self._lenght_btn
 
         self._time_btn = RadioToolButton()
-        self._time_btn.connect("clicked",
+        self._time_btn.connect('clicked',
                                lambda w: self._update_combo(time))
-        self._time_btn.set_tooltip("Time")
-        self._time_btn.props.icon_name = "time"
+        self._time_btn.set_tooltip('Time')
+        self._time_btn.props.icon_name = 'time'
         self._time_btn.props.group = self._lenght_btn
 
         self._temp_btn = RadioToolButton()
-        self._temp_btn.connect("clicked",
+        self._temp_btn.connect('clicked',
                                lambda w: self._update_combo(temp))
-        self._temp_btn.set_tooltip("Temperature")
-        self._temp_btn.props.icon_name = "temp"
+        self._temp_btn.set_tooltip('Temperature')
+        self._temp_btn.props.icon_name = 'temp'
         self._temp_btn.props.group = self._lenght_btn
 
         toolbarbox.toolbar.insert(self._lenght_btn, -1)
         toolbarbox.toolbar.insert(self._volume_btn, -1)
         toolbarbox.toolbar.insert(self._area_btn, -1)
         toolbarbox.toolbar.insert(self._weight_btn, -1)
+        toolbarbox.toolbar.insert(self._liquid_btn, -1)
         toolbarbox.toolbar.insert(self._speed_btn, -1)
         toolbarbox.toolbar.insert(self._time_btn, -1)
         toolbarbox.toolbar.insert(self._temp_btn, -1)
@@ -166,7 +189,7 @@ class ConvertActivity(activity.Activity):
         self.show_all()
 
     def _update_label(self):
-        self.label.set_text("%s ~ %s" % (str(self.spin_btn.get_value()),
+        self.label.set_text('%s ~ %s' % (str(self.spin_btn.get_value()),
                             str(self._convert())))
 
     def _update_combo(self, data):
@@ -198,20 +221,20 @@ class ConvertActivity(activity.Activity):
         self.spin_btn.set_value(float(self.label.get_text().split(' ~ ')[1]))
         self._update_label()
 
-    def _update_label_info(self, igual=False, text1=None, text2=None):
+    def _update_label_info(self, igual=False, util=None, to_util=None):
         if igual:
             value = 1
         else:
-            value = round(self.dic[text1] * self.dic[text2], 2)
-        self.label_info.set_text("   Convert \n %s x %s = %s" % (str(text1),
-                                 str(value), str(text2)))
+            value = round(self.dic[util] * self.dic[to_util], 2)
+        self.label_info.set_text('   Convert \n %s x %s = %s' % (str(util),
+                                 str(value), str(to_util)))
 
     def _convert(self):
         number = self.spin_btn.get_value()
         unit = self._get_active_text(self.combo1)
         to_unit = self._get_active_text(self.combo2)
         if unit == to_unit:
-            self._update_label_info(igual=True, text1=unit, text2=to_unit)
+            self._update_label_info(True, unit, to_unit)
             return self._round(number)
         else:
             self._update_label_info(igual=False, text1=unit, text2=to_unit)
@@ -219,10 +242,10 @@ class ConvertActivity(activity.Activity):
 
     def _round(self, num):
         num = str(num)
-        before_dot = num.split(".")[0]
-        then_dot = num.split(".")[1]
+        before_dot = num.split('.')[0]
+        then_dot = num.split('.')[1]
 
-        short_num = before_dot + "." + then_dot[:2]
+        short_num = before_dot + '.' + then_dot[:2]
         print short_num
 
         return float(short_num)
