@@ -43,14 +43,11 @@ weight = {'Gram': 1, 'hg': 0.01, 'dag': 0.1, 'dg': 10, 'cg': 100, 'mg': 1000,
 
 volume = {'Meter3': 1, 'Kilometer3': 0.001, 'Centimeter3': 100,
           'Yard3': 1.09361, 'Foot3': 3.28084, 'Fathoms3': 0.5468, 'mm3': 1000,
-          'dm3': 10, 'dam3': 0.1, 'hm3': 0.01}
+          'dm3': 10, 'dam3': 0.1, 'hm3': 0.01, 'Liter': 1, 'Kiloliter': 0.001,
+          'Centiliter': 100, 'ml': 1000, 'dl': 10, 'dal': 0.1, 'hl': 0.01}
 
-time = {'Hour': 1}
 
 temp = {'Celsius': 1}
-
-liquid = {'Liter': 1, 'Kiloliter': 0.001, 'Centiliter': 100,
-          'ml': 1000, 'dl': 10, 'dal': 0.1, 'hl': 0.01}
 
 
 class ConvertActivity(activity.Activity):
@@ -60,9 +57,13 @@ class ConvertActivity(activity.Activity):
         self.dic = {}
 
         #Canvas
+        event_box_canvas = gtk.EventBox()
+        event_box_canvas.modify_base(gtk.STATE_NORMAL,
+                                     gtk.gdk.color_parse('white'))
+        self.set_canvas(event_box_canvas)
         self.canvas = gtk.VBox()
 
-        self.set_canvas(self.canvas)
+        event_box_canvas.add(self.canvas)
 
         hbox = gtk.HBox()
         self.canvas.pack_start(hbox, False, padding=5)
@@ -86,14 +87,14 @@ class ConvertActivity(activity.Activity):
         spin_box.pack_start(self.spin_btn, True, False)
         self.canvas.pack_start(spin_box, False, False, 5)
 
-        scroll = gtk.ScrolledWindow()
-        scroll.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
+        eventbox_label = gtk.EventBox()
+        self.canvas.add(eventbox_label)
         self.label = gtk.Label()
+        self.label.connect('expose-event', self.resize_label)
         self.label.set_text('%s ~ %s' % (str(self.spin_btn.get_value()),
                             str(self.spin_btn.get_value())))
-        self.label.modify_font(pango.FontDescription('60'))
-        scroll.add_with_viewport(self.label)
-        self.canvas.add(scroll)
+        eventbox_label.add(self.label)
+
         self.label_info = gtk.Label('   Convert \n000 x 000 = 000')
         self.label_info.modify_font(pango.FontDescription('12'))
         self.canvas.pack_end(self.label_info, 0, True, 30)
@@ -138,26 +139,12 @@ class ConvertActivity(activity.Activity):
         self._weight_btn.props.icon_name = 'weight'
         self._weight_btn.props.group = self._lenght_btn
 
-        self._liquid_btn = RadioToolButton()
-        self._liquid_btn.connect('clicked',
-                                 lambda w: self._update_combo(liquid))
-        self._liquid_btn.set_tooltip('Liquid')
-        self._liquid_btn.props.icon_name = 'liquid'
-        self._liquid_btn.props.group = self._lenght_btn
-
         self._speed_btn = RadioToolButton()
         self._speed_btn.connect('clicked',
                                 lambda w: self._update_combo(speed))
         self._speed_btn.set_tooltip('Speed')
         self._speed_btn.props.icon_name = 'speed'
         self._speed_btn.props.group = self._lenght_btn
-
-        self._time_btn = RadioToolButton()
-        self._time_btn.connect('clicked',
-                               lambda w: self._update_combo(time))
-        self._time_btn.set_tooltip('Time')
-        self._time_btn.props.icon_name = 'time'
-        self._time_btn.props.group = self._lenght_btn
 
         self._temp_btn = RadioToolButton()
         self._temp_btn.connect('clicked',
@@ -170,9 +157,7 @@ class ConvertActivity(activity.Activity):
         toolbarbox.toolbar.insert(self._volume_btn, -1)
         toolbarbox.toolbar.insert(self._area_btn, -1)
         toolbarbox.toolbar.insert(self._weight_btn, -1)
-        toolbarbox.toolbar.insert(self._liquid_btn, -1)
         toolbarbox.toolbar.insert(self._speed_btn, -1)
-        toolbarbox.toolbar.insert(self._time_btn, -1)
         toolbarbox.toolbar.insert(self._temp_btn, -1)
 
         #
@@ -237,7 +222,7 @@ class ConvertActivity(activity.Activity):
             self._update_label_info(True, unit, to_unit)
             return self._round(number)
         else:
-            self._update_label_info(igual=False, text1=unit, text2=to_unit)
+            self._update_label_info(False, unit, to_unit)
             return self._round(number * self.dic[unit] * self.dic[to_unit])
 
     def _round(self, num):
@@ -246,9 +231,10 @@ class ConvertActivity(activity.Activity):
         then_dot = num.split('.')[1]
 
         short_num = before_dot + '.' + then_dot[:2]
-        print short_num
 
         return float(short_num)
 
-#    def _set_size(self):
-#
+    def resize_label(self, widget, event):
+        num_label = len(self.label.get_text())
+        self.label.modify_font(pango.FontDescription(str(num_label)))
+        print 'lechuga'
