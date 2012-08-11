@@ -18,12 +18,22 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+import os
+import sys
 import convert
 
-print '*********convert*********'
-print convert.lenght.keys()
-unit = raw_input('Ingresa una medida: ')
-to_unit = raw_input('Ingresa la tra medida: ')
-number = input('Ingresa el numero: ')
 
-print convert.convert(number, unit, to_unit)
+estado = True
+
+while estado:
+    os.system('clear')
+    print '*********convert*********'
+    print convert.lenght.keys()
+    number = input('No.: ')
+    unit = raw_input('unidad : ')
+
+    print convert.convert(number, unit)
+    if raw_input('Deseas salir(y/n): ') == 'y':
+        sys.exit()
+    else:
+        estado = True

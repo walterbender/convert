@@ -18,35 +18,44 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-
-lenght = {'Meter': 1, 'Kilometer': 0.001, 'Centimeter': 0.01, 'Yard': 1.09361,
-          'Foot': 3.28084, 'Fathoms': 0.5468, 'mm': 0.001, 'dm': 0.1, 'dam': 10,
-          'hm': 100}
+lenght = {'m': 1, 'km': 1000, 'cm': 0.01, 'mm': 0.001,
+          'dm': 0.1, 'dam': 10, 'hm': 100}
 
 speed = {'Km/H': 1}
 
-area = {'Meter2': 1, 'Kilometer2': 0.001, 'Centimeter2': 100, 'Yard2': 1.09361,
-        'Foot2': 3.28084, 'Fathoms2': 0.5468, 'mm2': 1000, 'dm2': 10,
-        'dam2': 0.1, 'hm2': 0.01}
+area = {'Meter2': 1}
 
-weight = {'Gram': 1, 'hg': 0.01, 'dag': 0.1, 'dg': 10, 'cg': 100, 'mg': 1000,
-          'Kilogram': 1000}
+weight = {'Gram': 1}
 
-volume = {'Meter3': 1, 'Kilometer3': 0.001, 'Centimeter3': 100,
-          'Yard3': 1.09361, 'Foot3': 3.28084, 'Fathoms3': 0.5468, 'mm3': 1000,
-          'dm3': 10, 'dam3': 0.1, 'hm3': 0.01, 'Liter': 1, 'Kiloliter': 0.001,
-          'Centiliter': 100, 'ml': 1000, 'dl': 10, 'dal': 0.1, 'hl': 0.01}
-
+volume = {'Meter3': 1}
 
 temp = {'Celsius': 1}
 
 dic = lenght
 
 
-def convert(number, unit, to_unit):
-    return number * dic[unit] * dic[to_unit]
+def convert(number, unit):
+    metro = number * dic[unit]
+    return str(metro) + 'm'
 
+#    print '%s * %s * %s' % (number, dic[unit], dic[to_unit    ])
+#    return number * dic[unit] * dic[to_unit]
+#    x = number * 1 / dic[unit]
+#    a = x * dic[to_unit] / 1
+#    return a
 
+#    print number, dic[unit], dic[to_unit]
+#    return number * dic[unit] * dic[to_unit]
+
+# 100cm  ___ 1m
+# number ___ x
+# x = number * 1m / 100cm
+# x = number / dic[to_unit]
+#1m __ 1000mm
+#x ____ a
+#a = x * 1000mm / 1m
+
+#ATENCION! buscar por que en losnumeros aparese e-
 #    def convert(self):
 #        number = self.spin_btn.get_value()
 #        unit = self._get_active_text(self.combo1)
