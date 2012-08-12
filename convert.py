@@ -18,54 +18,24 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-lenght = {'m': (1, 1), 'km': (1000, 0.001), 'cm': (0.01), 'mm': 0.001,
-          'dm': (0.1), 'dam': (10), 'hm': (100)}
+lenght = {'m': (1, 1), 'km': (1000, 0.001), 'cm': (0.01, 100),
+          'mm': (0.001, 100), 'dm': (0.1, 10), 'dam': (10, 0.1),
+          'hm': (100, 0.01)}
 
-speed = {'Km/H': (1)}
+speed = {'Km/H': (1, 1)}
 
-area = {'Meter2': (1)}
+area = {'Meter2': (1, 1)}
 
-weight = {'Gram': (1)}
+weight = {'Gram': (1, 1)}
 
-volume = {'Meter3': (1)}
+volume = {'Meter3': (1, 1)}
 
-temp = {'Celsius': (1)}
+temp = {'Celsius': (1, 1)}
 
 dic = lenght
 
 
 def convert(number, unit, to_unit):
-    metro = number * dic[unit][0]
-    print str(metro) + 'm'
-    uni = metro * dic[to_unit][1]
-    return uni
+    main_unit = number * dic[unit][0]
+    return main_unit * dic[to_unit][1]
 
-#    print '%s * %s * %s' % (number, dic[unit], dic[to_unit    ])
-#    return number * dic[unit] * dic[to_unit]
-#    x = number * 1 / dic[unit]
-#    a = x * dic[to_unit] / 1
-#    return a
-
-#    print number, dic[unit], dic[to_unit]
-#    return number * dic[unit] * dic[to_unit]
-
-# 100cm  ___ 1m
-# number ___ x
-# x = number * 1m / 100cm
-# x = number / dic[to_unit]
-#1m __ 1000mm
-#x ____ a
-#a = x * 1000mm / 1m
-
-#ATENCION! buscar por que en losnumeros aparese e-
-#    def convert(self):
-#        number = self.spin_btn.get_value()
-#        unit = self._get_active_text(self.combo1)
-#        to_unit = self._get_active_text(self.combo2)
-#        if unit == to_unit:
-#            self.update_label_info(True, unit, to_unit)
-#            return self.recut(number)
-#        else:
-#            self.update_label_info(False, unit, to_unit)
-#            return self.recut(number * self.dic[unit] * self.dic[to_unit])
-#
