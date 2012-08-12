@@ -30,9 +30,10 @@ while estado:
     print '*********convert*********'
     print convert.lenght.keys()
     number = input('No.: ')
-    unit = raw_input('unidad : ')
+    unit = raw_input('de : ')
+    to_unit = raw_input('a: ')
 
-    print convert.convert(number, unit)
+    print convert.convert(number, unit, to_unit)
     if raw_input('Deseas salir(y/n): ') == 'y':
         sys.exit()
     else:

@@ -18,25 +18,27 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-lenght = {'m': 1, 'km': 1000, 'cm': 0.01, 'mm': 0.001,
-          'dm': 0.1, 'dam': 10, 'hm': 100}
+lenght = {'m': (1, 1), 'km': (1000, 0.001), 'cm': (0.01), 'mm': 0.001,
+          'dm': (0.1), 'dam': (10), 'hm': (100)}
 
-speed = {'Km/H': 1}
+speed = {'Km/H': (1)}
 
-area = {'Meter2': 1}
+area = {'Meter2': (1)}
 
-weight = {'Gram': 1}
+weight = {'Gram': (1)}
 
-volume = {'Meter3': 1}
+volume = {'Meter3': (1)}
 
-temp = {'Celsius': 1}
+temp = {'Celsius': (1)}
 
 dic = lenght
 
 
-def convert(number, unit):
-    metro = number * dic[unit]
-    return str(metro) + 'm'
+def convert(number, unit, to_unit):
+    metro = number * dic[unit][0]
+    print str(metro) + 'm'
+    uni = metro * dic[to_unit][1]
+    return uni
 
 #    print '%s * %s * %s' % (number, dic[unit], dic[to_unit    ])
 #    return number * dic[unit] * dic[to_unit]
