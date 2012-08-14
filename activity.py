@@ -20,12 +20,15 @@
 
 import gtk
 import pango
+import convert
 
 from sugar.activity import activity
 from sugar.activity.widgets import StopButton
 from sugar.activity.widgets import ActivityToolbarButton
 from sugar.graphics.toolbarbox import ToolbarBox
 from sugar.graphics.radiotoolbutton import RadioToolButton
+
+SCREEN_WIDTH = gtk.gdk.screen_width()
 
 
 class ConvertActivity(activity.Activity):
@@ -35,47 +38,45 @@ class ConvertActivity(activity.Activity):
         self.dic = {}
 
         #Canvas
-        event_box_canvas = gtk.EventBox()
-        event_box_canvas.modify_base(gtk.STATE_NORMAL,
-                                     gtk.gdk.color_parse('white'))
-        self.set_canvas(event_box_canvas)
-        self.canvas = gtk.VBox()
-
-        event_box_canvas.add(self.canvas)
+        self._canvas = gtk.VBox()
 
         hbox = gtk.HBox()
-        self.canvas.pack_start(hbox, False, padding=5)
         self.combo1 = gtk.combo_box_new_text()
-        self.combo1.connect('changed', lambda w: self._update_label())
-        hbox.pack_start(self.combo1, False, True, 20)
 
         flip_btn = gtk.Button()
-        flip_btn.add(gtk.image_new_from_file('icons/flip.svg'))
         flip_btn.connect('clicked', self._flip)
-        hbox.pack_start(flip_btn, True, False)
+        flip_btn.add(gtk.image_new_from_file('icons/flip.svg'))
 
         self.combo2 = gtk.combo_box_new_text()
-        self.combo2.connect('changed', lambda w: self._update_label())
-        hbox.pack_end(self.combo2, False, True, 20)
+        self.label_box = gtk.HBox()
 
-        adjustment = gtk.Adjustment(1.0, 0.1, 1000000, 0.1, 0.1, 0.1)
-        spin_box = gtk.HBox()
-        self.spin_btn = gtk.SpinButton(adjustment, 1.0, 1)
-        self.spin_btn.connect('value-changed', lambda w: self._update_label())
-        spin_box.pack_start(self.spin_btn, True, False)
-        self.canvas.pack_start(spin_box, False, False, 5)
+        self.adjustment = gtk.Adjustment(1.0, 0.0, 10000.0, 1.0, 1.0)
+        self.spin = gtk.SpinButton(self.adjustment, 0.0, 0)
 
-        eventbox_label = gtk.EventBox()
-        self.canvas.add(eventbox_label)
         self.label = gtk.Label()
         self.label.connect('expose-event', self.resize_label)
-        self.label.set_text('%s ~ %s' % (str(self.spin_btn.get_value()),
-                            str(self.spin_btn.get_value())))
-        eventbox_label.add(self.label)
 
-        self.label_info = gtk.Label('   Convert \n000 x 000 = 000')
+        self.convert_btn = gtk.Button(' Convert ')
+        self.convert_btn.connect('clicked', self._call)
+
+        self.label_info = gtk.Label('convert:/n')
         self.label_info.modify_font(pango.FontDescription('12'))
-        self.canvas.pack_end(self.label_info, 0, True, 30)
+
+        self._canvas.pack_start(hbox, False, False, 20)
+        hbox.pack_start(self.combo1, False, True, 20)
+        hbox.pack_start(flip_btn, True, False)
+        hbox.pack_end(self.combo2, False, True, 20)
+        spin_box = gtk.HBox()
+        spin_box.pack_start(self.spin, True, False, 0)
+        self._canvas.pack_start(spin_box, False, False, 5)
+        self._canvas.pack_start(self.label_box, True, False, 0)
+        self.label_box.add(self.label)
+        convert_box = gtk.HBox()
+        convert_box.pack_start(self.convert_btn, True, False, 20)
+        self._canvas.pack_start(convert_box, False, False, 20)
+        self._canvas.pack_end(self.label_info, False, False, 30)
+
+        self.set_canvas(self._canvas)
 
         #Toolbar
         toolbarbox = ToolbarBox()
@@ -112,7 +113,7 @@ class ConvertActivity(activity.Activity):
 
         self._weight_btn = RadioToolButton()
         self._weight_btn.connect('clicked',
-                                 lambda w: self._update_combo(convertweight))
+                                 lambda w: self._update_combo(convert.weight))
         self._weight_btn.set_tooltip('Weight')
         self._weight_btn.props.icon_name = 'weight'
         self._weight_btn.props.group = self._lenght_btn
@@ -152,8 +153,16 @@ class ConvertActivity(activity.Activity):
         self.show_all()
 
     def _update_label(self):
-        self.label.set_text('%s ~ %s' % (str(self.spin_btn.get_value()),
-                            str(self.convert())))
+        a = '%s ~ %s' % (str(self.spin.get_text()), str(self.convert()))
+        print a
+        self.label.set_text(a)
+
+    def _call(self, widget):
+        _unit = self._get_active_text(self.combo1)
+        _to_unit = self._get_active_text(self.combo2)
+        self._update_label()
+        self.update_label_info(_unit, _to_unit)
+        self.show_all()
 
     def _update_combo(self, data):
         for x in self.dic.keys():
@@ -165,8 +174,8 @@ class ConvertActivity(activity.Activity):
             self.combo2.append_text(x)
         self.combo1.set_active(0)
         self.combo2.set_active(0)
-        self.show_all()
         self._update_label()
+        self.show_all()
 
     def _get_active_text(self, combobox):
         model = combobox.get_model()
@@ -180,26 +189,28 @@ class ConvertActivity(activity.Activity):
         active_combo2 = self.combo2.get_active()
         self.combo1.set_active(active_combo2)
         self.combo2.set_active(active_combo1)
-        self.spin_btn.set_value(float(self.label.get_text().split(' ~ ')[1]))
+        self.spin.set_value(float(self.label.get_text().split(' ~ ')[1]))
         self._update_label()
 
-    def update_label_info(self, igual=False, util=None, to_util=None):
-        if igual:
-            value = 1
-        else:
-            value = self.dic[util] * self.dic[to_util], 2
-        self.label_info.set_text('   Convert \n %s x %s = %s' % (str(util),
+    def update_label_info(self, util=None, to_util=None):
+        value = self.dic[util][0] * self.dic[to_util][1]
+        self.label_info.set_text('   Convert: \n %s x %s = %s' % (str(util),
                                  str(value), str(to_util)))
 
     def resize_label(self, widget, event):
         num_label = len(self.label.get_text())
-        self.label.modify_font(pango.FontDescription(str(720 / num_label)))
+        try:
+            if not num_label >= 12:
+                self.label.modify_font(pango.FontDescription(
+                                       str(SCREEN_WIDTH / num_label - 70)))
+        except ZeroDivisionError:
+            pass
 
     def convert(self):
-        number = self.spin_btn.get_value()
+        number = float(self.spin.get_text())
         unit = self._get_active_text(self.combo1)
         to_unit = self._get_active_text(self.combo2)
-        convert.convert(number, unit, to_unit, )
+        return convert.convert(number, unit, to_unit, self.dic)
 
     def recut(self, num):
         num = str(num)
@@ -209,3 +220,37 @@ class ConvertActivity(activity.Activity):
         short_num = before_dot + '.' + then_dot[:2]
 
         return float(short_num)
+
+
+#class Spin(gtk.HBox):
+#
+#    def __init__(self):
+#        gtk.HBox.__init__(self)
+#
+#        self.value = 0
+#
+#        self.entry = gtk.Entry()
+#        self.add(self.entry)
+#
+#        self.entry.set_text(self.value)
+#
+##        self.vbox = gtk.VBox()
+##        self.add(self.vbox)
+##
+##        self.plus_btn = gtk.Button('+')
+##        self.plus_btn.connect('clicked', self._plus)
+##        self.vbox.pack_start(self.plus_btn, False)
+##
+##        self.less_btn = gtk.Button('-')
+##        self.less_btn.connect('clicked', self._less)
+##        self.vbox.pack_end(self.less_btn, False)
+##
+#    def _plus(self):
+#        self.value += 1
+#
+#    def _less(self):
+#        self.value -= 1
+#
+#    def set_value(self, value):
+#        self.value = value
+#

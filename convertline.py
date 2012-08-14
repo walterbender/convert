@@ -33,7 +33,7 @@ while estado:
     unit = raw_input('de : ')
     to_unit = raw_input('a: ')
 
-    print convert.convert(number, unit, to_unit)
+    print convert.convert(number, unit, to_unit, convert.lenght)
     if raw_input('Deseas salir(y/n): ') == 'y':
         sys.exit()
     else:

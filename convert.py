@@ -32,10 +32,7 @@ volume = {'Meter3': (1, 1)}
 
 temp = {'Celsius': (1, 1)}
 
-dic = lenght
 
-
-def convert(number, unit, to_unit):
+def convert(number, unit, to_unit, dic):
     main_unit = number * dic[unit][0]
     return main_unit * dic[to_unit][1]
-
