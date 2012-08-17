@@ -24,16 +24,17 @@ import convert
 
 
 estado = True
+dic = convert.temp
 
 while estado:
     os.system('clear')
     print '*********convert*********'
-    print convert.lenght.keys()
+    print dic.keys()
     number = input('No.: ')
     unit = raw_input('de : ')
     to_unit = raw_input('a: ')
 
-    print convert.convert(number, unit, to_unit, convert.lenght)
+    print convert.convert(number, unit, to_unit, dic)
     if raw_input('Deseas salir(y/n): ') == 'y':
         sys.exit()
     else:
