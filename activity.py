@@ -191,7 +191,7 @@ class ConvertActivity(activity.Activity):
         self._call()
 
     def update_label_info(self, util=None, to_util=None):
-        value = 1 * self.dic[util] / self.dic[to_util]
+        value = self.dic[util][0] * self.dic[to_util][1]
         self.label_info.set_text('   Convert: \n %s x %s = %s' % (str(util),
                                  str(value), str(to_util)))
 
