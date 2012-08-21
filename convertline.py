@@ -24,7 +24,7 @@ import convert
 
 
 estado = True
-dic = convert.temp
+dic = convert.lenght
 
 while estado:
     os.system('clear')
