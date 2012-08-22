@@ -1,4 +1,4 @@
-#Copyright (C) 2012 Cristhofer Travieso <cristhofert97@gmail.com>
+# Copyright (C) 2012 Cristhofer Travieso <cristhofert97@gmail.com>
 
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -25,7 +25,10 @@ from sugar.activity.widgets import ActivityToolbarButton
 from sugar.graphics.toolbarbox import ToolbarBox
 from sugar.graphics.radiotoolbutton import RadioToolButton
 
+from gettext import gettext as _
+
 SCREEN_WIDTH = gtk.gdk.screen_width()
+ENTER_KEY = 65293
 
 
 class ConvertActivity(activity.Activity):
@@ -38,27 +41,37 @@ class ConvertActivity(activity.Activity):
         self._canvas = gtk.VBox()
 
         hbox = gtk.HBox()
-        self.combo1 = gtk.combo_box_new_text()
+        self._liststore1 = gtk.ListStore(str)
+        self.combo1 = gtk.ComboBox(self._liststore1)
+        cell = gtk.CellRendererText()
+        self.combo1.pack_start(cell, True)
+        self.combo1.add_attribute(cell, 'markup', 0)
         self.combo1.connect('changed', self._call)
 
         flip_btn = gtk.Button()
         flip_btn.connect('clicked', self._flip)
         flip_btn.add(gtk.image_new_from_file('icons/flip.svg'))
 
-        self.combo2 = gtk.combo_box_new_text()
+        self._liststore2 = gtk.ListStore(str)
+        self.combo2 = gtk.ComboBox(self._liststore1)
+        cell = gtk.CellRendererText()
+        self.combo2.pack_start(cell, True)
+        self.combo2.add_attribute(cell, 'markup', 0)
         self.combo2.connect('changed', self._call)
+        
         self.label_box = gtk.HBox()
 
         self.adjustment = gtk.Adjustment(1.0, 1.0, 10000.0, 0.1, 1.0)
         self.spin = gtk.SpinButton(self.adjustment, 0.0, 1)
 
         self.label = gtk.Label()
+        self.label._size = 12
         self.label.connect('expose-event', self.resize_label)
 
-        self.convert_btn = gtk.Button(' Convert ')
+        self.convert_btn = gtk.Button(_('Convert'))
         self.convert_btn.connect('clicked', self._call)
 
-        self.label_info = gtk.Label('convert:\n')
+        self.label_info = gtk.Label()
         self.label_info.modify_font(pango.FontDescription('12'))
 
         self._canvas.pack_start(hbox, False, False, 20)
@@ -93,41 +106,41 @@ class ConvertActivity(activity.Activity):
         self._lenght_btn = RadioToolButton()
         self._lenght_btn.connect('clicked',
                                  lambda w: self._update_combo(convert.lenght))
-        self._lenght_btn.set_tooltip('Lenght')
+        self._lenght_btn.set_tooltip(_('Lenght'))
         self._lenght_btn.props.icon_name = 'lenght'
 
         self._volume_btn = RadioToolButton()
         self._volume_btn.connect('clicked',
                                  lambda w: self._update_combo(convert.volume))
-        self._volume_btn.set_tooltip('Volume')
+        self._volume_btn.set_tooltip(_('Volume'))
         self._volume_btn.props.icon_name = 'volume'
         self._volume_btn.props.group = self._lenght_btn
 
         self._area_btn = RadioToolButton()
         self._area_btn.connect('clicked',
                                lambda w: self._update_combo(convert.area))
-        self._area_btn.set_tooltip('Area')
+        self._area_btn.set_tooltip(_('Area'))
         self._area_btn.props.icon_name = 'area'
         self._area_btn.props.group = self._lenght_btn
 
         self._weight_btn = RadioToolButton()
         self._weight_btn.connect('clicked',
                                  lambda w: self._update_combo(convert.weight))
-        self._weight_btn.set_tooltip('Weight')
+        self._weight_btn.set_tooltip(_('Weight'))
         self._weight_btn.props.icon_name = 'weight'
         self._weight_btn.props.group = self._lenght_btn
 
         self._speed_btn = RadioToolButton()
         self._speed_btn.connect('clicked',
                                 lambda w: self._update_combo(convert.speed))
-        self._speed_btn.set_tooltip('Speed')
+        self._speed_btn.set_tooltip(_('Speed'))
         self._speed_btn.props.icon_name = 'speed'
         self._speed_btn.props.group = self._lenght_btn
 
         self._time_btn = RadioToolButton()
         self._time_btn.connect('clicked',
                                 lambda w: self._update_combo(convert.time))
-        self._time_btn.set_tooltip('Time')
+        self._time_btn.set_tooltip(_('Time'))
         self._time_btn.props.icon_name = 'time'
         self._time_btn.props.group = self._lenght_btn
 
@@ -151,16 +164,19 @@ class ConvertActivity(activity.Activity):
         self.show_all()
 
     def _update_label(self):
-	spin_value = str(self.spin.get_value())
-	decimals = str(len(spin_value.split('.')[-1]))
-        new_value = locale.format('%.' + decimals + 'f', float(spin_value))
+        try:
+            spin_value = str(self.spin.get_value())
+            decimals = str(len(spin_value.split('.')[-1]))
+            new_value = locale.format('%.' + decimals + 'f', float(spin_value))
 
-	convert_value = str(self.convert())
-	decimals = str(len(convert_value.split('.')[-1]))
-        new_convert = locale.format('%.' + decimals + 'f', float(convert_value))
+            convert_value = str(self.convert())
+            decimals = str(len(convert_value.split('.')[-1]))
+            new_convert = locale.format('%.' + decimals + 'f', float(convert_value))
 
-        a = '%s ~ %s' % (new_value, new_convert)
-        self.label.set_text(a)
+            text = '%s ~ %s' % (new_value, new_convert)
+            self.label.set_text(text)
+        except KeyError:
+            pass
 
     def _call(self, widget=None):
         _unit = self._get_active_text(self.combo1)
@@ -170,13 +186,17 @@ class ConvertActivity(activity.Activity):
         self.show_all()
 
     def _update_combo(self, data):
-        for x in self.dic.keys():
-            self.combo1.remove_text(0)
-            self.combo2.remove_text(0)
+        self._liststore1.clear()
+        self._liststore2.clear()
         self.dic = data
         for x in self.dic.keys():
-            self.combo1.append_text(x)
-            self.combo2.append_text(x)
+            symbol = ''
+            if len(self.dic[x]) == 3:
+                symbol = self.dic[x][-1]
+                symbol = '<sup><b>%s</b></sup>' % symbol
+            
+            self._liststore1.append(['%s%s' % (x, symbol)])
+            self._liststore2.append(['%s%s' % (x, symbol)])
         self.combo1.set_active(0)
         self.combo2.set_active(0)
         self._call()
@@ -187,7 +207,10 @@ class ConvertActivity(activity.Activity):
         active = combobox.get_active()
         if active < 0:
             return None
-        return model[active][0]
+        text = model[active][0]
+        if '<sup>' in text:
+            text = text.split('<b>')[1].split('</b>')[0]
+        return text
 
     def _flip(self, widget):
         active_combo1 = self.combo1.get_active()
@@ -198,29 +221,28 @@ class ConvertActivity(activity.Activity):
         self._call()
 
     def update_label_info(self, util=None, to_util=None):
-        value = self.dic[util][0] * self.dic[to_util][1]
-        self.label_info.set_text('   Convert: \n %s x %s = %s' % (str(util),
-                                 str(value), str(to_util)))
+        try:
+            value = self.dic[util][0] * self.dic[to_util][1]
+            self.label_info.set_text('    %s: \n %s x %s = %s' % (_('Convert'),
+                                                                 str(util),
+                                                                 str(value), str(to_util)))
+        except KeyError:
+            pass
 
     def resize_label(self, widget, event):
         num_label = len(self.label.get_text())
-        size = str((60 * SCREEN_WIDTH / 100) / num_label)
         try:
-            self.label.modify_font(pango.FontDescription(size))
+            size = str((60 * SCREEN_WIDTH / 100) / num_label)
+            if not size == self.label._size:
+                self.label.modify_font(pango.FontDescription(size))
+                self.label._size = size
         except ZeroDivisionError:
             pass
 
     def convert(self):
-        number = float(self.spin.get_text().replace(",", "."))
+        number = float(self.spin.get_text().replace(',', '.'))
         unit = self._get_active_text(self.combo1)
         to_unit = self._get_active_text(self.combo2)
         return convert.convert(number, unit, to_unit, self.dic)
 
-    def recut(self, num):
-        num = str(num)
-        before_dot = num.split('.')[0]
-        then_dot = num.split('.')[1]
 
-        short_num = before_dot + '.' + then_dot[:2]
-
-        return float(short_num)
