@@ -34,10 +34,11 @@ ENTER_KEY = 65293
 class ConvertActivity(activity.Activity):
     def __init__(self, handle):
         activity.Activity.__init__(self, handle, True)
-
+	
+	self.max_participants = 1
         self.dic = {}
 
-        #Canvas
+        # Canvas
         self._canvas = gtk.VBox()
 
         hbox = gtk.HBox()
@@ -61,8 +62,8 @@ class ConvertActivity(activity.Activity):
 
         self.label_box = gtk.HBox()
 
-        self.adjustment = gtk.Adjustment(1.0, 1.0, 10.0 ** 20.0, 0.1, 1.0)
-        self.spin = gtk.SpinButton(self.adjustment, 0.0, 1)
+        self.adjustment = gtk.Adjustment(1.0, 0.0000000001, 10.0 ** 20.0, 0.1, 1.0)
+        self.spin = gtk.SpinButton(self.adjustment, 0.0, 2)
 
         self.label = gtk.Label()
         self.label._size = 12
