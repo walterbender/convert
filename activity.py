@@ -61,7 +61,7 @@ class ConvertActivity(activity.Activity):
         
         self.label_box = gtk.HBox()
 
-        self.adjustment = gtk.Adjustment(1.0, 1.0, 10000.0, 0.1, 1.0)
+        self.adjustment = gtk.Adjustment(1.0, 1.0, 10.0 ** 20.0, 0.1, 1.0)
         self.spin = gtk.SpinButton(self.adjustment, 0.0, 1)
 
         self.label = gtk.Label()
@@ -70,6 +70,9 @@ class ConvertActivity(activity.Activity):
 
         self.convert_btn = gtk.Button(_('Convert'))
         self.convert_btn.connect('clicked', self._call)
+
+        title_info = gtk.Label('%s:' % _('Convert'))
+        title_info.modify_font(pango.FontDescription('bold 12'))
 
         self.label_info = gtk.Label()
         self.label_info.modify_font(pango.FontDescription('12'))
@@ -86,7 +89,8 @@ class ConvertActivity(activity.Activity):
         self._canvas.pack_start(self.label_box, True, False, 0)
         self.label_box.add(self.label)
         spin_box.pack_start(self.convert_btn, False, False, 20)
-        self._canvas.pack_end(self.label_info, False, False, 30)
+        self._canvas.pack_end(self.label_info, False, False, 2)
+	self._canvas.pack_end(title_info, False, False, 2)
 
         self.set_canvas(self._canvas)
 
@@ -223,9 +227,8 @@ class ConvertActivity(activity.Activity):
     def update_label_info(self, util=None, to_util=None):
         try:
             value = self.dic[util][0] * self.dic[to_util][1]
-            self.label_info.set_text('    %s: \n %s x %s = %s' % (_('Convert'),
-                                                                 str(util),
-                                                                 str(value), str(to_util)))
+            self.label_info.set_text('%s x %s = %s' % (str(util),
+                                                       str(value), str(to_util)))
         except KeyError:
             pass
 
