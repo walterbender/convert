@@ -1,8 +1,7 @@
 [Activity]
 name = Convert
 activity_version = 1
-show_launcher = 1
-bundle_id = org.ceibaljam.Convert
+bundle_id = org.sugarlabs.Convert
 exec = sugar-activity activity.ConvertActivity -s
 icon = icon
 license = GPLv3+
