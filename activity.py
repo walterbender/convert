@@ -123,11 +123,19 @@ class ConvertActivity(activity.Activity):
         self._speed_btn.props.icon_name = 'speed'
         self._speed_btn.props.group = self._lenght_btn
 
+        self._time_btn = RadioToolButton()
+        self._time_btn.connect('clicked',
+                                lambda w: self._update_combo(convert.time))
+        self._time_btn.set_tooltip('Time')
+        self._time_btn.props.icon_name = 'time'
+        self._time_btn.props.group = self._lenght_btn
+
         toolbarbox.toolbar.insert(self._lenght_btn, -1)
         toolbarbox.toolbar.insert(self._volume_btn, -1)
         toolbarbox.toolbar.insert(self._area_btn, -1)
         toolbarbox.toolbar.insert(self._weight_btn, -1)
         toolbarbox.toolbar.insert(self._speed_btn, -1)
+        toolbarbox.toolbar.insert(self._time_btn, -1)
 
         separator = gtk.SeparatorToolItem()
         separator.set_expand(True)
