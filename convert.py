@@ -20,7 +20,6 @@
 
 lenght = {'Meters[m]': (1, 1), 'Kilometers[km]': (1000, 0.001),
           'Centimeter[cm]': (0.01, 100),
-          'Barleycorns': (0.00847, 118.063754427),
           'Cables': (185.0, 0.00540540540541),
           'Milimeters[mm]': (0.001, 1000), 'Decimeter[dm]': (0.1, 10),
           'Decameter': (10, 0.1),
@@ -32,7 +31,6 @@ lenght = {'Meters[m]': (1, 1), 'Kilometers[km]': (1000, 0.001),
           'Furlongs': (201.0, 0.00497512437811),
           'Inches[in]': (0.0254, 39.3700787402),
           'Micrometers': (0.000001, 1000000.0),
-          'Miles(international)': (1610.0, 0.000621118012422),
           'Scandinavian mile': (10000, 0.0001),
           'Yards': (0.914, 1.09409190372)
           }
@@ -76,7 +74,6 @@ speed = {'Kilometers/Hour': (1, 1),
          'Kilometers/Second': (3597.12230216, 0.000278),
          'Knots': (1.84892086331, 0.540856031128),
          'Mach': (1194.24460432, 0.00083734939759),
-         'Meter/Minute': (0.060071942446, 16.6467065868),
          'Meter/Second': (3.59712230216, 0.278),
          }
 
