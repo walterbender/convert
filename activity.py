@@ -58,7 +58,7 @@ class ConvertActivity(activity.Activity):
         self.combo2.pack_start(cell, True)
         self.combo2.add_attribute(cell, 'markup', 0)
         self.combo2.connect('changed', self._call)
-        
+
         self.label_box = gtk.HBox()
 
         self.adjustment = gtk.Adjustment(1.0, 1.0, 10.0 ** 20.0, 0.1, 1.0)
@@ -90,11 +90,11 @@ class ConvertActivity(activity.Activity):
         self.label_box.add(self.label)
         spin_box.pack_start(self.convert_btn, False, False, 20)
         self._canvas.pack_end(self.label_info, False, False, 2)
-	self._canvas.pack_end(title_info, False, False, 2)
+        self._canvas.pack_end(title_info, False, False, 2)
 
         self.set_canvas(self._canvas)
 
-        #Toolbar
+        # Toolbar
         toolbarbox = ToolbarBox()
 
         activity_button = ActivityToolbarButton(self)
@@ -175,7 +175,8 @@ class ConvertActivity(activity.Activity):
 
             convert_value = str(self.convert())
             decimals = str(len(convert_value.split('.')[-1]))
-            new_convert = locale.format('%.' + decimals + 'f', float(convert_value))
+            new_convert = locale.format('%.' + decimals + 'f', float(
+                                                                 convert_value))
 
             text = '%s ~ %s' % (new_value, new_convert)
             self.label.set_text(text)
@@ -198,7 +199,7 @@ class ConvertActivity(activity.Activity):
             if len(self.dic[x]) == 3:
                 symbol = self.dic[x][-1]
                 symbol = '<sup><b>%s</b></sup>' % symbol
-            
+
             self._liststore1.append(['%s%s' % (x, symbol)])
             self._liststore2.append(['%s%s' % (x, symbol)])
         self.combo1.set_active(0)
@@ -228,7 +229,8 @@ class ConvertActivity(activity.Activity):
         try:
             value = self.dic[util][0] * self.dic[to_util][1]
             self.label_info.set_text('%s x %s = %s' % (str(util),
-                                                       str(value), str(to_util)))
+                                                       str(value),
+                                                       str(to_util)))
         except KeyError:
             pass
 
@@ -247,5 +249,3 @@ class ConvertActivity(activity.Activity):
         unit = self._get_active_text(self.combo1)
         to_unit = self._get_active_text(self.combo2)
         return convert.convert(number, unit, to_unit, self.dic)
-
-
