@@ -16,6 +16,7 @@
 
 import gtk
 import pango
+import locale
 import convert
 
 from sugar.activity import activity
@@ -150,7 +151,15 @@ class ConvertActivity(activity.Activity):
         self.show_all()
 
     def _update_label(self):
-        a = '%s ~ %s' % (str(self.spin.get_text()), str(self.convert()))
+	spin_value = str(self.spin.get_value())
+	decimals = str(len(spin_value.split('.')[-1]))
+        new_value = locale.format('%.' + decimals + 'f', float(spin_value))
+
+	convert_value = str(self.convert())
+	decimals = str(len(convert_value.split('.')[-1]))
+        new_convert = locale.format('%.' + decimals + 'f', float(convert_value))
+
+        a = '%s ~ %s' % (new_value, new_convert)
         print a
         self.label.set_text(a)
 
@@ -203,7 +212,7 @@ class ConvertActivity(activity.Activity):
             pass
 
     def convert(self):
-        number = float(self.spin.get_text())
+        number = float(self.spin.get_text().replace(",", "."))
         unit = self._get_active_text(self.combo1)
         to_unit = self._get_active_text(self.combo2)
         return convert.convert(number, unit, to_unit, self.dic)
