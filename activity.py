@@ -160,7 +160,6 @@ class ConvertActivity(activity.Activity):
         new_convert = locale.format('%.' + decimals + 'f', float(convert_value))
 
         a = '%s ~ %s' % (new_value, new_convert)
-        print a
         self.label.set_text(a)
 
     def _call(self, widget=None):
