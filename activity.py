@@ -66,17 +66,12 @@ class ConvertActivity(activity.Activity):
         self.spin = gtk.SpinButton(self.adjustment, 0.0, 2)
 
         self.label = gtk.Label()
+        self.label.set_selectable(True)
         self.label._size = 12
         self.label.connect('expose-event', self.resize_label)
 
         self.convert_btn = gtk.Button(_('Convert'))
         self.convert_btn.connect('clicked', self._call)
-
-        title_info = gtk.Label('%s:' % _('Convert'))
-        title_info.modify_font(pango.FontDescription('bold 12'))
-
-        self.label_info = gtk.Label()
-        self.label_info.modify_font(pango.FontDescription('12'))
 
         self._canvas.pack_start(hbox, False, False, 20)
         hbox.pack_start(self.combo1, False, True, 20)
@@ -90,8 +85,6 @@ class ConvertActivity(activity.Activity):
         self._canvas.pack_start(self.label_box, True, False, 0)
         self.label_box.add(self.label)
         spin_box.pack_start(self.convert_btn, False, False, 20)
-        self._canvas.pack_end(self.label_info, False, False, 2)
-        self._canvas.pack_end(title_info, False, False, 2)
 
         self.set_canvas(self._canvas)
 
@@ -188,14 +181,15 @@ class ConvertActivity(activity.Activity):
         _unit = self._get_active_text(self.combo1)
         _to_unit = self._get_active_text(self.combo2)
         self._update_label()
-        self.update_label_info(_unit, _to_unit)
         self.show_all()
 
     def _update_combo(self, data):
         self._liststore1.clear()
         self._liststore2.clear()
         self.dic = data
-        for x in self.dic.keys():
+        keys = self.dic.keys()
+        keys.sort()
+        for x in keys:
             symbol = ''
             if len(self.dic[x]) == 3:
                 symbol = self.dic[x][-1]
@@ -209,11 +203,12 @@ class ConvertActivity(activity.Activity):
         self.show_all()
 
     def _get_active_text(self, combobox):
-        model = combobox.get_model()
         active = combobox.get_active()
+        keys = self.dic.keys()
+        keys.sort() 
         if active < 0:
             return None
-        text = model[active][0]
+        text = keys[active]
         if '<sup>' in text:
             text = text.split('<b>')[1].split('</b>')[0]
         return text
@@ -225,15 +220,6 @@ class ConvertActivity(activity.Activity):
         self.combo2.set_active(active_combo1)
         self.spin.set_value(float(self.label.get_text().split(' ~ ')[1]))
         self._call()
-
-    def update_label_info(self, util=None, to_util=None):
-        try:
-            value = self.dic[util][0] * self.dic[to_util][1]
-            self.label_info.set_text('%s x %s = %s' % (str(util),
-                                                       str(value),
-                                                       str(to_util)))
-        except KeyError:
-            pass
 
     def resize_label(self, widget, event):
         num_label = len(self.label.get_text())
@@ -250,3 +236,4 @@ class ConvertActivity(activity.Activity):
         unit = self._get_active_text(self.combo1)
         to_unit = self._get_active_text(self.combo2)
         return convert.convert(number, unit, to_unit, self.dic)
+
