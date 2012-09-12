@@ -34,8 +34,8 @@ ENTER_KEY = 65293
 class ConvertActivity(activity.Activity):
     def __init__(self, handle):
         activity.Activity.__init__(self, handle, True)
-	
-	self.max_participants = 1
+
+        self.max_participants = 1
         self.dic = {}
 
         # Canvas
@@ -205,7 +205,7 @@ class ConvertActivity(activity.Activity):
     def _get_active_text(self, combobox):
         active = combobox.get_active()
         keys = self.dic.keys()
-        keys.sort() 
+        keys.sort()
         if active < 0:
             return None
         text = keys[active]
@@ -218,7 +218,8 @@ class ConvertActivity(activity.Activity):
         active_combo2 = self.combo2.get_active()
         self.combo1.set_active(active_combo2)
         self.combo2.set_active(active_combo1)
-        self.spin.set_value(float(self.label.get_text().split(' ~ ')[1]))
+        self.spin.set_value(float(
+                       self.label.get_text().split(' ~ ')[1].replace(',', '.')))
         self._call()
 
     def resize_label(self, widget, event):
