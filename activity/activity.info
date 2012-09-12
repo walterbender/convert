@@ -1,6 +1,6 @@
 [Activity]
 name = Convert
-activity_version = 1
+activity_version = 1.1
 bundle_id = org.sugarlabs.Convert
 exec = sugar-activity activity.ConvertActivity -s
 icon = icon
