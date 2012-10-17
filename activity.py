@@ -102,55 +102,55 @@ class ConvertActivity(activity.Activity):
         toolbarbox.toolbar.insert(separator, -1)
 
         # RadioToolButton
-        self._lenght_btn = RadioToolButton()
-        self._lenght_btn.connect('clicked',
-                                 lambda w: self._update_combo(convert.lenght))
-        self._lenght_btn.set_tooltip(_('Lenght'))
-        self._lenght_btn.props.icon_name = 'lenght'
+        self._length_btn = RadioToolButton()
+        self._length_btn.connect('clicked',
+                                 lambda w: self._update_combo(convert.length))
+        self._length_btn.set_tooltip(_('Length'))
+        self._length_btn.props.icon_name = 'length'
 
         self._volume_btn = RadioToolButton()
         self._volume_btn.connect('clicked',
                                  lambda w: self._update_combo(convert.volume))
         self._volume_btn.set_tooltip(_('Volume'))
         self._volume_btn.props.icon_name = 'volume'
-        self._volume_btn.props.group = self._lenght_btn
+        self._volume_btn.props.group = self._length_btn
 
         self._area_btn = RadioToolButton()
         self._area_btn.connect('clicked',
                                lambda w: self._update_combo(convert.area))
         self._area_btn.set_tooltip(_('Area'))
         self._area_btn.props.icon_name = 'area'
-        self._area_btn.props.group = self._lenght_btn
+        self._area_btn.props.group = self._length_btn
 
         self._weight_btn = RadioToolButton()
         self._weight_btn.connect('clicked',
                                  lambda w: self._update_combo(convert.weight))
         self._weight_btn.set_tooltip(_('Weight'))
         self._weight_btn.props.icon_name = 'weight'
-        self._weight_btn.props.group = self._lenght_btn
+        self._weight_btn.props.group = self._length_btn
 
         self._speed_btn = RadioToolButton()
         self._speed_btn.connect('clicked',
                                 lambda w: self._update_combo(convert.speed))
         self._speed_btn.set_tooltip(_('Speed'))
         self._speed_btn.props.icon_name = 'speed'
-        self._speed_btn.props.group = self._lenght_btn
+        self._speed_btn.props.group = self._length_btn
 
         self._time_btn = RadioToolButton()
         self._time_btn.connect('clicked',
                                 lambda w: self._update_combo(convert.time))
         self._time_btn.set_tooltip(_('Time'))
         self._time_btn.props.icon_name = 'time'
-        self._time_btn.props.group = self._lenght_btn
+        self._time_btn.props.group = self._length_btn
 
         self._temp_btn = RadioToolButton()
         self._temp_btn.connect('clicked',
                                 lambda w: self._update_combo(convert.temp))
         self._temp_btn.set_tooltip(_('Temperature'))
         self._temp_btn.props.icon_name = 'temp'
-        self._temp_btn.props.group = self._lenght_btn
+        self._temp_btn.props.group = self._length_btn
 
-        toolbarbox.toolbar.insert(self._lenght_btn, -1)
+        toolbarbox.toolbar.insert(self._length_btn, -1)
         toolbarbox.toolbar.insert(self._volume_btn, -1)
         toolbarbox.toolbar.insert(self._area_btn, -1)
         toolbarbox.toolbar.insert(self._weight_btn, -1)
@@ -167,7 +167,7 @@ class ConvertActivity(activity.Activity):
         toolbarbox.toolbar.insert(stopbtn, -1)
 
         self.set_toolbar_box(toolbarbox)
-        self._update_combo(convert.lenght)
+        self._update_combo(convert.length)
         self.show_all()
 
     def _update_label(self):
