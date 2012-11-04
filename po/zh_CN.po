@@ -1,0 +1,313 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-10-29 08:24-0400\n"
+"PO-Revision-Date: 2012-11-01 07:44+0200\n"
+"Last-Translator: lite <litekok@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Pootle 2.0.5\n"
+
+#. TRANS: "name" option from activity.info file
+#. TRANS: "summary" option from activity.info file
+#. TRANS: "description" option from activity.info file
+#: activity.py:74
+msgid "Convert"
+msgstr "转换"
+
+#: activity.py:108
+msgid "Length"
+msgstr "长度"
+
+#: activity.py:114
+msgid "Volume"
+msgstr "体积"
+
+#: activity.py:121
+msgid "Area"
+msgstr "面积"
+
+#: activity.py:128
+msgid "Weight"
+msgstr "重量"
+
+#: activity.py:135
+msgid "Speed"
+msgstr "速度"
+
+#: activity.py:142
+msgid "Time"
+msgstr "时间"
+
+#: activity.py:149
+msgid "Temperature"
+msgstr "温度"
+
+#: convert.py:19
+msgid "Meters (m)"
+msgstr "米 (m)"
+
+#: convert.py:20
+msgid "Kilometers (km)"
+msgstr "公里 (km)"
+
+#: convert.py:21
+msgid "Centimeter (cm)"
+msgstr "厘米 (cm)"
+
+#: convert.py:22
+msgid "Cables"
+msgstr "链(Cables 海上测距单位)"
+
+#: convert.py:23
+msgid "Miles"
+msgstr "英里(Miles)"
+
+#: convert.py:24
+msgid "Millimeters (mm)"
+msgstr "毫米 (mm)"
+
+#: convert.py:25
+msgid "Decimeter (dm)"
+msgstr "分米 (dm)"
+
+#: convert.py:26
+msgid "Decameter"
+msgstr "公丈(Decameter)"
+
+#: convert.py:27
+msgid "Hectometers (hm)"
+msgstr "公引 (hm)"
+
+#: convert.py:28
+msgid "Chains"
+msgstr "测链 (Chains)"
+
+#: convert.py:29
+msgid "Ell"
+msgstr "埃尔 (Ell 英量布单位)"
+
+#: convert.py:30
+msgid "Ems (Pica)"
+msgstr "Ems (Pica)(=1/6英寸)"
+
+#: convert.py:31
+msgid "Fathoms"
+msgstr "英寻(Fathoms)"
+
+#: convert.py:32 convert.py:41 convert.py:62
+msgid "feet"
+msgstr "英尺(feet)"
+
+#: convert.py:33
+msgid "Furlongs"
+msgstr "弗朗(Furlongs)"
+
+#: convert.py:34
+msgid "Inches (in)"
+msgstr "英寸(in)"
+
+#: convert.py:35
+msgid "Micrometers"
+msgstr "微米(Micrometers)(um)"
+
+#: convert.py:36
+msgid "Scandinavian mile"
+msgstr "斯堪的纳维亚英里(Scandinavian mile＝10公里)"
+
+#: convert.py:37
+msgid "Yards"
+msgstr "码(Yards)"
+
+#: convert.py:40 convert.py:61
+msgid "Meter"
+msgstr "米(Meter)"
+
+#: convert.py:42 convert.py:63
+msgid "Yard"
+msgstr "码(Yard)"
+
+#: convert.py:43 convert.py:64
+msgid "Inch"
+msgstr "英寸(Inch)"
+
+#: convert.py:44 convert.py:65
+msgid "Kilometer"
+msgstr "公里(Kilometer)"
+
+#: convert.py:45 convert.py:66
+msgid "Mile"
+msgstr "英里(Mile)"
+
+#: convert.py:46 convert.py:67
+msgid "Centimeter"
+msgstr "厘米(Centimeter)"
+
+#: convert.py:47 convert.py:68
+msgid "Millimeter"
+msgstr "毫米(Millimeter)"
+
+#: convert.py:48
+msgid "Micrometer"
+msgstr "微米(Micrometer)"
+
+#: convert.py:49
+msgid "Acre"
+msgstr "英亩(Acre)"
+
+#: convert.py:52
+msgid "Gram"
+msgstr "克(Gram)"
+
+#: convert.py:53
+msgid "Kilogram"
+msgstr "千克(Kilogram)"
+
+#: convert.py:54
+msgid "Milligram"
+msgstr "毫克(Milligram)"
+
+#: convert.py:55
+msgid "Ton"
+msgstr "吨(Ton)"
+
+#: convert.py:56
+msgid "Pound"
+msgstr "磅(Pound)"
+
+#: convert.py:57
+msgid "Ounce"
+msgstr "盎司(Ounce)"
+
+#: convert.py:58
+msgid "Carat"
+msgstr "克拉(Carat)"
+
+#: convert.py:69
+msgid "Liter"
+msgstr "升(Liter)"
+
+#: convert.py:70
+msgid "Milliliter"
+msgstr "毫升(Milliliter)"
+
+#: convert.py:71
+msgid "Pint"
+msgstr "品脱(Pint)"
+
+#: convert.py:72
+msgid "Quart"
+msgstr "夸脱(Quart)"
+
+#: convert.py:73
+msgid "Gallon"
+msgstr "加仑(Gallon)"
+
+#: convert.py:76
+msgid "Kilometers/Hour"
+msgstr "公里/小时(Kilometers/Hour)"
+
+#: convert.py:77
+msgid "Centimeters/Minute"
+msgstr "厘米/分钟(Centimeters/Minute)"
+
+#: convert.py:78
+msgid "Centimeters/Second"
+msgstr "厘米/秒(Centimeters/Second)"
+
+#: convert.py:79
+msgid "feet/Hour"
+msgstr "英尺/小时(Feet/Hour)"
+
+#: convert.py:80
+msgid "Feet/Minute"
+msgstr "英尺/分钟(Feet/Minute)"
+
+#: convert.py:81
+msgid "Feet/Second"
+msgstr "英尺/秒(Feet/Second)"
+
+#: convert.py:82
+msgid "Inches/Second"
+msgstr "英寸/秒(Inches/Second)"
+
+#: convert.py:83
+msgid "Kilometers/Second"
+msgstr "千米/秒(Kilometers/Second)"
+
+#: convert.py:84
+msgid "Knots"
+msgstr "节(Knots)(船速,=哩/小时)"
+
+#: convert.py:85
+msgid "Mach"
+msgstr "马赫(Mach)"
+
+#: convert.py:86
+msgid "Meters/Second"
+msgstr "米/秒(Meters/Second)"
+
+#: convert.py:89
+msgid "Day"
+msgstr "日(Day)"
+
+#: convert.py:90
+msgid "Week"
+msgstr "周(Week)"
+
+#: convert.py:91
+msgid "Month"
+msgstr "月(Month)"
+
+#: convert.py:92
+msgid "Year"
+msgstr "年(Year)"
+
+#: convert.py:93
+msgid "Hour"
+msgstr "小时(Hour)"
+
+#: convert.py:94
+msgid "Minute"
+msgstr "分钟(Minute)"
+
+#: convert.py:95
+msgid "Second"
+msgstr "秒(Second)"
+
+#: convert.py:96
+msgid "Millisecond"
+msgstr "毫秒(Millisecond)"
+
+#: convert.py:97
+msgid "Microsecond"
+msgstr "微秒(Microsecond)"
+
+#: convert.py:98
+msgid "Nanosecond"
+msgstr "纳秒(Nanosecond)"
+
+#: convert.py:99
+msgid "Picosecond"
+msgstr "皮秒(Picosecond)"
+
+#: convert.py:102
+msgid "Celsius"
+msgstr "摄氏(Celsius)"
+
+#: convert.py:103
+msgid "Fahrenheit"
+msgstr "华氏(Fahrenheit)"
+
+#: convert.py:104
+msgid "Kelvin"
+msgstr "开尔文(Kelvin)"
