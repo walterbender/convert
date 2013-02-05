@@ -100,11 +100,29 @@ time = {_('Day'): (1, 1),
         }
 
 temp = {_('Celsius'): (1, 1),
-        _('Fahrenheit'): (-17.22222222222222, 33.8),
-        _('Kelvin'): (-272.15, 274.15)}
+        _('Kelvin'): (274.15, -272.15),
+        _('Fahrenheit'): (-17.22222222222222, 33.8)}
 
 
 
 def convert(number, unit, to_unit, dic):
-    main_unit = number * dic[unit][0]
-    return main_unit * dic[to_unit][1]
+    if dic == temp:
+        if unit == to_unit:
+            return number
+        elif unit == 'Celsius' and to_unit == 'Kelvin':
+            return number + 273.15
+        elif unit == 'Kelvin' and to_unit == 'Celsius':
+            return number - 273.15
+        elif unit == 'Celsius' and to_unit == 'Fahrenheit':
+            return 1.8 * number + 32
+        elif unit == 'Fahrenheit' and to_unit == 'Celsius':
+            return (number - 32) / 1.8
+        elif unit == 'Kelvin' and to_unit == 'Fahrenheit':
+            return 9/5 * number - 459.67
+        elif unit == 'Fahrenheit' and to_unit == 'Kelvin':
+            return (number + 459.67) / 1.8
+        else:
+            pass
+    else:
+        main_unit = number * dic[unit][0]
+        return main_unit * dic[to_unit][1]
