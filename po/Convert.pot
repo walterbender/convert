@@ -8,41 +8,47 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-22 14:42+0000\n"
+"POT-Creation-Date: 2012-10-29 08:24-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: activity/activity.info:2 activity.py:60 activity.py:208
+#. TRANS: "name" option from activity.info file
+#. TRANS: "summary" option from activity.info file
+#. TRANS: "description" option from activity.info file
+#: activity.py:74
 msgid "Convert"
 msgstr ""
 
-#: activity.py:98
-msgid "Lenght"
+#: activity.py:108
+msgid "Length"
 msgstr ""
 
-#: activity.py:104
+#: activity.py:114
 msgid "Volume"
 msgstr ""
 
-#: activity.py:111
+#: activity.py:121
 msgid "Area"
 msgstr ""
 
-#: activity.py:118
+#: activity.py:128
 msgid "Weight"
 msgstr ""
 
-#: activity.py:125
+#: activity.py:135
 msgid "Speed"
 msgstr ""
 
-#: activity.py:132
+#: activity.py:142
 msgid "Time"
+msgstr ""
+
+#: activity.py:149
+msgid "Temperature"
 msgstr ""
 
 #: convert.py:19
@@ -62,233 +68,245 @@ msgid "Cables"
 msgstr ""
 
 #: convert.py:23
-msgid "Milimeters (mm)"
+msgid "Miles"
 msgstr ""
 
 #: convert.py:24
-msgid "Decimeter (dm)"
+msgid "Millimeters (mm)"
 msgstr ""
 
 #: convert.py:25
-msgid "Decameter"
+msgid "Decimeter (dm)"
 msgstr ""
 
 #: convert.py:26
-msgid "Hectometers (hm)"
+msgid "Decameter"
 msgstr ""
 
 #: convert.py:27
-msgid "Chains"
+msgid "Hectometers (hm)"
 msgstr ""
 
 #: convert.py:28
-msgid "Ell"
+msgid "Chains"
 msgstr ""
 
 #: convert.py:29
-msgid "Ems (Pica)"
+msgid "Ell"
 msgstr ""
 
 #: convert.py:30
+msgid "Ems (Pica)"
+msgstr ""
+
+#: convert.py:31
 msgid "Fathoms"
 msgstr ""
 
-#: convert.py:31 convert.py:40 convert.py:61
-msgid "Foot"
+#: convert.py:32 convert.py:41 convert.py:62
+msgid "feet"
 msgstr ""
 
 #: convert.py:33
-msgid "Inches (in)"
+msgid "Furlongs"
 msgstr ""
 
 #: convert.py:34
-msgid "Micrometers"
+msgid "Inches (in)"
 msgstr ""
 
 #: convert.py:35
-msgid "Scandinavian mile"
+msgid "Micrometers"
 msgstr ""
 
 #: convert.py:36
+msgid "Scandinavian mile"
+msgstr ""
+
+#: convert.py:37
 msgid "Yards"
 msgstr ""
 
-#: convert.py:39 convert.py:60
+#: convert.py:40 convert.py:61
 msgid "Meter"
 msgstr ""
 
-#: convert.py:41 convert.py:62
+#: convert.py:42 convert.py:63
 msgid "Yard"
 msgstr ""
 
-#: convert.py:42 convert.py:63
+#: convert.py:43 convert.py:64
 msgid "Inch"
 msgstr ""
 
-#: convert.py:43 convert.py:64
+#: convert.py:44 convert.py:65
 msgid "Kilometer"
 msgstr ""
 
-#: convert.py:44 convert.py:65
+#: convert.py:45 convert.py:66
 msgid "Mile"
 msgstr ""
 
-#: convert.py:45 convert.py:66
+#: convert.py:46 convert.py:67
 msgid "Centimeter"
 msgstr ""
 
-#: convert.py:46
-msgid "milimeter"
-msgstr ""
-
-#: convert.py:47
-msgid "Micrometer"
+#: convert.py:47 convert.py:68
+msgid "Millimeter"
 msgstr ""
 
 #: convert.py:48
+msgid "Micrometer"
+msgstr ""
+
+#: convert.py:49
 msgid "Acre"
 msgstr ""
 
-#: convert.py:51
+#: convert.py:52
 msgid "Gram"
 msgstr ""
 
-#: convert.py:52
+#: convert.py:53
 msgid "Kilogram"
 msgstr ""
 
-#: convert.py:53
-msgid "Miligram"
-msgstr ""
-
 #: convert.py:54
-msgid "Ton"
+msgid "Milligram"
 msgstr ""
 
 #: convert.py:55
-msgid "Pound"
+msgid "Ton"
 msgstr ""
 
 #: convert.py:56
-msgid "Ounce"
+msgid "Pound"
 msgstr ""
 
 #: convert.py:57
-msgid "Carrat"
+msgid "Ounce"
 msgstr ""
 
-#: convert.py:67
-msgid "Milimeter"
-msgstr ""
-
-#: convert.py:68
-msgid "Liter"
+#: convert.py:58
+msgid "Carat"
 msgstr ""
 
 #: convert.py:69
-msgid "Milliliter"
+msgid "Liter"
 msgstr ""
 
 #: convert.py:70
-msgid "Pint"
+msgid "Milliliter"
 msgstr ""
 
 #: convert.py:71
-msgid "Quart"
+msgid "Pint"
 msgstr ""
 
 #: convert.py:72
+msgid "Quart"
+msgstr ""
+
+#: convert.py:73
 msgid "Gallon"
 msgstr ""
 
-#: convert.py:75
+#: convert.py:76
 msgid "Kilometers/Hour"
 msgstr ""
 
-#: convert.py:76
-msgid "Centimeter/Minute"
-msgstr ""
-
 #: convert.py:77
-msgid "Centimeter/Second"
+msgid "Centimeters/Minute"
 msgstr ""
 
 #: convert.py:78
-msgid "Foot/Hour"
+msgid "Centimeters/Second"
 msgstr ""
 
 #: convert.py:79
-msgid "Feet/Minute"
+msgid "feet/Hour"
 msgstr ""
 
 #: convert.py:80
-msgid "Feet/Second"
+msgid "Feet/Minute"
 msgstr ""
 
 #: convert.py:81
-msgid "Inches/Second"
+msgid "Feet/Second"
 msgstr ""
 
 #: convert.py:82
-msgid "Kilometers/Second"
+msgid "Inches/Second"
 msgstr ""
 
 #: convert.py:83
-msgid "Knots"
+msgid "Kilometers/Second"
 msgstr ""
 
 #: convert.py:84
-msgid "Mach"
+msgid "Knots"
 msgstr ""
 
 #: convert.py:85
-msgid "Meter/Second"
+msgid "Mach"
 msgstr ""
 
-#: convert.py:88
-msgid "Day"
+#: convert.py:86
+msgid "Meters/Second"
 msgstr ""
 
 #: convert.py:89
-msgid "Week"
+msgid "Day"
 msgstr ""
 
 #: convert.py:90
-msgid "Month"
+msgid "Week"
 msgstr ""
 
 #: convert.py:91
-msgid "Year"
+msgid "Month"
 msgstr ""
 
 #: convert.py:92
-msgid "Hour"
+msgid "Year"
 msgstr ""
 
 #: convert.py:93
-msgid "Minute"
+msgid "Hour"
 msgstr ""
 
 #: convert.py:94
-msgid "Second"
+msgid "Minute"
 msgstr ""
 
 #: convert.py:95
-msgid "Millisecond"
+msgid "Second"
 msgstr ""
 
 #: convert.py:96
-msgid "Microsecond"
+msgid "Millisecond"
 msgstr ""
 
 #: convert.py:97
-msgid "Nanosecond"
+msgid "Microsecond"
 msgstr ""
 
 #: convert.py:98
+msgid "Nanosecond"
+msgstr ""
+
+#: convert.py:99
 msgid "Picosecond"
 msgstr ""
 
-#: convert.py:32
-msgid "Furlongs)"
+#: convert.py:102
+msgid "Celsius"
+msgstr ""
+
+#: convert.py:103
+msgid "Fahrenheit"
+msgstr ""
+
+#: convert.py:104
+msgid "Kelvin"
 msgstr ""
