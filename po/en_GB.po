@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-10-29 08:24-0400\n"
-"PO-Revision-Date: 2012-10-30 04:21+0200\n"
-"Last-Translator: Chris <cjl@laptop.org>\n"
+"PO-Revision-Date: 2013-03-04 11:52+0200\n"
+"Last-Translator: Robert <robert_readman@hotmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: en_GB\n"
 "MIME-Version: 1.0\n"
@@ -54,15 +54,15 @@ msgstr "Temperature"
 
 #: convert.py:19
 msgid "Meters (m)"
-msgstr ""
+msgstr "Meters(m)"
 
 #: convert.py:20
 msgid "Kilometers (km)"
-msgstr ""
+msgstr "Kilometers(km)"
 
 #: convert.py:21
 msgid "Centimeter (cm)"
-msgstr ""
+msgstr "Centimeter(cm)"
 
 #: convert.py:22
 msgid "Cables"
@@ -74,19 +74,19 @@ msgstr "Miles"
 
 #: convert.py:24
 msgid "Millimeters (mm)"
-msgstr ""
+msgstr "Millimeters (mm)"
 
 #: convert.py:25
 msgid "Decimeter (dm)"
-msgstr ""
+msgstr "Decimeter (dm)"
 
 #: convert.py:26
 msgid "Decameter"
-msgstr ""
+msgstr "Decameter"
 
 #: convert.py:27
 msgid "Hectometers (hm)"
-msgstr ""
+msgstr "Hectometers (hm)"
 
 #: convert.py:28
 msgid "Chains"
@@ -118,7 +118,7 @@ msgstr "Inches (in)"
 
 #: convert.py:35
 msgid "Micrometers"
-msgstr ""
+msgstr "Micrometers"
 
 #: convert.py:36
 msgid "Scandinavian mile"
@@ -130,7 +130,7 @@ msgstr "Yards"
 
 #: convert.py:40 convert.py:61
 msgid "Meter"
-msgstr ""
+msgstr "Meter"
 
 #: convert.py:42 convert.py:63
 msgid "Yard"
@@ -142,7 +142,7 @@ msgstr "Inch"
 
 #: convert.py:44 convert.py:65
 msgid "Kilometer"
-msgstr ""
+msgstr "Kilometre"
 
 #: convert.py:45 convert.py:66
 msgid "Mile"
@@ -150,15 +150,15 @@ msgstr "Mile"
 
 #: convert.py:46 convert.py:67
 msgid "Centimeter"
-msgstr ""
+msgstr "Centimetre"
 
 #: convert.py:47 convert.py:68
 msgid "Millimeter"
-msgstr ""
+msgstr "Millimetre"
 
 #: convert.py:48
 msgid "Micrometer"
-msgstr ""
+msgstr "Micrometre"
 
 #: convert.py:49
 msgid "Acre"
@@ -166,19 +166,19 @@ msgstr "Acre"
 
 #: convert.py:52
 msgid "Gram"
-msgstr ""
+msgstr "Gram"
 
 #: convert.py:53
 msgid "Kilogram"
-msgstr ""
+msgstr "Kilogram"
 
 #: convert.py:54
 msgid "Milligram"
-msgstr ""
+msgstr "Milligram"
 
 #: convert.py:55
 msgid "Ton"
-msgstr ""
+msgstr "Ton"
 
 #: convert.py:56
 msgid "Pound"
@@ -194,11 +194,11 @@ msgstr "Carat"
 
 #: convert.py:69
 msgid "Liter"
-msgstr ""
+msgstr "Litre"
 
 #: convert.py:70
 msgid "Milliliter"
-msgstr ""
+msgstr "Millilitre"
 
 #: convert.py:71
 msgid "Pint"
@@ -214,15 +214,15 @@ msgstr "Gallon"
 
 #: convert.py:76
 msgid "Kilometers/Hour"
-msgstr ""
+msgstr "Kilometres/Hour"
 
 #: convert.py:77
 msgid "Centimeters/Minute"
-msgstr ""
+msgstr "Centimetres/Minute"
 
 #: convert.py:78
 msgid "Centimeters/Second"
-msgstr ""
+msgstr "Centimetres/Second"
 
 #: convert.py:79
 msgid "feet/Hour"
@@ -242,7 +242,7 @@ msgstr "Inches/Second"
 
 #: convert.py:83
 msgid "Kilometers/Second"
-msgstr ""
+msgstr "Kilometres/Second"
 
 #: convert.py:84
 msgid "Knots"
@@ -254,7 +254,7 @@ msgstr "Mach"
 
 #: convert.py:86
 msgid "Meters/Second"
-msgstr ""
+msgstr "Metres/Second"
 
 #: convert.py:89
 msgid "Day"
