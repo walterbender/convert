@@ -14,20 +14,20 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import gtk
+from gi.repository import Gtk
 import pango
 import locale
 import convert
 
-from sugar.activity import activity
-from sugar.activity.widgets import StopButton
-from sugar.activity.widgets import ActivityToolbarButton
-from sugar.graphics.toolbarbox import ToolbarBox
-from sugar.graphics.radiotoolbutton import RadioToolButton
+from sugar3.activity import activity
+from sugar3.activity.widgets import StopButton
+from sugar3.activity.widgets import ActivityToolbarButton
+from sugar3.graphics.toolbarbox import ToolbarBox
+from sugar3.graphics.radiotoolbutton import RadioToolButton
 
 from gettext import gettext as _
 
-SCREEN_WIDTH = gtk.gdk.screen_width()
+SCREEN_WIDTH = Gtk.gdk.screen_width()
 ENTER_KEY = 65293
 
 
@@ -39,47 +39,47 @@ class ConvertActivity(activity.Activity):
         self.dic = {}
 
         # Canvas
-        self._canvas = gtk.VBox()
+        self._canvas = Gtk.VBox()
 
-        hbox = gtk.HBox()
-        self._liststore1 = gtk.ListStore(str)
-        self.combo1 = gtk.ComboBox(self._liststore1)
-        cell = gtk.CellRendererText()
+        hbox = Gtk.HBox()
+        self._liststore1 = Gtk.ListStore(str)
+        self.combo1 = Gtk.ComboBox(self._liststore1)
+        cell = Gtk.CellRendererText()
         self.combo1.pack_start(cell, True)
         self.combo1.add_attribute(cell, 'markup', 0)
         self.combo1.connect('changed', self._call)
 
-        flip_btn = gtk.Button()
+        flip_btn = Gtk.Button()
         flip_btn.connect('clicked', self._flip)
-        flip_btn.add(gtk.image_new_from_file('icons/flip.svg'))
+        flip_btn.add(Gtk.image_new_from_file('icons/flip.svg'))
 
-        self._liststore2 = gtk.ListStore(str)
-        self.combo2 = gtk.ComboBox(self._liststore1)
-        cell = gtk.CellRendererText()
+        self._liststore2 = Gtk.ListStore(str)
+        self.combo2 = Gtk.ComboBox(self._liststore1)
+        cell = Gtk.CellRendererText()
         self.combo2.pack_start(cell, True)
         self.combo2.add_attribute(cell, 'markup', 0)
         self.combo2.connect('changed', self._call)
 
-        self.label_box = gtk.HBox()
+        self.label_box = Gtk.HBox()
 
-        self.adjustment = gtk.Adjustment(1.0, 0.0000000001, 10.0 ** 20.0, 0.1,
+        self.adjustment = Gtk.Adjustment(1.0, 0.0000000001, 10.0 ** 20.0, 0.1,
                                          1.0)
-        self.spin = gtk.SpinButton(self.adjustment, 0.0, 2)
+        self.spin = Gtk.SpinButton(self.adjustment, 0.0, 2)
 
-        self.label = gtk.Label()
+        self.label = Gtk.Label()
         self.label.set_selectable(True)
         self.label._size = 12
         self.label.connect('expose-event', self.resize_label)
 
-        self.convert_btn = gtk.Button(_('Convert'))
+        self.convert_btn = Gtk.Button(_('Convert'))
         self.convert_btn.connect('clicked', self._call)
 
         self._canvas.pack_start(hbox, False, False, 20)
         hbox.pack_start(self.combo1, False, True, 20)
         hbox.pack_start(flip_btn, True, False)
         hbox.pack_end(self.combo2, False, True, 20)
-        spin_box = gtk.HBox()
-        convert_box = gtk.HBox()
+        spin_box = Gtk.HBox()
+        convert_box = Gtk.HBox()
         convert_box.pack_start(spin_box, True, False, 0)
         spin_box.pack_start(self.spin, False, False, 0)
         self._canvas.pack_start(convert_box, False, False, 5)
@@ -96,7 +96,7 @@ class ConvertActivity(activity.Activity):
 
         toolbarbox.toolbar.insert(activity_button, 0)
 
-        separator = gtk.SeparatorToolItem()
+        separator = Gtk.SeparatorToolItem()
         separator.set_expand(False)
         separator.set_draw(True)
         toolbarbox.toolbar.insert(separator, -1)
@@ -158,7 +158,7 @@ class ConvertActivity(activity.Activity):
         toolbarbox.toolbar.insert(self._time_btn, -1)
         toolbarbox.toolbar.insert(self._temp_btn, -1)
 
-        separator = gtk.SeparatorToolItem()
+        separator = Gtk.SeparatorToolItem()
         separator.set_expand(True)
         separator.set_draw(False)
         toolbarbox.toolbar.insert(separator, -1)
