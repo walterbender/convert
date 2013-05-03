@@ -1,0 +1,314 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-10-29 08:24-0400\n"
+"PO-Revision-Date: 2013-04-23 15:46+0200\n"
+"Last-Translator: anushnur <anush.mkrtchyan@ca1492.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: hy\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Pootle 2.0.5\n"
+
+#. TRANS: "name" option from activity.info file
+#. TRANS: "summary" option from activity.info file
+#. TRANS: "description" option from activity.info file
+#: activity.py:74
+msgid "Convert"
+msgstr "Փոխակերպում"
+
+#: activity.py:108
+msgid "Length"
+msgstr "Երկարություն"
+
+#: activity.py:114
+msgid "Volume"
+msgstr "Ուժգնություն"
+
+#: activity.py:121
+msgid "Area"
+msgstr "Տարածք"
+
+#: activity.py:128
+msgid "Weight"
+msgstr "Քաշ"
+
+#: activity.py:135
+msgid "Speed"
+msgstr "Արագություն"
+
+#: activity.py:142
+msgid "Time"
+msgstr "Ժամանակ"
+
+#: activity.py:149
+msgid "Temperature"
+msgstr "Ջերմաստիճան"
+
+#: convert.py:19
+msgid "Meters (m)"
+msgstr "Մետրեր (մ)"
+
+#: convert.py:20
+msgid "Kilometers (km)"
+msgstr "Կիլոմտրներ (կմ)"
+
+#: convert.py:21
+msgid "Centimeter (cm)"
+msgstr "Սանտիմետր (սմ)"
+
+#: convert.py:22
+msgid "Cables"
+msgstr "Մալուխներ"
+
+#: convert.py:23
+msgid "Miles"
+msgstr "Մղոններ"
+
+#: convert.py:24
+msgid "Millimeters (mm)"
+msgstr "Միլիմետրներ (մմ)"
+
+#: convert.py:25
+msgid "Decimeter (dm)"
+msgstr "Դեցիմետր (դմ)"
+
+#: convert.py:26
+msgid "Decameter"
+msgstr "Դեկամետր"
+
+#: convert.py:27
+msgid "Hectometers (hm)"
+msgstr "Հեկտոմետր (hm)"
+
+#: convert.py:28
+msgid "Chains"
+msgstr "Շղթաներ"
+
+#: convert.py:29
+msgid "Ell"
+msgstr ""
+
+#: convert.py:30
+msgid "Ems (Pica)"
+msgstr ""
+
+#: convert.py:31
+msgid "Fathoms"
+msgstr "Ֆատոմ"
+
+#: convert.py:32 convert.py:41 convert.py:62
+msgid "feet"
+msgstr "ոտնաչափ"
+
+#: convert.py:33
+msgid "Furlongs"
+msgstr "Ֆուրլոնգ"
+
+#: convert.py:34
+msgid "Inches (in)"
+msgstr "մատնաչափ"
+
+#: convert.py:35
+msgid "Micrometers"
+msgstr "Միկրոմետր"
+
+#: convert.py:36
+msgid "Scandinavian mile"
+msgstr "Սկանդինավիան մղոն"
+
+# մեծ երկարություն
+#: convert.py:37
+msgid "Yards"
+msgstr "Յարդեր"
+
+#: convert.py:40 convert.py:61
+msgid "Meter"
+msgstr "Մետր"
+
+#: convert.py:42 convert.py:63
+msgid "Yard"
+msgstr "Յարդ"
+
+#: convert.py:43 convert.py:64
+msgid "Inch"
+msgstr "Մատնաչափ"
+
+#: convert.py:44 convert.py:65
+msgid "Kilometer"
+msgstr "Կիլոմետր"
+
+#: convert.py:45 convert.py:66
+msgid "Mile"
+msgstr "Մղոն"
+
+#: convert.py:46 convert.py:67
+msgid "Centimeter"
+msgstr "Սանտիմետր"
+
+#: convert.py:47 convert.py:68
+msgid "Millimeter"
+msgstr "Միլիմետր"
+
+#: convert.py:48
+msgid "Micrometer"
+msgstr "Միկրոմետր"
+
+#: convert.py:49
+msgid "Acre"
+msgstr "Ակր"
+
+#: convert.py:52
+msgid "Gram"
+msgstr "Գրամ"
+
+#: convert.py:53
+msgid "Kilogram"
+msgstr "Կիլոգրամ"
+
+#: convert.py:54
+msgid "Milligram"
+msgstr "Միլիգրամ"
+
+#: convert.py:55
+msgid "Ton"
+msgstr "Տոննա"
+
+#: convert.py:56
+msgid "Pound"
+msgstr "Ֆունտ"
+
+#: convert.py:57
+msgid "Ounce"
+msgstr "Ունցիա"
+
+#: convert.py:58
+msgid "Carat"
+msgstr "Կարատ"
+
+#: convert.py:69
+msgid "Liter"
+msgstr "Լիտր"
+
+#: convert.py:70
+msgid "Milliliter"
+msgstr "Միլիլիտր"
+
+#: convert.py:71
+msgid "Pint"
+msgstr "Պինտ"
+
+#: convert.py:72
+msgid "Quart"
+msgstr "Քվարտա"
+
+#: convert.py:73
+msgid "Gallon"
+msgstr "Գալոն"
+
+#: convert.py:76
+msgid "Kilometers/Hour"
+msgstr "Կիլոմետր/Ժամ"
+
+#: convert.py:77
+msgid "Centimeters/Minute"
+msgstr "Սանտիմետր/Րոպե"
+
+#: convert.py:78
+msgid "Centimeters/Second"
+msgstr "Սանտիմետր/Վայրկյան"
+
+#: convert.py:79
+msgid "feet/Hour"
+msgstr "Ոտնաչափ/Ժամ"
+
+#: convert.py:80
+msgid "Feet/Minute"
+msgstr "Ոտնաչափ/Րոպե"
+
+#: convert.py:81
+msgid "Feet/Second"
+msgstr "Ոտնաչափ/Վայրկյան "
+
+#: convert.py:82
+msgid "Inches/Second"
+msgstr "Մատնաչափ/Վայրկյան"
+
+#: convert.py:83
+msgid "Kilometers/Second"
+msgstr "Կիլոմտր/Վայրկյան"
+
+#: convert.py:84
+msgid "Knots"
+msgstr "Հանգույց"
+
+#: convert.py:85
+msgid "Mach"
+msgstr ""
+
+#: convert.py:86
+msgid "Meters/Second"
+msgstr "Մետր/Վայրկյան"
+
+#: convert.py:89
+msgid "Day"
+msgstr "Օր"
+
+#: convert.py:90
+msgid "Week"
+msgstr "Շաբաթ"
+
+#: convert.py:91
+msgid "Month"
+msgstr "Ամիս"
+
+#: convert.py:92
+msgid "Year"
+msgstr "Տարի"
+
+#: convert.py:93
+msgid "Hour"
+msgstr "Ժամ"
+
+#: convert.py:94
+msgid "Minute"
+msgstr "Րոպե"
+
+#: convert.py:95
+msgid "Second"
+msgstr "Վայրկյան"
+
+#: convert.py:96
+msgid "Millisecond"
+msgstr "Միլիվայրկյան"
+
+#: convert.py:97
+msgid "Microsecond"
+msgstr "Միկրովայրկյան"
+
+#: convert.py:98
+msgid "Nanosecond"
+msgstr "Նանովայրկյան"
+
+#: convert.py:99
+msgid "Picosecond"
+msgstr "Պիկովայրկյան"
+
+#: convert.py:102
+msgid "Celsius"
+msgstr "Ցելսուս"
+
+#: convert.py:103
+msgid "Fahrenheit"
+msgstr " Ֆարենհայտի ջերմաչափ"
+
+#: convert.py:104
+msgid "Kelvin"
+msgstr "Կելվին"
