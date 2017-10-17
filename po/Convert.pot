@@ -8,10 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-29 08:24-0400\n"
+"POT-Creation-Date: 2017-10-17 14:07+1100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,294 +20,361 @@ msgstr ""
 #. TRANS: "name" option from activity.info file
 #. TRANS: "summary" option from activity.info file
 #. TRANS: "description" option from activity.info file
-#: activity.py:74
+#: activity/activity.info:2 activity.py:74
 msgid "Convert"
 msgstr ""
 
-#: activity.py:108
+#. TRANS: https://en.wikipedia.org/wiki/Length
+#: activity.py:109
 msgid "Length"
 msgstr ""
 
-#: activity.py:114
+#. TRANS: https://en.wikipedia.org/wiki/Volume
+#: activity.py:116
 msgid "Volume"
 msgstr ""
 
-#: activity.py:121
+#. TRANS: https://en.wikipedia.org/wiki/Area
+#: activity.py:124
 msgid "Area"
 msgstr ""
 
-#: activity.py:128
+#. TRANS: https://en.wikipedia.org/wiki/Weight
+#: activity.py:132
 msgid "Weight"
 msgstr ""
 
-#: activity.py:135
+#. TRANS: https://en.wikipedia.org/wiki/Speed
+#: activity.py:140
 msgid "Speed"
 msgstr ""
 
-#: activity.py:142
+#. TRANS: https://en.wikipedia.org/wiki/Time
+#: activity.py:148
 msgid "Time"
 msgstr ""
 
-#: activity.py:149
+#. TRANS: https://en.wikipedia.org/wiki/Temperature
+#: activity.py:156
 msgid "Temperature"
 msgstr ""
 
-#: convert.py:19
+#. TRANS: https://en.wikipedia.org/wiki/Metre
+#: convert.py:21
 msgid "Meters (m)"
 msgstr ""
 
-#: convert.py:20
+#. TRANS: https://en.wikipedia.org/wiki/Kilometre
+#: convert.py:23
 msgid "Kilometers (km)"
 msgstr ""
 
-#: convert.py:21
+#. TRANS: https://en.wikipedia.org/wiki/Centimetre
+#: convert.py:25
 msgid "Centimeter (cm)"
 msgstr ""
 
-#: convert.py:22
+#. TRANS: https://en.wikipedia.org/wiki/Cable_length
+#: convert.py:27
 msgid "Cables"
 msgstr ""
 
-#: convert.py:23
+#. TRANS: https://en.wikipedia.org/wiki/Mile
+#: convert.py:29
 msgid "Miles"
 msgstr ""
 
-#: convert.py:24
+#. TRANS: https://en.wikipedia.org/wiki/Millimetre
+#: convert.py:31
 msgid "Millimeters (mm)"
 msgstr ""
 
-#: convert.py:25
+#. TRANS: https://en.wikipedia.org/wiki/Decimetre
+#: convert.py:33
 msgid "Decimeter (dm)"
 msgstr ""
 
-#: convert.py:26
+#. TRANS: https://en.wikipedia.org/wiki/Decametre
+#: convert.py:35
 msgid "Decameter"
 msgstr ""
 
-#: convert.py:27
+#. TRANS: https://en.wikipedia.org/wiki/Hectometre
+#: convert.py:37
 msgid "Hectometers (hm)"
 msgstr ""
 
-#: convert.py:28
+#. TRANS: https://en.wikipedia.org/wiki/Chain_(unit)
+#: convert.py:39
 msgid "Chains"
 msgstr ""
 
-#: convert.py:29
+#. TRANS: https://en.wikipedia.org/wiki/Ell
+#: convert.py:41
 msgid "Ell"
 msgstr ""
 
-#: convert.py:30
+#. TRANS: https://en.wikipedia.org/wiki/Em_(typography)
+#: convert.py:43
 msgid "Ems (Pica)"
 msgstr ""
 
-#: convert.py:31
+#. TRANS: https://en.wikipedia.org/wiki/Fathom
+#: convert.py:45
 msgid "Fathoms"
 msgstr ""
 
-#: convert.py:32 convert.py:41 convert.py:62
+#. TRANS: https://en.wikipedia.org/wiki/Foot_(unit)
+#: convert.py:47 convert.py:63 convert.py:101
 msgid "feet"
 msgstr ""
 
-#: convert.py:33
+#. TRANS: https://en.wikipedia.org/wiki/Furlong
+#: convert.py:49
 msgid "Furlongs"
 msgstr ""
 
-#: convert.py:34
+#. TRANS: https://en.wikipedia.org/wiki/Inch
+#: convert.py:51
 msgid "Inches (in)"
 msgstr ""
 
-#: convert.py:35
+#. TRANS: https://en.wikipedia.org/wiki/Micrometre
+#: convert.py:53
 msgid "Micrometers"
 msgstr ""
 
-#: convert.py:36
+#. TRANS: https://en.wikipedia.org/wiki/Scandinavian_mile
+#: convert.py:55
 msgid "Scandinavian mile"
 msgstr ""
 
-#: convert.py:37
+#. TRANS: https://en.wikipedia.org/wiki/Yard
+#: convert.py:57
 msgid "Yards"
 msgstr ""
 
-#: convert.py:40 convert.py:61
+#. TRANS: https://en.wikipedia.org/wiki/Metre
+#: convert.py:62 convert.py:100
 msgid "Meter"
 msgstr ""
 
-#: convert.py:42 convert.py:63
+#. TRANS: https://en.wikipedia.org/wiki/Yard
+#: convert.py:65 convert.py:102
 msgid "Yard"
 msgstr ""
 
-#: convert.py:43 convert.py:64
+#. TRANS: https://en.wikipedia.org/wiki/Inch
+#: convert.py:67 convert.py:103
 msgid "Inch"
 msgstr ""
 
-#: convert.py:44 convert.py:65
+#. TRANS: https://en.wikipedia.org/wiki/Kilometre
+#: convert.py:69 convert.py:104
 msgid "Kilometer"
 msgstr ""
 
-#: convert.py:45 convert.py:66
+#. TRANS: https://en.wikipedia.org/wiki/Mile
+#: convert.py:71 convert.py:105
 msgid "Mile"
 msgstr ""
 
-#: convert.py:46 convert.py:67
+#. TRANS: https://en.wikipedia.org/wiki/Centimetre
+#: convert.py:73 convert.py:106
 msgid "Centimeter"
 msgstr ""
 
-#: convert.py:47 convert.py:68
+#. TRANS: https://en.wikipedia.org/wiki/Millimetre
+#: convert.py:75 convert.py:107
 msgid "Millimeter"
 msgstr ""
 
-#: convert.py:48
+#. TRANS: https://en.wikipedia.org/wiki/Micrometre
+#: convert.py:77
 msgid "Micrometer"
 msgstr ""
 
-#: convert.py:49
+#. TRANS: https://en.wikipedia.org/wiki/Acre
+#: convert.py:79
 msgid "Acre"
 msgstr ""
 
-#: convert.py:52
+#. TRANS: https://en.wikipedia.org/wiki/Gram
+#: convert.py:84
 msgid "Gram"
 msgstr ""
 
-#: convert.py:53
+#. TRANS: https://en.wikipedia.org/wiki/Kilogram
+#: convert.py:86
 msgid "Kilogram"
 msgstr ""
 
-#: convert.py:54
+#. TRANS: https://en.wikipedia.org/wiki/Kilogram#SI_multiples
+#: convert.py:88
 msgid "Milligram"
 msgstr ""
 
-#: convert.py:55
+#. TRANS: https://en.wikipedia.org/wiki/Ton
+#: convert.py:90
 msgid "Ton"
 msgstr ""
 
-#: convert.py:56
+#. TRANS: https://en.wikipedia.org/wiki/Pound_(mass)
+#: convert.py:92
 msgid "Pound"
 msgstr ""
 
-#: convert.py:57
+#. TRANS: https://en.wikipedia.org/wiki/Ounce
+#: convert.py:94
 msgid "Ounce"
 msgstr ""
 
-#: convert.py:58
+#. TRANS: https://en.wikipedia.org/wiki/Carat_(mass)
+#: convert.py:96
 msgid "Carat"
 msgstr ""
 
-#: convert.py:69
+#. TRANS: https://en.wikipedia.org/wiki/Litre
+#: convert.py:109
 msgid "Liter"
 msgstr ""
 
-#: convert.py:70
+#. TRANS: https://en.wikipedia.org/wiki/Litre
+#: convert.py:111
 msgid "Milliliter"
 msgstr ""
 
-#: convert.py:71
+#. TRANS: https://en.wikipedia.org/wiki/Pint
+#: convert.py:113
 msgid "Pint"
 msgstr ""
 
-#: convert.py:72
+#. TRANS: https://en.wikipedia.org/wiki/Quart
+#: convert.py:115
 msgid "Quart"
 msgstr ""
 
-#: convert.py:73
+#. TRANS: https://en.wikipedia.org/wiki/Gallon
+#: convert.py:117
 msgid "Gallon"
 msgstr ""
 
-#: convert.py:76
+#. TRANS: https://en.wikipedia.org/wiki/Kilometres_per_hour
+#: convert.py:122
 msgid "Kilometers/Hour"
 msgstr ""
 
-#: convert.py:77
+#: convert.py:123
 msgid "Centimeters/Minute"
 msgstr ""
 
-#: convert.py:78
+#: convert.py:124
 msgid "Centimeters/Second"
 msgstr ""
 
-#: convert.py:79
+#: convert.py:125
 msgid "feet/Hour"
 msgstr ""
 
-#: convert.py:80
+#: convert.py:126
 msgid "Feet/Minute"
 msgstr ""
 
-#: convert.py:81
+#. TRANS: https://en.wikipedia.org/wiki/Foot_per_second
+#: convert.py:128
 msgid "Feet/Second"
 msgstr ""
 
-#: convert.py:82
+#. TRANS: https://en.wikipedia.org/wiki/Inch_per_second
+#: convert.py:130
 msgid "Inches/Second"
 msgstr ""
 
-#: convert.py:83
+#: convert.py:131
 msgid "Kilometers/Second"
 msgstr ""
 
-#: convert.py:84
+#. TRANS: https://en.wikipedia.org/wiki/Knot_(unit)
+#: convert.py:133
 msgid "Knots"
 msgstr ""
 
-#: convert.py:85
+#. TRANS: https://en.wikipedia.org/wiki/Mach_number
+#: convert.py:135
 msgid "Mach"
 msgstr ""
 
-#: convert.py:86
+#. TRANS: https://en.wikipedia.org/wiki/Metre_per_second
+#: convert.py:137
 msgid "Meters/Second"
 msgstr ""
 
-#: convert.py:89
+#. TRANS: https://en.wikipedia.org/wiki/Day
+#: convert.py:142
 msgid "Day"
 msgstr ""
 
-#: convert.py:90
+#. TRANS: https://en.wikipedia.org/wiki/Week
+#: convert.py:144
 msgid "Week"
 msgstr ""
 
-#: convert.py:91
+#. TRANS: https://en.wikipedia.org/wiki/Month
+#: convert.py:146
 msgid "Month"
 msgstr ""
 
-#: convert.py:92
+#. TRANS: https://en.wikipedia.org/wiki/Year
+#: convert.py:148
 msgid "Year"
 msgstr ""
 
-#: convert.py:93
+#. TRANS: https://en.wikipedia.org/wiki/Hour
+#: convert.py:150
 msgid "Hour"
 msgstr ""
 
-#: convert.py:94
+#. TRANS: https://en.wikipedia.org/wiki/Minute
+#: convert.py:152
 msgid "Minute"
 msgstr ""
 
-#: convert.py:95
+#. TRANS: https://en.wikipedia.org/wiki/Second
+#: convert.py:154
 msgid "Second"
 msgstr ""
 
-#: convert.py:96
+#. TRANS: https://en.wikipedia.org/wiki/Millisecond
+#: convert.py:156
 msgid "Millisecond"
 msgstr ""
 
-#: convert.py:97
+#. TRANS: https://en.wikipedia.org/wiki/Microsecond
+#: convert.py:158
 msgid "Microsecond"
 msgstr ""
 
-#: convert.py:98
+#. TRANS: https://en.wikipedia.org/wiki/Nanosecond
+#: convert.py:160
 msgid "Nanosecond"
 msgstr ""
 
-#: convert.py:99
+#. TRANS: https://en.wikipedia.org/wiki/Picosecond
+#: convert.py:162
 msgid "Picosecond"
 msgstr ""
 
-#: convert.py:102
+#. TRANS: https://en.wikipedia.org/wiki/Celsius
+#: convert.py:167
 msgid "Celsius"
 msgstr ""
 
-#: convert.py:103
-msgid "Fahrenheit"
+#. TRANS: https://en.wikipedia.org/wiki/Kelvin
+#: convert.py:169
+msgid "Kelvin"
 msgstr ""
 
-#: convert.py:104
-msgid "Kelvin"
+#. TRANS: https://en.wikipedia.org/wiki/Fahrenheit
+#: convert.py:171
+msgid "Fahrenheit"
 msgstr ""
