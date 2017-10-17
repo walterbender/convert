@@ -2,313 +2,315 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-10-29 08:24-0400\n"
-"PO-Revision-Date: 2017-10-15 11:22+0000\n"
-"Last-Translator: Chris <cjl@sugarlabs.org>\n"
+"PO-Revision-Date: 2016-06-07 22:48+0000\n"
+"Last-Translator: Shoshaa <abdulla.shoshaa@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: ayc\n"
+"Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
 "X-Generator: Pootle 2.5.1.1\n"
-"X-POOTLE-MTIME: 1508066523.000000\n"
+"X-POOTLE-MTIME: 1465339707.000000\n"
 
 #. TRANS: "name" option from activity.info file
 #. TRANS: "summary" option from activity.info file
 #. TRANS: "description" option from activity.info file
 #: activity.py:74
 msgid "Convert"
-msgstr "Jaqtaña"
+msgstr "تحويل"
 
 #: activity.py:108
 msgid "Length"
-msgstr "Sara chani tupäwi"
+msgstr "الطول"
 
 #: activity.py:114
 msgid "Volume"
-msgstr "Walja chani tupäwi"
+msgstr "الحجم"
 
 #: activity.py:121
 msgid "Area"
-msgstr "Utjäwi chani tupäwi"
+msgstr "المساحة"
 
 #: activity.py:128
 msgid "Weight"
-msgstr "Jathi chani tupäwi"
+msgstr "الوزن"
 
 #: activity.py:135
 msgid "Speed"
-msgstr "T'ijtäwi chani tupäwi"
+msgstr "السرعة"
 
 #: activity.py:142
 msgid "Time"
-msgstr "Pacha chani tupäwi"
+msgstr "الوقت"
 
 #: activity.py:149
 msgid "Temperature"
-msgstr "Junt'u chani tupäwi"
+msgstr "درجة الحرارة"
 
 #: convert.py:19
 msgid "Meters (m)"
-msgstr "Chillqinaka (ch) chani tupäwi"
+msgstr "امتار"
 
 #: convert.py:20
 msgid "Kilometers (km)"
-msgstr "Kilómetros (km) chani tupäwi"
+msgstr "كيلومترات"
 
 #: convert.py:21
 msgid "Centimeter (cm)"
-msgstr "Centímetros (cm) chani tupäwi"
+msgstr "سنتيمترات"
 
 #: convert.py:22
 msgid "Cables"
-msgstr "Jiskhaña"
+msgstr "سلك"
 
 #: convert.py:23
 msgid "Miles"
-msgstr "Milla chani tupäwi"
+msgstr "اميال"
 
 #: convert.py:24
 msgid "Millimeters (mm)"
-msgstr "Milímetro (mm) chani tupäwi"
+msgstr "ميليميتر(مم)"
 
 #: convert.py:25
 msgid "Decimeter (dm)"
-msgstr "Decímetro (dm) chani tupäwi"
+msgstr "ديسيمتر(دسم)"
 
 #: convert.py:26
 msgid "Decameter"
-msgstr "Decámetro chani tupäwi"
+msgstr "ديساميتر"
 
 #: convert.py:27
 msgid "Hectometers (hm)"
-msgstr "Hectómetro (hm) chani tupäwi"
+msgstr "هيكتوميتر(هم)"
 
 #: convert.py:28
 msgid "Chains"
-msgstr "Jiskhaña"
+msgstr "سلاسل"
 
 #: convert.py:29
 msgid "Ell"
-msgstr "Ana sutini"
+msgstr "ذراع"
 
 #: convert.py:30
 msgid "Ems (Pica)"
-msgstr "Ems (Pica) wakichata"
+msgstr "اي ام سي (بيكا)"
 
 #: convert.py:31
 msgid "Fathoms"
-msgstr "Luqanaka"
+msgstr "قامة"
 
 #: convert.py:32 convert.py:41 convert.py:62
 msgid "feet"
-msgstr "kayu"
+msgstr "قدم"
 
 #: convert.py:33
 msgid "Furlongs"
-msgstr "Pachanaka"
+msgstr "فورلونغ"
 
 #: convert.py:34
 msgid "Inches (in)"
-msgstr "Paya luk'ana (pl) chani tupäwi"
+msgstr "بوصات(بوص)"
 
 #: convert.py:35
 msgid "Micrometers"
-msgstr "Micrómetro chani tupäwi"
+msgstr "ميكرومترات"
 
 #: convert.py:36
 msgid "Scandinavian mile"
-msgstr "Milla Escandinava chani tupäwi"
+msgstr "ميل اسكندنافي"
 
 #: convert.py:37
 msgid "Yards"
-msgstr "Yarda chani tupäwi"
+msgstr "ياردة"
 
 #: convert.py:40 convert.py:61
 msgid "Meter"
-msgstr "Chillqi chani tupäwi"
+msgstr "متر"
 
 #: convert.py:42 convert.py:63
 msgid "Yard"
-msgstr "Yarda chani tupäwi"
+msgstr "يارده"
 
 #: convert.py:43 convert.py:64
 msgid "Inch"
-msgstr "Paya luk'ana chani tupäwi"
+msgstr "بوصة"
 
 #: convert.py:44 convert.py:65
 msgid "Kilometer"
-msgstr "Kilómetro chani tupäwi"
+msgstr "كيلومتر"
 
 #: convert.py:45 convert.py:66
 msgid "Mile"
-msgstr "Milla chani tupäwi"
+msgstr "ميل"
 
 #: convert.py:46 convert.py:67
 msgid "Centimeter"
-msgstr "Centímetro chani tupäwi"
+msgstr "سنتيمتر"
 
 #: convert.py:47 convert.py:68
 msgid "Millimeter"
-msgstr "Milímetro chani tupäwi"
+msgstr "ميليمتر"
 
 #: convert.py:48
 msgid "Micrometer"
-msgstr "Micrómetro chani tupäwi"
+msgstr "ميكرومتر"
 
 #: convert.py:49
 msgid "Acre"
-msgstr "Acre chani tupäwi"
+msgstr "فدان"
 
 #: convert.py:52
 msgid "Gram"
-msgstr "Gramo chani tupäwi"
+msgstr "جرام"
 
 #: convert.py:53
 msgid "Kilogram"
-msgstr "Kilogramo chani tupäwi"
+msgstr "كيلوجرام"
 
 #: convert.py:54
 msgid "Milligram"
-msgstr "Miligramo chani tupäwi"
+msgstr "ملي جرام"
 
 #: convert.py:55
 msgid "Ton"
-msgstr "Tonelada chani tupäwi"
+msgstr "طن"
 
 #: convert.py:56
 msgid "Pound"
-msgstr "Libra chani tupäwi"
+msgstr "رطل"
 
 #: convert.py:57
 msgid "Ounce"
-msgstr "Onza chani tupäwi"
+msgstr "اوقية"
 
 #: convert.py:58
 msgid "Carat"
-msgstr "Quilate chani tupäwi"
+msgstr "قيراط"
 
 #: convert.py:69
 msgid "Liter"
-msgstr "Litro chani tupäwi"
+msgstr "لتر"
 
 #: convert.py:70
 msgid "Milliliter"
-msgstr "Milímetro chani tupäwi"
+msgstr "مليلتر"
 
 #: convert.py:71
 msgid "Pint"
-msgstr "Pinta chani tupäwi"
+msgstr "مكيال"
 
 #: convert.py:72
 msgid "Quart"
-msgstr "Wiku chani tupäwi"
+msgstr "ربع جالون"
 
 #: convert.py:73
 msgid "Gallon"
-msgstr "Galón chani tupäwi"
+msgstr "جالون"
 
 #: convert.py:76
 msgid "Kilometers/Hour"
-msgstr "Kilómetros/Hora chani tupäwi"
+msgstr "كيلومترات/الساعة"
 
 #: convert.py:77
 msgid "Centimeters/Minute"
-msgstr "Centímetros/Minuto chani tupäwi"
+msgstr "سنتيمترات/دقيقة"
 
 #: convert.py:78
 msgid "Centimeters/Second"
-msgstr "Centímetros/Segundo chani tupäwi"
+msgstr "سنتيمترات/ثانية"
 
 #: convert.py:79
 msgid "feet/Hour"
-msgstr "pies/Hora chani tupäwi"
+msgstr "قدم/ساعة"
 
 #: convert.py:80
 msgid "Feet/Minute"
-msgstr "Pies/Minuto chani tupäwi"
+msgstr "قدم/دقيقة"
 
 #: convert.py:81
 msgid "Feet/Second"
-msgstr "Pies/Segundo chani tupäwi"
+msgstr "قدم/ثانية"
 
 #: convert.py:82
 msgid "Inches/Second"
-msgstr "Pulgadas/Segundo chani tupäwi"
+msgstr "بوصة/ثانية"
 
 #: convert.py:83
 msgid "Kilometers/Second"
-msgstr "Kilómetros/Segundo chani tupäwi"
+msgstr "كيلومترات/ثانية"
 
 #: convert.py:84
 msgid "Knots"
-msgstr "Chinunaka chani tupäwi"
+msgstr "عقدة"
 
 #: convert.py:85
 msgid "Mach"
-msgstr "Mach chani tupäwi"
+msgstr "ماخ"
 
 #: convert.py:86
 msgid "Meters/Second"
-msgstr "Metros/Segundo chani tupäwi"
+msgstr "مترات/ثانية"
 
 #: convert.py:89
 msgid "Day"
-msgstr "Uru"
+msgstr "يوم"
 
 #: convert.py:90
 msgid "Week"
-msgstr "Simana"
+msgstr "اسبوع"
 
 #: convert.py:91
 msgid "Month"
-msgstr "Phaxsi"
+msgstr "شهر"
 
 #: convert.py:92
 msgid "Year"
-msgstr "Mara"
+msgstr "سنة"
 
 #: convert.py:93
 msgid "Hour"
-msgstr "Pacha"
+msgstr "ساعة"
 
 #: convert.py:94
 msgid "Minute"
-msgstr "Pacha t'ijta"
+msgstr "دقيقة"
 
 #: convert.py:95
 msgid "Second"
-msgstr "Juk'a pacha t'ijta"
+msgstr "ثانية"
 
 #: convert.py:96
 msgid "Millisecond"
-msgstr "Mili-segundo pacha t'ijta"
+msgstr "ملّي ثانية"
 
 #: convert.py:97
 msgid "Microsecond"
-msgstr "Micro-segundo pacha t'ijta"
+msgstr "ميكروثانية"
 
 #: convert.py:98
 msgid "Nanosecond"
-msgstr "Nano-segundo pacha t'ijta"
+msgstr "نانوثانية"
 
 #: convert.py:99
 msgid "Picosecond"
-msgstr "Pico-segundo pacha t'ijta"
+msgstr "بيكوثانية"
 
 #: convert.py:102
 msgid "Celsius"
-msgstr "Celsius pacha tupäwi"
+msgstr "درجة مئوية"
 
 #: convert.py:103
 msgid "Fahrenheit"
-msgstr "Fahrenheit pacha tupäwi"
+msgstr "فهرنهايت"
 
 #: convert.py:104
 msgid "Kelvin"
-msgstr "Kelvin pacha tupäwi"
+msgstr "كلفن"
