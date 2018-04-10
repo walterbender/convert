@@ -15,7 +15,9 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from gi.repository import Gtk
-from gi.repository import pango
+from gi.repository import Pango
+from gi.repository import Gdk
+
 import locale
 import convert
 
@@ -27,7 +29,7 @@ from sugar3.graphics.radiotoolbutton import RadioToolButton
 
 from gettext import gettext as _
 
-SCREEN_WIDTH = Gtk.gdk.screen_width()
+SCREEN_WIDTH = Gdk.Screen.width()
 ENTER_KEY = 65293
 
 
@@ -43,7 +45,7 @@ class ConvertActivity(activity.Activity):
 
         hbox = Gtk.HBox()
         self._liststore1 = Gtk.ListStore(str)
-        self.combo1 = Gtk.ComboBox(self._liststore1)
+        self.combo1 = Gtk.ComboBox.new_with_model_and_entry(self._liststore1)
         cell = Gtk.CellRendererText()
         self.combo1.pack_start(cell, True)
         self.combo1.add_attribute(cell, 'markup', 0)
@@ -51,10 +53,10 @@ class ConvertActivity(activity.Activity):
 
         flip_btn = Gtk.Button()
         flip_btn.connect('clicked', self._flip)
-        flip_btn.add(Gtk.image_new_from_file('icons/flip.svg'))
+        flip_btn.add(Gtk.Image.new_from_file('icons/flip.svg'))
 
         self._liststore2 = Gtk.ListStore(str)
-        self.combo2 = Gtk.ComboBox(self._liststore1)
+        self.combo2 = Gtk.ComboBox.new_with_model_and_entry(self._liststore1)
         cell = Gtk.CellRendererText()
         self.combo2.pack_start(cell, True)
         self.combo2.add_attribute(cell, 'markup', 0)
@@ -64,19 +66,20 @@ class ConvertActivity(activity.Activity):
 
         self.adjustment = Gtk.Adjustment(1.0, 0.0000000001, 10.0 ** 20.0, 0.1,
                                          1.0)
-        self.spin = Gtk.SpinButton(self.adjustment, 0.0, 2)
+        self.spin = Gtk.SpinButton() #self.adjustment, 0.0, 2)
+        self.spin.set_adjustment(self.adjustment)
 
         self.label = Gtk.Label()
         self.label.set_selectable(True)
         self.label._size = 12
-        self.label.connect('expose-event', self.resize_label)
+        self.label.connect('draw', self.resize_label)
 
         self.convert_btn = Gtk.Button(_('Convert'))
         self.convert_btn.connect('clicked', self._call)
 
         self._canvas.pack_start(hbox, False, False, 20)
         hbox.pack_start(self.combo1, False, True, 20)
-        hbox.pack_start(flip_btn, True, False)
+        hbox.pack_start(flip_btn, True, False, 20)
         hbox.pack_end(self.combo2, False, True, 20)
         spin_box = Gtk.HBox()
         convert_box = Gtk.HBox()
@@ -242,7 +245,7 @@ class ConvertActivity(activity.Activity):
         try:
             size = str((60 * SCREEN_WIDTH / 100) / num_label)
             if not size == self.label._size:
-                self.label.modify_font(pango.FontDescription(size))
+                self.label.modify_font(Pango.FontDescription(size))
                 self.label._size = size
         except ZeroDivisionError:
             pass
