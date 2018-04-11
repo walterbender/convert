@@ -49,6 +49,7 @@ class ConvertActivity(activity.Activity):
         cell = Gtk.CellRendererText()
         self.combo1.pack_start(cell, True)
         self.combo1.add_attribute(cell, 'markup', 0)
+        self.combo1.set_entry_text_column(0)
         self.combo1.connect('changed', self._call)
 
         flip_btn = Gtk.Button()
@@ -56,17 +57,37 @@ class ConvertActivity(activity.Activity):
         flip_btn.add(Gtk.Image.new_from_file('icons/flip.svg'))
 
         self._liststore2 = Gtk.ListStore(str)
+<<<<<<< HEAD
+<<<<<<< HEAD
+        self.combo2 = Gtk.ComboBox.new_with_model_and_entry(self._liststore2)
+=======
         self.combo2 = Gtk.ComboBox.new_with_model_and_entry(self._liststore1)
+>>>>>>> refs/remotes/origin/master
+=======
+        self.combo2 = Gtk.ComboBox.new_with_model_and_entry(self._liststore2)
+>>>>>>> Combobox works properly, spin button also works properly but i still get this error                                                                             "Traceback (most recent call last):
         cell = Gtk.CellRendererText()
+        iter = self.combo2.get_active_iter()
         self.combo2.pack_start(cell, True)
         self.combo2.add_attribute(cell, 'markup', 0)
+        self.combo2.set_entry_text_column(0)
         self.combo2.connect('changed', self._call)
 
         self.label_box = Gtk.HBox()
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+        self.adjustment = Gtk.Adjustment(1.0, 0, 10.00 ** 10.00 , 1.0, 1.0, 0)  
+        self.spin = Gtk.SpinButton() 
+=======
         self.adjustment = Gtk.Adjustment(1.0, 0.0000000001, 10.0 ** 20.0, 0.1,
                                          1.0)
         self.spin = Gtk.SpinButton() #self.adjustment, 0.0, 2)
+>>>>>>> refs/remotes/origin/master
+=======
+        self.adjustment = Gtk.Adjustment(1.0, 0, 10.00 ** 10.00 , 1.0, 1.0, 0)  
+        self.spin = Gtk.SpinButton() 
+>>>>>>> Combobox works properly, spin button also works properly but i still get this error                                                                             "Traceback (most recent call last):
         self.spin.set_adjustment(self.adjustment)
 
         self.label = Gtk.Label()
@@ -198,6 +219,10 @@ class ConvertActivity(activity.Activity):
             pass
 
     def _call(self, widget=None):
+        #tree_iter = combobox.get_active_iter()
+        #if tree_iter != None:
+        #    model = combobox.get_model()
+        #    combobox[model]
         self._update_label()
         self.show_all()
 
