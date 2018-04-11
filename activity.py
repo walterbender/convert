@@ -57,7 +57,11 @@ class ConvertActivity(activity.Activity):
         flip_btn.add(Gtk.Image.new_from_file('icons/flip.svg'))
 
         self._liststore2 = Gtk.ListStore(str)
+<<<<<<< HEAD
         self.combo2 = Gtk.ComboBox.new_with_model_and_entry(self._liststore2)
+=======
+        self.combo2 = Gtk.ComboBox.new_with_model_and_entry(self._liststore1)
+>>>>>>> refs/remotes/origin/master
         cell = Gtk.CellRendererText()
         iter = self.combo2.get_active_iter()
         self.combo2.pack_start(cell, True)
@@ -67,8 +71,14 @@ class ConvertActivity(activity.Activity):
 
         self.label_box = Gtk.HBox()
 
+<<<<<<< HEAD
         self.adjustment = Gtk.Adjustment(1.0, 0, 10.00 ** 10.00 , 1.0, 1.0, 0)  
         self.spin = Gtk.SpinButton() 
+=======
+        self.adjustment = Gtk.Adjustment(1.0, 0.0000000001, 10.0 ** 20.0, 0.1,
+                                         1.0)
+        self.spin = Gtk.SpinButton() #self.adjustment, 0.0, 2)
+>>>>>>> refs/remotes/origin/master
         self.spin.set_adjustment(self.adjustment)
 
         self.label = Gtk.Label()
