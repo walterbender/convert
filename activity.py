@@ -58,10 +58,14 @@ class ConvertActivity(activity.Activity):
 
         self._liststore2 = Gtk.ListStore(str)
 <<<<<<< HEAD
+<<<<<<< HEAD
         self.combo2 = Gtk.ComboBox.new_with_model_and_entry(self._liststore2)
 =======
         self.combo2 = Gtk.ComboBox.new_with_model_and_entry(self._liststore1)
 >>>>>>> refs/remotes/origin/master
+=======
+        self.combo2 = Gtk.ComboBox.new_with_model_and_entry(self._liststore2)
+>>>>>>> Combobox works properly, spin button also works properly but i still get this error                                                                             "Traceback (most recent call last):
         cell = Gtk.CellRendererText()
         iter = self.combo2.get_active_iter()
         self.combo2.pack_start(cell, True)
@@ -72,6 +76,7 @@ class ConvertActivity(activity.Activity):
         self.label_box = Gtk.HBox()
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         self.adjustment = Gtk.Adjustment(1.0, 0, 10.00 ** 10.00 , 1.0, 1.0, 0)  
         self.spin = Gtk.SpinButton() 
 =======
@@ -79,6 +84,10 @@ class ConvertActivity(activity.Activity):
                                          1.0)
         self.spin = Gtk.SpinButton() #self.adjustment, 0.0, 2)
 >>>>>>> refs/remotes/origin/master
+=======
+        self.adjustment = Gtk.Adjustment(1.0, 0, 10.00 ** 10.00 , 1.0, 1.0, 0)  
+        self.spin = Gtk.SpinButton() 
+>>>>>>> Combobox works properly, spin button also works properly but i still get this error                                                                             "Traceback (most recent call last):
         self.spin.set_adjustment(self.adjustment)
 
         self.label = Gtk.Label()
