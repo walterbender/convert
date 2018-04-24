@@ -223,7 +223,7 @@ class ConvertActivity(activity.Activity):
         keys = self.dic.keys()
         keys.sort()
         if active < 0:
-            return None
+            active = 0
         text = keys[active]
         if '<sup>' in text:
             text = text.split('<b>')[1].split('</b>')[0]
