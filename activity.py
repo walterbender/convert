@@ -1,4 +1,5 @@
 # Copyright (C) 2012 Cristhofer Travieso <cristhofert97@gmail.com>
+#
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation; either version 3 of the License, or
@@ -42,8 +43,8 @@ class ConvertActivity(activity.Activity):
         self._canvas = Gtk.VBox()
 
         hbox = Gtk.HBox()
-        self._liststore1 = Gtk.ListStore(str)
-        self.combo1 = Gtk.ComboBox.new_with_model_and_entry(self._liststore1)
+        self._liststore = Gtk.ListStore(str)
+        self.combo1 = Gtk.ComboBox.new_with_model_and_entry(self._liststore)
         cell = Gtk.CellRendererText()
         self.combo1.pack_start(cell, True)
         self.combo1.add_attribute(cell, 'markup', 0)
@@ -54,8 +55,7 @@ class ConvertActivity(activity.Activity):
         flip_btn.connect('clicked', self._flip)
         flip_btn.add(Gtk.Image.new_from_file('icons/flip.svg'))
 
-        self._liststore2 = Gtk.ListStore(str)
-        self.combo2 = Gtk.ComboBox.new_with_model_and_entry(self._liststore2)
+        self.combo2 = Gtk.ComboBox.new_with_model_and_entry(self._liststore)
         cell = Gtk.CellRendererText()
         self.combo2.pack_start(cell, True)
         self.combo2.add_attribute(cell, 'markup', 0)
