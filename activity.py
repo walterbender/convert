@@ -202,8 +202,7 @@ class ConvertActivity(activity.Activity):
         self.show_all()
 
     def _update_combo(self, data):
-        self._liststore1.clear()
-        self._liststore2.clear()
+        self._liststore.clear()
         self.dic = data
         keys = self.dic.keys()
         keys.sort()
@@ -213,8 +212,7 @@ class ConvertActivity(activity.Activity):
                 symbol = self.dic[x][-1]
                 symbol = '<sup><b>%s</b></sup>' % symbol
 
-            self._liststore1.append(['%s%s' % (x, symbol)])
-            self._liststore2.append(['%s%s' % (x, symbol)])
+            self._liststore.append(['%s%s' % (x, symbol)])
         self.combo1.set_active(0)
         self.combo2.set_active(0)
         self._call()
