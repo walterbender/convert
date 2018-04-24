@@ -1,5 +1,4 @@
 # Copyright (C) 2012 Cristhofer Travieso <cristhofert97@gmail.com>
-
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation; either version 3 of the License, or
@@ -30,7 +29,6 @@ from sugar3.graphics.radiotoolbutton import RadioToolButton
 from gettext import gettext as _
 
 SCREEN_WIDTH = Gdk.Screen.width()
-ENTER_KEY = 65293
 
 
 class ConvertActivity(activity.Activity):
@@ -49,6 +47,7 @@ class ConvertActivity(activity.Activity):
         cell = Gtk.CellRendererText()
         self.combo1.pack_start(cell, True)
         self.combo1.add_attribute(cell, 'markup', 0)
+        self.combo1.set_entry_text_column(0)
         self.combo1.connect('changed', self._call)
 
         flip_btn = Gtk.Button()
@@ -56,18 +55,19 @@ class ConvertActivity(activity.Activity):
         flip_btn.add(Gtk.Image.new_from_file('icons/flip.svg'))
 
         self._liststore2 = Gtk.ListStore(str)
-        self.combo2 = Gtk.ComboBox.new_with_model_and_entry(self._liststore1)
+        self.combo2 = Gtk.ComboBox.new_with_model_and_entry(self._liststore2)
         cell = Gtk.CellRendererText()
         self.combo2.pack_start(cell, True)
         self.combo2.add_attribute(cell, 'markup', 0)
+        self.combo2.set_entry_text_column(0)
         self.combo2.connect('changed', self._call)
 
         self.label_box = Gtk.HBox()
 
-        self.adjustment = Gtk.Adjustment(1.0, 0.0000000001, 10.0 ** 20.0, 0.1,
-                                         1.0)
-        self.spin = Gtk.SpinButton() #self.adjustment, 0.0, 2)
+        self.adjustment = Gtk.Adjustment(1.0, 0, 10.00 ** 10.00 , 1.0, 1.0, 0)  
+        self.spin = Gtk.SpinButton() 
         self.spin.set_adjustment(self.adjustment)
+        self.spin.set_numeric(True)
 
         self.label = Gtk.Label()
         self.label.set_selectable(True)
