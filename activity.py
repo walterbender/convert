@@ -47,7 +47,6 @@ class ConvertActivity(activity.Activity):
         self.combo1 = Gtk.ComboBox.new_with_model_and_entry(self._liststore)
         cell = Gtk.CellRendererText()
         self.combo1.pack_start(cell, True)
-        self.combo1.add_attribute(cell, 'markup', 0)
         self.combo1.set_entry_text_column(0)
         self.combo1.connect('changed', self._call)
 
@@ -58,7 +57,6 @@ class ConvertActivity(activity.Activity):
         self.combo2 = Gtk.ComboBox.new_with_model_and_entry(self._liststore)
         cell = Gtk.CellRendererText()
         self.combo2.pack_start(cell, True)
-        self.combo2.add_attribute(cell, 'markup', 0)
         self.combo2.set_entry_text_column(0)
         self.combo2.connect('changed', self._call)
 
