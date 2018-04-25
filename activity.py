@@ -211,8 +211,8 @@ class ConvertActivity(activity.Activity):
                 symbol = '<sup><b>%s</b></sup>' % symbol
 
             self._liststore.append(['%s%s' % (x, symbol)])
-        self.combo1.set_active(0)
-        self.combo2.set_active(0)
+        self.combo1.set_active(-1)
+        self.combo2.set_active(-1)
         self._call()
         self.show_all()
 
