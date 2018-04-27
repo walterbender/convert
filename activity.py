@@ -14,12 +14,15 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+import locale
+import convert
+
+import gi
+gi.require_version('Gtk', '3.0')
+
 from gi.repository import Gtk
 from gi.repository import Pango
 from gi.repository import Gdk
-
-import locale
-import convert
 
 from sugar3.activity import activity
 from sugar3.activity.widgets import StopButton
@@ -62,8 +65,8 @@ class ConvertActivity(activity.Activity):
 
         self.label_box = Gtk.HBox()
 
-        self.adjustment = Gtk.Adjustment(1.0, 0, 10.00 ** 10.00 , 1.0, 1.0, 0)  
-        self.spin = Gtk.SpinButton() 
+        self.adjustment = Gtk.Adjustment(1.0, 0, 10.00 ** 10.00, 1.0, 1.0, 0)
+        self.spin = Gtk.SpinButton()
         self.spin.set_adjustment(self.adjustment)
         self.spin.set_numeric(True)
 
