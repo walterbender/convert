@@ -185,7 +185,7 @@ def convert(number, unit, to_unit, dic):
         elif unit == 'Fahrenheit' and to_unit == 'Celsius':
             return (number - 32) / 1.8
         elif unit == 'Kelvin' and to_unit == 'Fahrenheit':
-            return 9/5 * number - 459.67
+            return 9 / 5 * number - 459.67
         elif unit == 'Fahrenheit' and to_unit == 'Kelvin':
             return (number + 459.67) / 1.8
         else:
