@@ -7,92 +7,91 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-10-29 08:24-0400\n"
-"PO-Revision-Date: 2017-12-18 12:18+0000\n"
-"Last-Translator: jszu <jszu@protonmail.com>\n"
+"PO-Revision-Date: 2018-02-11 09:40+0000\n"
+"Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: pl\n"
+"Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
-"|| n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.1.1\n"
-"X-POOTLE-MTIME: 1513599530.000000\n"
+"X-POOTLE-MTIME: 1518342028.000000\n"
 
 #. TRANS: "name" option from activity.info file
 #. TRANS: "summary" option from activity.info file
 #. TRANS: "description" option from activity.info file
 #: activity.py:74
 msgid "Convert"
-msgstr "Przekształć"
+msgstr "המרה"
 
 #: activity.py:108
 msgid "Length"
-msgstr "Długość"
+msgstr "אורך"
 
 #: activity.py:114
 msgid "Volume"
-msgstr "Głośność"
+msgstr "נפח"
 
 #: activity.py:121
 msgid "Area"
-msgstr "Zakres"
+msgstr "שטח"
 
 #: activity.py:128
 msgid "Weight"
-msgstr "Ciężar"
+msgstr "גובה"
 
 #: activity.py:135
 msgid "Speed"
-msgstr "Szybkość"
+msgstr "מהירות"
 
 #: activity.py:142
 msgid "Time"
-msgstr "Czas"
+msgstr "זמן"
 
 #: activity.py:149
 msgid "Temperature"
-msgstr "Temperatura"
+msgstr "טמפרטורה"
 
 #: convert.py:19
 msgid "Meters (m)"
-msgstr "Metry (m)"
+msgstr "מטרים (מ׳)"
 
 #: convert.py:20
 msgid "Kilometers (km)"
-msgstr "Kilometry (km)"
+msgstr "קילומטרים (ק״מ)"
 
 #: convert.py:21
 msgid "Centimeter (cm)"
-msgstr "Centymetry (cm)"
+msgstr "סנטימטרים (ס״מ)"
 
 #: convert.py:22
 msgid "Cables"
-msgstr "Kable"
+msgstr "כבלים"
 
 #: convert.py:23
 msgid "Miles"
-msgstr "Mile"
+msgstr "מילים"
 
 #: convert.py:24
 msgid "Millimeters (mm)"
-msgstr "Milimetry (mm)"
+msgstr "מילימטרים (מ״מ)"
 
 #: convert.py:25
 msgid "Decimeter (dm)"
-msgstr "Decymetry (dm)"
+msgstr "דצימטר (ד״מ)"
 
 #: convert.py:26
 msgid "Decameter"
-msgstr "Dekametr (dam)"
+msgstr "דקאמטר"
 
 #: convert.py:27
 msgid "Hectometers (hm)"
-msgstr "Hektometry (hm)"
+msgstr "הקטומטרים (ה״מ)"
 
 #: convert.py:28
 msgid "Chains"
-msgstr "Łańcuchy"
+msgstr ""
 
 #: convert.py:29
 msgid "Ell"
@@ -104,212 +103,212 @@ msgstr ""
 
 #: convert.py:31
 msgid "Fathoms"
-msgstr ""
+msgstr "פאתום"
 
 #: convert.py:32 convert.py:41 convert.py:62
 msgid "feet"
-msgstr "stopa"
+msgstr "רגל"
 
 #: convert.py:33
 msgid "Furlongs"
-msgstr ""
+msgstr "פרלונג"
 
 #: convert.py:34
 msgid "Inches (in)"
-msgstr "Cale (in)"
+msgstr "אינצ׳ים (in)"
 
 #: convert.py:35
 msgid "Micrometers"
-msgstr "Mikrometry"
+msgstr "מיקרומטרים"
 
 #: convert.py:36
 msgid "Scandinavian mile"
-msgstr "Mile"
+msgstr "מיל סקנדינבי"
 
 #: convert.py:37
 msgid "Yards"
-msgstr "Jardy"
+msgstr "יארדים"
 
 #: convert.py:40 convert.py:61
 msgid "Meter"
-msgstr "Metr"
+msgstr "מטר"
 
 #: convert.py:42 convert.py:63
 msgid "Yard"
-msgstr "Jard"
+msgstr "יארד"
 
 #: convert.py:43 convert.py:64
 msgid "Inch"
-msgstr "Cal"
+msgstr "אינץ׳"
 
 #: convert.py:44 convert.py:65
 msgid "Kilometer"
-msgstr "Kilometr"
+msgstr "קילומטר"
 
 #: convert.py:45 convert.py:66
 msgid "Mile"
-msgstr "Mila"
+msgstr "מיל"
 
 #: convert.py:46 convert.py:67
 msgid "Centimeter"
-msgstr "Centymetr"
+msgstr "סנטימטר"
 
 #: convert.py:47 convert.py:68
 msgid "Millimeter"
-msgstr "Milimetr"
+msgstr "מילימטר"
 
 #: convert.py:48
 msgid "Micrometer"
-msgstr "Mikrometr"
+msgstr "מיקרומטר"
 
 #: convert.py:49
 msgid "Acre"
-msgstr "Akr"
+msgstr "אקר"
 
 #: convert.py:52
 msgid "Gram"
-msgstr "Gram"
+msgstr "גרם"
 
 #: convert.py:53
 msgid "Kilogram"
-msgstr "Kilogram"
+msgstr "קילוגרם"
 
 #: convert.py:54
 msgid "Milligram"
-msgstr "Miligram"
+msgstr "מיליגרם"
 
 #: convert.py:55
 msgid "Ton"
-msgstr "Tona"
+msgstr "טון"
 
 #: convert.py:56
 msgid "Pound"
-msgstr "Funt"
+msgstr "ליברה"
 
 #: convert.py:57
 msgid "Ounce"
-msgstr "Uncja"
+msgstr "אונקיה"
 
 #: convert.py:58
 msgid "Carat"
-msgstr "Karat"
+msgstr "קרט"
 
 #: convert.py:69
 msgid "Liter"
-msgstr "Litr"
+msgstr "ליטר"
 
 #: convert.py:70
 msgid "Milliliter"
-msgstr "Mililitr"
+msgstr "מיליליטר"
 
 #: convert.py:71
 msgid "Pint"
-msgstr "Półkwarta"
+msgstr "פיינט"
 
 #: convert.py:72
 msgid "Quart"
-msgstr "Kwarta"
+msgstr "רבע גלון"
 
 #: convert.py:73
 msgid "Gallon"
-msgstr "Galon"
+msgstr "גלון"
 
 #: convert.py:76
 msgid "Kilometers/Hour"
-msgstr "Kilometry na godzinę (km/godz)"
+msgstr "קילומטרים/שעה"
 
 #: convert.py:77
 msgid "Centimeters/Minute"
-msgstr "Centymetry na minutę (cm/min)"
+msgstr "קילומטרים/דקה"
 
 #: convert.py:78
 msgid "Centimeters/Second"
-msgstr "Centymetry na sekundę (cm/s)"
+msgstr "קילומטרים/שנייה"
 
 #: convert.py:79
 msgid "feet/Hour"
-msgstr "stopy na godzinę"
+msgstr "רגל/שעה"
 
 #: convert.py:80
 msgid "Feet/Minute"
-msgstr "Stopy na minutę"
+msgstr "רגל/דקה"
 
 #: convert.py:81
 msgid "Feet/Second"
-msgstr ""
+msgstr "רגל/שנייה"
 
 #: convert.py:82
 msgid "Inches/Second"
-msgstr ""
+msgstr "אינצ׳ים/שנייה"
 
 #: convert.py:83
 msgid "Kilometers/Second"
-msgstr ""
+msgstr "קילומטרים/שנייה"
 
 #: convert.py:84
 msgid "Knots"
-msgstr "Węzłów"
+msgstr "קשרים"
 
 #: convert.py:85
 msgid "Mach"
-msgstr ""
+msgstr "מאך"
 
 #: convert.py:86
 msgid "Meters/Second"
-msgstr ""
+msgstr "מטרים/שנייה"
 
 #: convert.py:89
 msgid "Day"
-msgstr "Dzień"
+msgstr "יום"
 
 #: convert.py:90
 msgid "Week"
-msgstr "Tydzień"
+msgstr "שבוע"
 
 #: convert.py:91
 msgid "Month"
-msgstr "Miesiąc"
+msgstr "חודש"
 
 #: convert.py:92
 msgid "Year"
-msgstr "Rok"
+msgstr "שנה"
 
 #: convert.py:93
 msgid "Hour"
-msgstr "Godzina"
+msgstr "שעה"
 
 #: convert.py:94
 msgid "Minute"
-msgstr "Minuta"
+msgstr "דקה"
 
 #: convert.py:95
 msgid "Second"
-msgstr "Sekunda"
+msgstr "שנייה"
 
 #: convert.py:96
 msgid "Millisecond"
-msgstr "Milisekunda"
+msgstr "מילישניות"
 
 #: convert.py:97
 msgid "Microsecond"
-msgstr "Mikrosekunda"
+msgstr "מיקרו שניות"
 
 #: convert.py:98
 msgid "Nanosecond"
-msgstr "Nanosekunda"
+msgstr "ננו שניות"
 
 #: convert.py:99
 msgid "Picosecond"
-msgstr "Pikosekunda"
+msgstr "פיקו שניות"
 
 #: convert.py:102
 msgid "Celsius"
-msgstr "Celsjusz"
+msgstr "צלזיוס"
 
 #: convert.py:103
 msgid "Fahrenheit"
-msgstr ""
+msgstr "פרנהייט"
 
 #: convert.py:104
 msgid "Kelvin"
-msgstr ""
+msgstr "קלווין"

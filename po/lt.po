@@ -2,97 +2,98 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-10-29 08:24-0400\n"
-"PO-Revision-Date: 2017-12-18 12:18+0000\n"
-"Last-Translator: jszu <jszu@protonmail.com>\n"
+"PO-Revision-Date: 2017-11-10 22:07+0000\n"
+"Last-Translator: Moo <hazap@hotmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: pl\n"
+"Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
-"|| n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"(n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.5.1.1\n"
-"X-POOTLE-MTIME: 1513599530.000000\n"
+"X-POOTLE-MTIME: 1510351644.000000\n"
 
 #. TRANS: "name" option from activity.info file
 #. TRANS: "summary" option from activity.info file
 #. TRANS: "description" option from activity.info file
 #: activity.py:74
 msgid "Convert"
-msgstr "Przekształć"
+msgstr ""
 
 #: activity.py:108
 msgid "Length"
-msgstr "Długość"
+msgstr ""
 
 #: activity.py:114
 msgid "Volume"
-msgstr "Głośność"
+msgstr ""
 
 #: activity.py:121
 msgid "Area"
-msgstr "Zakres"
+msgstr ""
 
 #: activity.py:128
 msgid "Weight"
-msgstr "Ciężar"
+msgstr ""
 
 #: activity.py:135
 msgid "Speed"
-msgstr "Szybkość"
+msgstr "Greitis"
 
 #: activity.py:142
 msgid "Time"
-msgstr "Czas"
+msgstr "Laikas"
 
 #: activity.py:149
 msgid "Temperature"
-msgstr "Temperatura"
+msgstr "Temperatūra"
 
 #: convert.py:19
 msgid "Meters (m)"
-msgstr "Metry (m)"
+msgstr ""
 
 #: convert.py:20
 msgid "Kilometers (km)"
-msgstr "Kilometry (km)"
+msgstr ""
 
 #: convert.py:21
 msgid "Centimeter (cm)"
-msgstr "Centymetry (cm)"
+msgstr ""
 
 #: convert.py:22
 msgid "Cables"
-msgstr "Kable"
+msgstr ""
 
 #: convert.py:23
 msgid "Miles"
-msgstr "Mile"
+msgstr ""
 
 #: convert.py:24
 msgid "Millimeters (mm)"
-msgstr "Milimetry (mm)"
+msgstr ""
 
 #: convert.py:25
 msgid "Decimeter (dm)"
-msgstr "Decymetry (dm)"
+msgstr ""
 
 #: convert.py:26
 msgid "Decameter"
-msgstr "Dekametr (dam)"
+msgstr ""
 
 #: convert.py:27
 msgid "Hectometers (hm)"
-msgstr "Hektometry (hm)"
+msgstr ""
 
 #: convert.py:28
 msgid "Chains"
-msgstr "Łańcuchy"
+msgstr ""
 
 #: convert.py:29
 msgid "Ell"
@@ -108,7 +109,7 @@ msgstr ""
 
 #: convert.py:32 convert.py:41 convert.py:62
 msgid "feet"
-msgstr "stopa"
+msgstr ""
 
 #: convert.py:33
 msgid "Furlongs"
@@ -116,123 +117,123 @@ msgstr ""
 
 #: convert.py:34
 msgid "Inches (in)"
-msgstr "Cale (in)"
+msgstr ""
 
 #: convert.py:35
 msgid "Micrometers"
-msgstr "Mikrometry"
+msgstr ""
 
 #: convert.py:36
 msgid "Scandinavian mile"
-msgstr "Mile"
+msgstr ""
 
 #: convert.py:37
 msgid "Yards"
-msgstr "Jardy"
+msgstr ""
 
 #: convert.py:40 convert.py:61
 msgid "Meter"
-msgstr "Metr"
+msgstr ""
 
 #: convert.py:42 convert.py:63
 msgid "Yard"
-msgstr "Jard"
+msgstr ""
 
 #: convert.py:43 convert.py:64
 msgid "Inch"
-msgstr "Cal"
+msgstr ""
 
 #: convert.py:44 convert.py:65
 msgid "Kilometer"
-msgstr "Kilometr"
+msgstr ""
 
 #: convert.py:45 convert.py:66
 msgid "Mile"
-msgstr "Mila"
+msgstr ""
 
 #: convert.py:46 convert.py:67
 msgid "Centimeter"
-msgstr "Centymetr"
+msgstr ""
 
 #: convert.py:47 convert.py:68
 msgid "Millimeter"
-msgstr "Milimetr"
+msgstr ""
 
 #: convert.py:48
 msgid "Micrometer"
-msgstr "Mikrometr"
+msgstr ""
 
 #: convert.py:49
 msgid "Acre"
-msgstr "Akr"
+msgstr ""
 
 #: convert.py:52
 msgid "Gram"
-msgstr "Gram"
+msgstr ""
 
 #: convert.py:53
 msgid "Kilogram"
-msgstr "Kilogram"
+msgstr ""
 
 #: convert.py:54
 msgid "Milligram"
-msgstr "Miligram"
+msgstr ""
 
 #: convert.py:55
 msgid "Ton"
-msgstr "Tona"
+msgstr ""
 
 #: convert.py:56
 msgid "Pound"
-msgstr "Funt"
+msgstr ""
 
 #: convert.py:57
 msgid "Ounce"
-msgstr "Uncja"
+msgstr ""
 
 #: convert.py:58
 msgid "Carat"
-msgstr "Karat"
+msgstr ""
 
 #: convert.py:69
 msgid "Liter"
-msgstr "Litr"
+msgstr ""
 
 #: convert.py:70
 msgid "Milliliter"
-msgstr "Mililitr"
+msgstr ""
 
 #: convert.py:71
 msgid "Pint"
-msgstr "Półkwarta"
+msgstr ""
 
 #: convert.py:72
 msgid "Quart"
-msgstr "Kwarta"
+msgstr ""
 
 #: convert.py:73
 msgid "Gallon"
-msgstr "Galon"
+msgstr ""
 
 #: convert.py:76
 msgid "Kilometers/Hour"
-msgstr "Kilometry na godzinę (km/godz)"
+msgstr ""
 
 #: convert.py:77
 msgid "Centimeters/Minute"
-msgstr "Centymetry na minutę (cm/min)"
+msgstr ""
 
 #: convert.py:78
 msgid "Centimeters/Second"
-msgstr "Centymetry na sekundę (cm/s)"
+msgstr ""
 
 #: convert.py:79
 msgid "feet/Hour"
-msgstr "stopy na godzinę"
+msgstr ""
 
 #: convert.py:80
 msgid "Feet/Minute"
-msgstr "Stopy na minutę"
+msgstr ""
 
 #: convert.py:81
 msgid "Feet/Second"
@@ -248,7 +249,7 @@ msgstr ""
 
 #: convert.py:84
 msgid "Knots"
-msgstr "Węzłów"
+msgstr ""
 
 #: convert.py:85
 msgid "Mach"
@@ -260,51 +261,51 @@ msgstr ""
 
 #: convert.py:89
 msgid "Day"
-msgstr "Dzień"
+msgstr ""
 
 #: convert.py:90
 msgid "Week"
-msgstr "Tydzień"
+msgstr ""
 
 #: convert.py:91
 msgid "Month"
-msgstr "Miesiąc"
+msgstr ""
 
 #: convert.py:92
 msgid "Year"
-msgstr "Rok"
+msgstr ""
 
 #: convert.py:93
 msgid "Hour"
-msgstr "Godzina"
+msgstr ""
 
 #: convert.py:94
 msgid "Minute"
-msgstr "Minuta"
+msgstr ""
 
 #: convert.py:95
 msgid "Second"
-msgstr "Sekunda"
+msgstr ""
 
 #: convert.py:96
 msgid "Millisecond"
-msgstr "Milisekunda"
+msgstr ""
 
 #: convert.py:97
 msgid "Microsecond"
-msgstr "Mikrosekunda"
+msgstr ""
 
 #: convert.py:98
 msgid "Nanosecond"
-msgstr "Nanosekunda"
+msgstr ""
 
 #: convert.py:99
 msgid "Picosecond"
-msgstr "Pikosekunda"
+msgstr ""
 
 #: convert.py:102
 msgid "Celsius"
-msgstr "Celsjusz"
+msgstr ""
 
 #: convert.py:103
 msgid "Fahrenheit"
