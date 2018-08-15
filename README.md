@@ -1,18 +1,18 @@
 What is this?
 =============
 
-Convert is a measurement units converter activity for the Sugar desktop.
+Convert is a measurement units converter activity.
 
 Convert accepts an input unit, an output unit, and an input value.  Convert then displays the result of conversion.
 
 How to use?
 ===========
 
-Convert is part of the Sugar desktop.  Please refer to;
+Convert is not part of the Sugar desktop, but can be added.  Please refer to;
 
 * [How to Get Sugar on sugarlabs.org](https://sugarlabs.org/),
 * [How to use Sugar](https://help.sugarlabs.org/),
-* [Download Convert using Browse](https://activities.sugarlabs.org/), search for `Convert`, then download, and;
+* [Download Convert using Browse](https://activities.sugarlabs.org/), search for `Convert`, then download.
 
 How to upgrade?
 ===============
