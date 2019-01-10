@@ -16,6 +16,7 @@
 
 import locale
 import convert
+import re
 
 import gi
 gi.require_version('Gtk', '3.0')
@@ -65,9 +66,10 @@ class ConvertActivity(activity.Activity):
 
         self.label_box = Gtk.HBox()
 
-        self.adjustment = Gtk.Adjustment(1.0, 0, 10.00 ** 10.00, 1.0, 1.0, 0)
         self.spin = Gtk.Entry()
         self.spin.set_text("1")
+        self.spin.connect('insert-text',
+                                     self.spin_insert_text_cb)
 
         self.label = Gtk.Label()
         self.label.set_selectable(True)
@@ -182,21 +184,12 @@ class ConvertActivity(activity.Activity):
 
     def _update_label(self):
         try:
-            try:
-                if(int(str(self.spin.get_text()))):
-                    spin_value = str(self.spin.get_text())
-            except:
-                spin_value = "1"
-
+            spin_value = str(self.spin.get_text())
             decimals = "1"
             fmt = '%.' + decimals + 'f'
             new_value = locale.format(fmt, float(spin_value))
 
-            try:
-                convert_value = str(self.convert())
-            except:
-                convert_value = "1"
-
+            convert_value = str(self.convert())
             decimals = str(len(convert_value.split('.')[-1]))
             fmt = '%.' + decimals + 'f'
             new_convert = locale.format(fmt, float(convert_value))
@@ -262,3 +255,10 @@ class ConvertActivity(activity.Activity):
         unit = self._get_active_text(self.combo1)
         to_unit = self._get_active_text(self.combo2)
         return convert.convert(number, unit, to_unit, self.dic)
+
+    def spin_insert_text_cb(self, entry, text, length, position):
+        if not re.match('[0-9]', text):
+            entry.emit_stop_by_name('insert-text')
+            return True
+        return False
+            
