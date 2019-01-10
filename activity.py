@@ -66,9 +66,8 @@ class ConvertActivity(activity.Activity):
         self.label_box = Gtk.HBox()
 
         self.adjustment = Gtk.Adjustment(1.0, 0, 10.00 ** 10.00, 1.0, 1.0, 0)
-        self.spin = Gtk.SpinButton()
-        self.spin.set_adjustment(self.adjustment)
-        self.spin.set_numeric(True)
+        self.spin = Gtk.Entry()
+        self.spin.set_text("1")
 
         self.label = Gtk.Label()
         self.label.set_selectable(True)
@@ -183,12 +182,21 @@ class ConvertActivity(activity.Activity):
 
     def _update_label(self):
         try:
-            spin_value = str(self.spin.get_value())
-            decimals = str(len(spin_value.split('.')[-1]))
+            try:
+                if(int(str(self.spin.get_text()))):
+                    spin_value = str(self.spin.get_text())
+            except:
+                spin_value = "1"
+
+            decimals = "1"
             fmt = '%.' + decimals + 'f'
             new_value = locale.format(fmt, float(spin_value))
 
-            convert_value = str(self.convert())
+            try:
+                convert_value = str(self.convert())
+            except:
+                convert_value = "1"
+
             decimals = str(len(convert_value.split('.')[-1]))
             fmt = '%.' + decimals + 'f'
             new_convert = locale.format(fmt, float(convert_value))
