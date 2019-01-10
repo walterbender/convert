@@ -211,7 +211,10 @@ class ConvertActivity(activity.Activity):
             symbol = ''
             if len(self.dic[x]) == 3:
                 symbol = self.dic[x][-1]
-                symbol = '<sup><b>%s</b></sup>' % symbol
+                if symbol == 3:
+                    symbol = " " + u'\u00b3'
+                elif symbol == 2:
+                    symbol = " " + u'\u00b2'
 
             self._liststore.append(['%s%s' % (x, symbol)])
         self.combo1.set_active(-1)
