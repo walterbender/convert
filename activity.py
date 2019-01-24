@@ -16,6 +16,7 @@
 
 import locale
 import convert
+import re
 
 import gi
 gi.require_version('Gtk', '3.0')
@@ -65,10 +66,9 @@ class ConvertActivity(activity.Activity):
 
         self.label_box = Gtk.HBox()
 
-        self.adjustment = Gtk.Adjustment(1.0, 0, 10.00 ** 10.00, 1.0, 1.0, 0)
-        self.spin = Gtk.SpinButton()
-        self.spin.set_adjustment(self.adjustment)
-        self.spin.set_numeric(True)
+        self.value_entry = Gtk.Entry()
+        self.value_entry.set_text("1")
+        self.value_entry.connect('insert-text', self._value_insert_text)
 
         self.label = Gtk.Label()
         self.label.set_selectable(True)
@@ -82,14 +82,14 @@ class ConvertActivity(activity.Activity):
         hbox.pack_start(self.combo1, False, True, 20)
         hbox.pack_start(flip_btn, True, False, 20)
         hbox.pack_end(self.combo2, False, True, 20)
-        spin_box = Gtk.HBox()
+        value_box = Gtk.HBox()
         convert_box = Gtk.HBox()
-        convert_box.pack_start(spin_box, True, False, 0)
-        spin_box.pack_start(self.spin, False, False, 0)
+        convert_box.pack_start(value_box, True, False, 0)
+        value_box.pack_start(self.value_entry, False, False, 0)
         self._canvas.pack_start(convert_box, False, False, 5)
         self._canvas.pack_start(self.label_box, True, False, 0)
         self.label_box.add(self.label)
-        spin_box.pack_start(self.convert_btn, False, False, 20)
+        value_box.pack_start(self.convert_btn, False, False, 20)
 
         self.set_canvas(self._canvas)
 
@@ -183,10 +183,11 @@ class ConvertActivity(activity.Activity):
 
     def _update_label(self):
         try:
-            spin_value = str(self.spin.get_value())
-            decimals = str(len(spin_value.split('.')[-1]))
+            num_value = str(self.value_entry.get_text())
+            num_value = str(num_value.replace(',',''))
+            decimals = str(len(num_value.split('.')[-1]))
             fmt = '%.' + decimals + 'f'
-            new_value = locale.format(fmt, float(spin_value))
+            new_value = locale.format(fmt, float(num_value))
 
             convert_value = str(self.convert())
             decimals = str(len(convert_value.split('.')[-1]))
@@ -238,8 +239,8 @@ class ConvertActivity(activity.Activity):
         active_combo2 = self.combo2.get_active()
         self.combo1.set_active(active_combo2)
         self.combo2.set_active(active_combo1)
-        value = float(self.label.get_text().split(' ~ ')[1].replace(',', '.'))
-        self.spin.set_value(value)
+        value = float(self.label.get_text().split(' ~ ')[1])
+        self.value_entry.set_text(str(value))
         self._call()
 
     def resize_label(self, widget, event):
@@ -253,7 +254,17 @@ class ConvertActivity(activity.Activity):
             pass
 
     def convert(self):
-        number = float(self.spin.get_text().replace(',', '.'))
+        number = float(self.value_entry.get_text().replace(',', ''))
         unit = self._get_active_text(self.combo1)
         to_unit = self._get_active_text(self.combo2)
         return convert.convert(number, unit, to_unit, self.dic)
+
+    def _value_insert_text(self, entry, text, length, position):
+        for char in text:
+            if char == "-" and self.value_entry.get_text() is "" and len(text) == 1:
+                return False
+            elif not re.match('[0-9,.]', char):
+                entry.emit_stop_by_name('insert-text')
+                return True
+        return False
+
