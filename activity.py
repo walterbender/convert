@@ -67,16 +67,14 @@ class ConvertActivity(activity.Activity):
         self.label_box = Gtk.HBox()
 
         self.value_entry = Gtk.Entry()
-        self.value_entry.set_text("1")
+        self.value_entry.set_placeholder_text("Enter number")
         self.value_entry.connect('insert-text', self._value_insert_text)
+        self.value_entry.connect('changed', self._call)
 
         self.label = Gtk.Label()
         self.label.set_selectable(True)
         self.label._size = 12
         self.label.connect('draw', self.resize_label)
-
-        self.convert_btn = Gtk.Button(_('Convert'))
-        self.convert_btn.connect('clicked', self._call)
 
         self._canvas.pack_start(hbox, False, False, 20)
         hbox.pack_start(self.combo1, False, True, 20)
@@ -89,7 +87,6 @@ class ConvertActivity(activity.Activity):
         self._canvas.pack_start(convert_box, False, False, 5)
         self._canvas.pack_start(self.label_box, True, False, 0)
         self.label_box.add(self.label)
-        value_box.pack_start(self.convert_btn, False, False, 20)
 
         self.set_canvas(self._canvas)
 
@@ -200,7 +197,10 @@ class ConvertActivity(activity.Activity):
             pass
 
     def _call(self, widget=None):
-        self._update_label()
+        try:
+            self._update_label()
+        except:
+            pass
         self.show_all()
 
     def _update_combo(self, data):
@@ -239,8 +239,11 @@ class ConvertActivity(activity.Activity):
         active_combo2 = self.combo2.get_active()
         self.combo1.set_active(active_combo2)
         self.combo2.set_active(active_combo1)
-        value = float(self.label.get_text().split(' ~ ')[1])
-        self.value_entry.set_text(str(value))
+        try:
+            value = float(self.label.get_text().split(' ~ ')[1])
+            self.value_entry.set_text(str(value))
+        except:
+            pass
         self._call()
 
     def resize_label(self, widget, event):
