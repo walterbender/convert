@@ -52,7 +52,7 @@ class ConvertActivity(activity.Activity):
         cell = Gtk.CellRendererText()
         self.combo1.pack_start(cell, True)
         self.combo1.set_entry_text_column(0)
-        self.combo1.connect('changed', self._call)
+        self.combo1.connect('changed', self._update_label)
 
         flip_btn = Gtk.Button()
         flip_btn.connect('clicked', self._flip)
@@ -62,21 +62,19 @@ class ConvertActivity(activity.Activity):
         cell = Gtk.CellRendererText()
         self.combo2.pack_start(cell, True)
         self.combo2.set_entry_text_column(0)
-        self.combo2.connect('changed', self._call)
+        self.combo2.connect('changed', self._update_label)
 
         self.label_box = Gtk.HBox()
 
         self.value_entry = Gtk.Entry()
-        self.value_entry.set_text("1")
+        self.value_entry.set_placeholder_text("Enter number")
         self.value_entry.connect('insert-text', self._value_insert_text)
+        self.value_entry.connect('changed', self._update_label)
 
         self.label = Gtk.Label()
         self.label.set_selectable(True)
         self.label._size = 12
         self.label.connect('draw', self.resize_label)
-
-        self.convert_btn = Gtk.Button(_('Convert'))
-        self.convert_btn.connect('clicked', self._call)
 
         self._canvas.pack_start(hbox, False, False, 20)
         hbox.pack_start(self.combo1, False, True, 20)
@@ -89,7 +87,6 @@ class ConvertActivity(activity.Activity):
         self._canvas.pack_start(convert_box, False, False, 5)
         self._canvas.pack_start(self.label_box, True, False, 0)
         self.label_box.add(self.label)
-        value_box.pack_start(self.convert_btn, False, False, 20)
 
         self.set_canvas(self._canvas)
 
@@ -181,7 +178,7 @@ class ConvertActivity(activity.Activity):
         self._update_combo(convert.length)
         self.show_all()
 
-    def _update_label(self):
+    def _update_label(self, entry):
         try:
             num_value = str(self.value_entry.get_text())
             num_value = str(num_value.replace(',',''))
@@ -196,12 +193,8 @@ class ConvertActivity(activity.Activity):
 
             text = '%s ~ %s' % (new_value, new_convert)
             self.label.set_text(text)
-        except KeyError:
+        except ValueError:
             pass
-
-    def _call(self, widget=None):
-        self._update_label()
-        self.show_all()
 
     def _update_combo(self, data):
         self._liststore.clear()
@@ -220,7 +213,6 @@ class ConvertActivity(activity.Activity):
             self._liststore.append(['%s%s' % (x, symbol)])
         self.combo1.set_active(-1)
         self.combo2.set_active(-1)
-        self._call()
         self.show_all()
 
     def _get_active_text(self, combobox):
@@ -241,7 +233,7 @@ class ConvertActivity(activity.Activity):
         self.combo2.set_active(active_combo1)
         value = float(self.label.get_text().split(' ~ ')[1])
         self.value_entry.set_text(str(value))
-        self._call()
+        self._update_label(self.value_entry)
 
     def resize_label(self, widget, event):
         num_label = len(self.label.get_text())
@@ -267,4 +259,3 @@ class ConvertActivity(activity.Activity):
                 entry.emit_stop_by_name('insert-text')
                 return True
         return False
-
