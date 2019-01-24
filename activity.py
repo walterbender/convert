@@ -236,8 +236,8 @@ class ConvertActivity(activity.Activity):
         active_combo2 = self.combo2.get_active()
         self.combo1.set_active(active_combo2)
         self.combo2.set_active(active_combo1)
-        value = float(self.label.get_text().split(' ~ ')[1].replace(',', '.'))
-        self.value_entry.set_value(value)
+        value = float(self.label.get_text().split(' ~ ')[1])
+        self.value_entry.set_text(str(value))
         self._call()
 
     def resize_label(self, widget, event):
