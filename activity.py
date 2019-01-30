@@ -17,6 +17,8 @@
 import locale
 import convert
 import re
+import utils
+import ast
 
 import gi
 gi.require_version('Gtk', '3.0')
@@ -105,61 +107,72 @@ class ConvertActivity(activity.Activity):
         separator.set_draw(True)
         toolbarbox.toolbar.insert(separator, -1)
 
+        self._clicked_btn = ""
         # RadioToolButton
         self._length_btn = RadioToolButton()
         self._length_btn.connect('clicked',
-                                 lambda w: self._update_combo(convert.length))
+                                 lambda w: self._update_combo(convert.length, "length"))
         # TRANS: https://en.wikipedia.org/wiki/Length
         self._length_btn.set_tooltip(_('Length'))
         self._length_btn.props.icon_name = 'length'
 
         self._volume_btn = RadioToolButton()
         self._volume_btn.connect('clicked',
-                                 lambda w: self._update_combo(convert.volume))
+                                 lambda w: self._update_combo(convert.volume, "volume"))
         # TRANS: https://en.wikipedia.org/wiki/Volume
         self._volume_btn.set_tooltip(_('Volume'))
         self._volume_btn.props.icon_name = 'volume'
-        self._volume_btn.props.group = self._length_btn
 
         self._area_btn = RadioToolButton()
         self._area_btn.connect('clicked',
-                               lambda w: self._update_combo(convert.area))
+                               lambda w: self._update_combo(convert.area, "area"))
         # TRANS: https://en.wikipedia.org/wiki/Area
         self._area_btn.set_tooltip(_('Area'))
         self._area_btn.props.icon_name = 'area'
-        self._area_btn.props.group = self._length_btn
 
         self._weight_btn = RadioToolButton()
         self._weight_btn.connect('clicked',
-                                 lambda w: self._update_combo(convert.weight))
+                                 lambda w: self._update_combo(convert.weight, "weight"))
         # TRANS: https://en.wikipedia.org/wiki/Weight
         self._weight_btn.set_tooltip(_('Weight'))
         self._weight_btn.props.icon_name = 'weight'
-        self._weight_btn.props.group = self._length_btn
 
         self._speed_btn = RadioToolButton()
         self._speed_btn.connect('clicked',
-                                lambda w: self._update_combo(convert.speed))
+                                lambda w: self._update_combo(convert.speed, "speed"))
         # TRANS: https://en.wikipedia.org/wiki/Speed
         self._speed_btn.set_tooltip(_('Speed'))
         self._speed_btn.props.icon_name = 'speed'
-        self._speed_btn.props.group = self._length_btn
 
         self._time_btn = RadioToolButton()
         self._time_btn.connect('clicked',
-                               lambda w: self._update_combo(convert.time))
+                               lambda w: self._update_combo(convert.time, "time"))
         # TRANS: https://en.wikipedia.org/wiki/Time
         self._time_btn.set_tooltip(_('Time'))
         self._time_btn.props.icon_name = 'time'
-        self._time_btn.props.group = self._length_btn
 
         self._temp_btn = RadioToolButton()
         self._temp_btn.connect('clicked',
-                               lambda w: self._update_combo(convert.temp))
+                               lambda w: self._update_combo(convert.temp, "temp"))
         # TRANS: https://en.wikipedia.org/wiki/Temperature
         self._temp_btn.set_tooltip(_('Temperature'))
         self._temp_btn.props.icon_name = 'temp'
-        self._temp_btn.props.group = self._length_btn
+
+        self._saved_params = ast.literal_eval(utils.load())
+        saved_btn = self._saved_params[0]
+        format_Str = "self._{}_btn"
+        self._length_btn.props.group = eval(format_Str.format(saved_btn))
+        self._volume_btn.props.group = eval(format_Str.format(saved_btn))
+        self._area_btn.props.group = eval(format_Str.format(saved_btn))
+        self._weight_btn.props.group = eval(format_Str.format(saved_btn))
+        self._speed_btn.props.group = eval(format_Str.format(saved_btn))
+        self._time_btn.props.group = eval(format_Str.format(saved_btn))
+        self._temp_btn.props.group = eval(format_Str.format(saved_btn))
+
+        self._update_combo(eval("convert.{}".format(saved_btn)), saved_btn)
+
+        self.combo1.set_active(int(self._saved_params[1]))
+        self.combo2.set_active(int(self._saved_params[2]))
 
         toolbarbox.toolbar.insert(self._length_btn, -1)
         toolbarbox.toolbar.insert(self._volume_btn, -1)
@@ -176,9 +189,9 @@ class ConvertActivity(activity.Activity):
 
         stopbtn = StopButton(self)
         toolbarbox.toolbar.insert(stopbtn, -1)
+        stopbtn.connect('clicked', self._exit)
 
         self.set_toolbar_box(toolbarbox)
-        self._update_combo(convert.length)
         self.show_all()
 
     def _update_label(self):
@@ -203,7 +216,11 @@ class ConvertActivity(activity.Activity):
         self._update_label()
         self.show_all()
 
-    def _update_combo(self, data):
+    def _exit(self, widget=None):
+        utils.save(self)
+
+    def _update_combo(self, data, btnName):
+        self._clicked_btn = btnName
         self._liststore.clear()
         self.dic = data
         keys = self.dic.keys()
@@ -218,8 +235,8 @@ class ConvertActivity(activity.Activity):
                     symbol = " " + u'\u00b2'
 
             self._liststore.append(['%s%s' % (x, symbol)])
-        self.combo1.set_active(-1)
-        self.combo2.set_active(-1)
+        self.combo1.set_active(0)
+        self.combo2.set_active(0)
         self._call()
         self.show_all()
 
