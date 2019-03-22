@@ -52,6 +52,7 @@ class ConvertActivity(activity.Activity):
         cell = Gtk.CellRendererText()
         self.combo1.pack_start(cell, True)
         self.combo1.set_entry_text_column(0)
+        self.combo1.connect('changed', self._update_label)
 
         flip_btn = Gtk.Button()
         flip_btn.connect('clicked', self._flip)
@@ -61,6 +62,7 @@ class ConvertActivity(activity.Activity):
         cell = Gtk.CellRendererText()
         self.combo2.pack_start(cell, True)
         self.combo2.set_entry_text_column(0)
+        self.combo2.connect('changed', self._update_label)
 
         self.label_box = Gtk.HBox()
 
