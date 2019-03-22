@@ -211,8 +211,8 @@ class ConvertActivity(activity.Activity):
                     symbol = " " + u'\u00b2'
 
             self._liststore.append(['%s%s' % (x, symbol)])
-        self.combo1.set_active(-1)
-        self.combo2.set_active(-1)
+        self.combo1.set_active(0)
+        self.combo2.set_active(0)
         self.show_all()
 
     def _get_active_text(self, combobox):
