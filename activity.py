@@ -181,7 +181,7 @@ class ConvertActivity(activity.Activity):
     def _update_label(self, entry):
         try:
             num_value = str(self.value_entry.get_text())
-            num_value = str(num_value.replace(',',''))
+            num_value = str(num_value.replace(',', ''))
             decimals = str(len(num_value.split('.')[-1]))
             fmt = '%.' + decimals + 'f'
             new_value = locale.format(fmt, float(num_value))
@@ -253,7 +253,8 @@ class ConvertActivity(activity.Activity):
 
     def _value_insert_text(self, entry, text, length, position):
         for char in text:
-            if char == "-" and self.value_entry.get_text() is "" and len(text) == 1:
+            if char == "-" and \
+               self.value_entry.get_text() is "" and len(text) == 1:
                 return False
             elif not re.match('[0-9,.]', char):
                 entry.emit_stop_by_name('insert-text')
