@@ -15,6 +15,15 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from gettext import gettext as _
+import urllib2
+import json
+
+
+url = "http://data.fixer.io/api/latest?access_key=f886247741bde596c12e2cac6dfc0cc2"
+#req = urllib2.request.Request(url)
+data = urllib2.urlopen(url).read()
+data = json.loads(data.decode('utf-8'))
+currency = data["rates"]
 
 length = {
     # TRANS: https://en.wikipedia.org/wiki/Metre
@@ -59,22 +68,22 @@ length = {
 
 area = {
     # TRANS: https://en.wikipedia.org/wiki/Metre
-    _('Meter'): (1, 1, 2),
-    _('feet'): (0.092903, 10.763915051182416, 2),
+    _('Square Meter'): (1, 1, 2),
+    _('Square feet'): (0.092903, 10.763915051182416, 2),
     # TRANS: https://en.wikipedia.org/wiki/Yard
-    _('Yard'): (0.836127, 1.1959905612424908, 2),
+    _('Square Yard'): (0.836127, 1.1959905612424908, 2),
     # TRANS: https://en.wikipedia.org/wiki/Inch
-    _('Inch'): (0.00064516, 1550.0031000062002, 2),
+    _('Square Inch'): (0.00064516, 1550.0031000062002, 2),
     # TRANS: https://en.wikipedia.org/wiki/Kilometre
-    _('Kilometer'): (1000000, 0.000001, 2),
+    _('Square Kilometer'): (1000000, 0.000001, 2),
     # TRANS: https://en.wikipedia.org/wiki/Mile
-    _('Mile'): (2589990, 3.8610187684122333e-7, 2),
+    _('Square Mile'): (2589990, 3.8610187684122333e-7, 2),
     # TRANS: https://en.wikipedia.org/wiki/Centimetre
-    _('Centimeter'): (0.0001, 10000, 2),
+    _('Square Centimeter'): (0.0001, 10000, 2),
     # TRANS: https://en.wikipedia.org/wiki/Millimetre
-    _('Millimeter'): (0.000001, 1000000, 2),
+    _('Square Millimeter'): (0.000001, 1000000, 2),
     # TRANS: https://en.wikipedia.org/wiki/Micrometre
-    _('Micrometer'): (1e-12, 1000000000000, 2),
+    _('Square Micrometer'): (1e-12, 1000000000000, 2),
     # TRANS: https://en.wikipedia.org/wiki/Acre
     _('Acre'): (4046.86, 0.00024710516301527604),
 }
@@ -97,18 +106,18 @@ weight = {
 }
 
 volume = {
-    _('Meter'): (1, 1, 3),
-    _('feet'): (0.0283168, 35.31472482766414, 3),
-    _('Yard'): (0.764555, 1.307950376362721, 3),
-    _('Inch'): (0.0000163871, 61023.61003472243, 3),
-    _('Kilometer'): (1000000000, 1e-9, 3),
-    _('Mile'): (4168180000, 2.399128636479231e-10, 3),
-    _('Centimeter'): (0.000001, 1000000, 3),
-    _('Millimeter'): (1e-9, 999999999.9999999, 3),
+    _('Cubic Meter'): (1, 1, 3),
+    _('Cubic feet'): (0.0283168, 35.31472482766414, 3),
+    _('Cubic Yard'): (0.764555, 1.307950376362721, 3),
+    _('Cubic Inch'): (0.0000163871, 61023.61003472243, 3),
+    _('Cubic Kilometer'): (1000000000, 1e-9, 3),
+    _('Cubic Mile'): (4168180000, 2.399128636479231e-10, 3),
+    _('Cubic Centimeter'): (0.000001, 1000000, 3),
+    _('Cubic Millimeter'): (1e-9, 999999999.9999999, 3),
     # TRANS: https://en.wikipedia.org/wiki/Litre
     _('Liter'): (0.001, 1000),
     # TRANS: https://en.wikipedia.org/wiki/Litre
-    _('Milliliter'): (0.000001, 1000000, 3),
+    _('Milliliter'): (0.000001, 1000000), #Its only mililitre not cube.
     # TRANS: https://en.wikipedia.org/wiki/Pint
     _('Pint'): (0.000473176, 2113.378531455526),
     # TRANS: https://en.wikipedia.org/wiki/Quart
@@ -171,7 +180,6 @@ temp = {
     _('Fahrenheit'): (-17.22222222222222, 33.8),
 }
 
-
 def convert(number, unit, to_unit, dic):
     if dic == temp:
         if unit == to_unit:
@@ -190,6 +198,8 @@ def convert(number, unit, to_unit, dic):
             return (number + 459.67) / 1.8
         else:
             pass
+    elif(dic == currency):
+        return(number/currency[unit])*currency[to_unit]
     else:
         main_unit = number * dic[unit][0]
         return main_unit * dic[to_unit][1]

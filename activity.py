@@ -157,6 +157,16 @@ class ConvertActivity(activity.Activity):
         self._temp_btn.set_tooltip(_('Temperature'))
         self._temp_btn.props.icon_name = 'temp'
         self._temp_btn.props.group = self._length_btn
+	
+	    # Currency
+        self._curr_btn = RadioToolButton()
+        self._curr_btn.connect('clicked',
+                               lambda w: self._update_combo(convert.currency))
+        self._curr_btn.set_tooltip(_('Currency'))
+        self._curr_btn.props.icon_name = 'currency'
+        self._curr_btn.props.group = self._length_btn
+        
+
 
         toolbarbox.toolbar.insert(self._length_btn, -1)
         toolbarbox.toolbar.insert(self._volume_btn, -1)
@@ -165,6 +175,7 @@ class ConvertActivity(activity.Activity):
         toolbarbox.toolbar.insert(self._speed_btn, -1)
         toolbarbox.toolbar.insert(self._time_btn, -1)
         toolbarbox.toolbar.insert(self._temp_btn, -1)
+        toolbarbox.toolbar.insert(self._curr_btn, -1)
 
         separator = Gtk.SeparatorToolItem()
         separator.set_expand(True)
@@ -202,15 +213,14 @@ class ConvertActivity(activity.Activity):
         keys = self.dic.keys()
         keys.sort()
         for x in keys:
-            symbol = ''
-            if len(self.dic[x]) == 3:
-                symbol = self.dic[x][-1]
-                if symbol == 3:
-                    symbol = " " + u'\u00b3'
-                elif symbol == 2:
-                    symbol = " " + u'\u00b2'
-
-            self._liststore.append(['%s%s' % (x, symbol)])
+            # symbol = ''
+            # if len(self.dic[x]) == 3:
+            #     symbol = self.dic[x][-1]
+            #     if symbol == 3:
+            #         symbol = " " + u'\u00b3'
+            #     elif symbol == 2:
+            #         symbol = " " + u'\u00b2'
+            self._liststore.append(['%s' % (x)])
         self.combo1.set_active(-1)
         self.combo2.set_active(-1)
         self.show_all()
@@ -259,3 +269,4 @@ class ConvertActivity(activity.Activity):
                 entry.emit_stop_by_name('insert-text')
                 return True
         return False
+
