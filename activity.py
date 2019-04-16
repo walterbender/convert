@@ -56,6 +56,7 @@ class ConvertActivity(activity.Activity):
 
         flip_btn = Gtk.Button()
         flip_btn.connect('clicked', self._flip)
+        flip_btn.set_tooltip_text("Flip Units")
         flip_btn.add(Gtk.Image.new_from_file('icons/flip.svg'))
 
         self.combo2 = Gtk.ComboBox.new_with_model_and_entry(self._liststore)
@@ -207,7 +208,7 @@ class ConvertActivity(activity.Activity):
             new_convert = new_convert.rstrip("0")
             if new_convert[-1] == '.':
             	new_convert = new_convert[0:len(new_convert)-1]
-            
+
             text = '%s ~ %s' % (new_value, new_convert)
             self.label.set_text(text)
         except ValueError:
@@ -243,13 +244,15 @@ class ConvertActivity(activity.Activity):
         return text
 
     def _flip(self, widget):
+        value = self.label.get_text().split(' ~ ')
+        self.value_entry.set_text(value[1])
         active_combo1 = self.combo1.get_active()
         active_combo2 = self.combo2.get_active()
         self.combo1.set_active(active_combo2)
         self.combo2.set_active(active_combo1)
-        value = float(self.label.get_text().split(' ~ ')[1])
-        self.value_entry.set_text(str(value))
-        self._update_label(self.value_entry)
+        
+        
+
 
     def resize_label(self, widget, event):
         num_label = len(self.label.get_text())
