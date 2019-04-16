@@ -196,12 +196,18 @@ class ConvertActivity(activity.Activity):
             decimals = str(len(num_value.split('.')[-1]))
             fmt = '%.' + decimals + 'f'
             new_value = locale.format(fmt, float(num_value))
+            new_value = new_value.rstrip("0")
+            if new_value[-1] == '.':
+            	new_value = new_value[0:len(new_value)-1]
 
             convert_value = str(self.convert())
             decimals = str(len(convert_value.split('.')[-1]))
             fmt = '%.' + decimals + 'f'
             new_convert = locale.format(fmt, float(convert_value))
-
+            new_convert = new_convert.rstrip("0")
+            if new_convert[-1] == '.':
+            	new_convert = new_convert[0:len(new_convert)-1]
+            
             text = '%s ~ %s' % (new_value, new_convert)
             self.label.set_text(text)
         except ValueError:
