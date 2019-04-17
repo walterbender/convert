@@ -15,15 +15,6 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from gettext import gettext as _
-import urllib2
-import json
-
-
-url = "http://data.fixer.io/api/latest?access_key=f886247741bde596c12e2cac6dfc0cc2"
-#req = urllib2.request.Request(url)
-data = urllib2.urlopen(url).read()
-data = json.loads(data.decode('utf-8'))
-currency = data["rates"]
 
 length = {
     # TRANS: https://en.wikipedia.org/wiki/Metre
@@ -198,8 +189,6 @@ def convert(number, unit, to_unit, dic):
             return (number + 459.67) / 1.8
         else:
             pass
-    elif(dic == currency):
-        return(number/currency[unit])*currency[to_unit]
     else:
         main_unit = number * dic[unit][0]
         return main_unit * dic[to_unit][1]

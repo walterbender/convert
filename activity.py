@@ -159,13 +159,7 @@ class ConvertActivity(activity.Activity):
         self._temp_btn.props.icon_name = 'temp'
         self._temp_btn.props.group = self._length_btn
 	
-	    # Currency
-        self._curr_btn = RadioToolButton()
-        self._curr_btn.connect('clicked',
-                               lambda w: self._update_combo(convert.currency))
-        self._curr_btn.set_tooltip(_('Currency'))
-        self._curr_btn.props.icon_name = 'currency'
-        self._curr_btn.props.group = self._length_btn
+	    
         
 
 
@@ -176,7 +170,7 @@ class ConvertActivity(activity.Activity):
         toolbarbox.toolbar.insert(self._speed_btn, -1)
         toolbarbox.toolbar.insert(self._time_btn, -1)
         toolbarbox.toolbar.insert(self._temp_btn, -1)
-        toolbarbox.toolbar.insert(self._curr_btn, -1)
+        
 
         separator = Gtk.SeparatorToolItem()
         separator.set_expand(True)
