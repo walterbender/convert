@@ -214,13 +214,6 @@ class ConvertActivity(activity.Activity):
         keys = self.dic.keys()
         keys.sort()
         for x in keys:
-            # symbol = ''
-            # if len(self.dic[x]) == 3:
-            #     symbol = self.dic[x][-1]
-            #     if symbol == 3:
-            #         symbol = " " + u'\u00b3'
-            #     elif symbol == 2:
-            #         symbol = " " + u'\u00b2'
             self._liststore.append(['%s' % (x)])
         self.combo1.set_active(0)
         self.combo2.set_active(0)
