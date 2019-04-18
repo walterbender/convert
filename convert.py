@@ -15,6 +15,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from gettext import gettext as _
+import math
 
 length = {
     # TRANS: https://en.wikipedia.org/wiki/Metre
@@ -171,6 +172,45 @@ temp = {
     _('Fahrenheit'): (-17.22222222222222, 33.8),
 }
 
+circle = {
+    _('Degrees'): (1, 1),
+    _('Radians'): (0.0174533, 57.2958), 
+}
+
+pressure = {
+    _('Pascal (Pa)'): (1, 1),
+    _('Bar'): (100000, 1e-5),
+    _('Atmosphere (atm)'): (101325, 9.869232e-6),
+    _('Torr'): (133.322, 7.500637e-3),
+    _('Pounds per square inch (psi)'): (6894.76, 1.450376e-4),
+}
+
+force = {
+    _('Newton (N)'): (1, 1),
+    _('Dyne (dyn)'): (1e-5, 100000),
+    _('Poundal (pdl)'): (0.138255028, 7.23301),
+    _('Kilogram-force (kp)'): (9.80665, 0.1019716213),
+}
+
+energy = {
+    _('Joules (J)'): (1,1),
+    _('KiloJoule (KJ)'): (1000, 1e-3),
+    _('Calories (cal)') : (4.184, 0.2390057361),
+    _('KiloCalories (KCal)'): (4184, 0.0002390057361),
+    _('Watt hour'): (3600, 2.777777e-4),
+    _('Electronvolt (eV)'): (1.6022e-19, 6.242e18),
+}
+
+storage = {
+    _('Byte'): (1, 1),
+    _('Bit'): (0.125, 8),
+    _('Kilobyte (KB)'): (1e3, 1e-3),
+    _('Megabyte (MB)'): (1e6, 1e-6),
+    _('Gigabyte (GB)'): (1e9, 1e-9),
+    _('Terabyte (TB)'): (1e12, 1e-12),
+    _('Petabyte (PB)'): (1e15, 1e-15),
+}
+
 def convert(number, unit, to_unit, dic):
     if dic == temp:
         if unit == to_unit:
@@ -187,6 +227,15 @@ def convert(number, unit, to_unit, dic):
             return 9 / 5 * number - 459.67
         elif unit == 'Fahrenheit' and to_unit == 'Kelvin':
             return (number + 459.67) / 1.8
+        else:
+            pass
+    elif dic == circle:
+        if unit == to_unit:
+            return number
+        elif unit == 'Radians':
+            return math.degrees(number)
+        elif unit == 'Degrees':
+            return math.radians(number)
         else:
             pass
     else:

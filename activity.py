@@ -158,8 +158,46 @@ class ConvertActivity(activity.Activity):
         self._temp_btn.set_tooltip(_('Temperature'))
         self._temp_btn.props.icon_name = 'temp'
         self._temp_btn.props.group = self._length_btn
-	
-	    
+
+        #Circle
+        self._circle_btn = RadioToolButton()
+        self._circle_btn.connect('clicked',
+                               lambda w: self._update_combo(convert.circle))
+        self._circle_btn.set_tooltip(_('Angles of Circles'))
+        self._circle_btn.props.icon_name = 'circle'
+        self._circle_btn.props.group = self._length_btn
+
+        #pressure
+        self._pressure_btn = RadioToolButton()
+        self._pressure_btn.connect('clicked',
+                               lambda w: self._update_combo(convert.pressure))
+        self._pressure_btn.set_tooltip(_('Pressure'))
+        self._pressure_btn.props.icon_name = 'pressure'
+        self._pressure_btn.props.group = self._length_btn
+
+        #force
+        self._force_btn = RadioToolButton()
+        self._force_btn.connect('clicked',
+                               lambda w: self._update_combo(convert.force))
+        self._force_btn.set_tooltip(_('Force'))
+        self._force_btn.props.icon_name = 'force'
+        self._force_btn.props.group = self._length_btn
+
+        #energy
+        self._energy_btn = RadioToolButton()
+        self._energy_btn.connect('clicked',
+                               lambda w: self._update_combo(convert.energy))
+        self._energy_btn.set_tooltip(_('Energy'))
+        self._energy_btn.props.icon_name = 'energy'
+        self._energy_btn.props.group = self._length_btn
+
+        #Storage
+        self._storage_btn = RadioToolButton()
+        self._storage_btn.connect('clicked',
+                               lambda w: self._update_combo(convert.storage))
+        self._storage_btn.set_tooltip(_('Digital Storage'))
+        self._storage_btn.props.icon_name = 'storage'
+        self._storage_btn.props.group = self._length_btn
         
 
 
@@ -170,6 +208,11 @@ class ConvertActivity(activity.Activity):
         toolbarbox.toolbar.insert(self._speed_btn, -1)
         toolbarbox.toolbar.insert(self._time_btn, -1)
         toolbarbox.toolbar.insert(self._temp_btn, -1)
+        toolbarbox.toolbar.insert(self._circle_btn, -1)
+        toolbarbox.toolbar.insert(self._pressure_btn, -1)
+        toolbarbox.toolbar.insert(self._force_btn, -1)
+        toolbarbox.toolbar.insert(self._energy_btn, -1)
+        toolbarbox.toolbar.insert(self._storage_btn, -1)
         
 
         separator = Gtk.SeparatorToolItem()
