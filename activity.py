@@ -258,8 +258,44 @@ class ConvertActivity(activity.Activity):
         keys.sort()
         for x in keys:
             self._liststore.append(['%s' % (x)])
-        self.combo1.set_active(0)
-        self.combo2.set_active(0)
+        if keys[0] == 'Cables':
+            self.combo1.set_active(12)
+            self.combo2.set_active(12)
+        elif keys[0] == 'Cubic Centimeter':
+            self.combo1.set_active(3)
+            self.combo2.set_active(3)
+        elif keys[0] == 'Acre':
+            self.combo1.set_active(4)
+            self.combo2.set_active(4)
+        elif keys[0] == 'Carat':
+            self.combo1.set_active(2)
+            self.combo2.set_active(2)
+        elif keys[0] == 'Centimeters/Minute':
+            self.combo1.set_active(9)
+            self.combo2.set_active(9)
+        elif keys[0] == 'Day':
+            self.combo1.set_active(8)
+            self.combo2.set_active(8)
+        elif keys[0] == 'Celsius':
+            self.combo1.set_active(2)
+            self.combo2.set_active(2)
+        elif keys[0] == 'Degrees':
+            self.combo1.set_active(1)
+            self.combo2.set_active(1)
+        elif keys[0] == 'Atmosphere (atm)':
+            self.combo1.set_active(2)
+            self.combo2.set_active(2)
+        elif keys[0] == 'Dyne (dyn)':
+            self.combo1.set_active(2)
+            self.combo2.set_active(2)
+        elif keys[0] == 'Calories (cal)':
+            self.combo1.set_active(2)
+            self.combo2.set_active(2)
+        elif keys[0] == 'Bit':
+            self.combo1.set_active(1)
+            self.combo2.set_active(1)
+        else:
+            pass
         self.show_all()
 
     def _get_active_text(self, combobox):
