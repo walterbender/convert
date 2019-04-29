@@ -56,6 +56,7 @@ class ConvertActivity(activity.Activity):
 
         flip_btn = Gtk.Button()
         flip_btn.connect('clicked', self._flip)
+        flip_btn.set_tooltip_text("Flip Units")
         flip_btn.add(Gtk.Image.new_from_file('icons/flip.svg'))
 
         self.combo2 = Gtk.ComboBox.new_with_model_and_entry(self._liststore)
@@ -158,6 +159,48 @@ class ConvertActivity(activity.Activity):
         self._temp_btn.props.icon_name = 'temp'
         self._temp_btn.props.group = self._length_btn
 
+        #Circle
+        self._circle_btn = RadioToolButton()
+        self._circle_btn.connect('clicked',
+                               lambda w: self._update_combo(convert.circle))
+        self._circle_btn.set_tooltip(_('Angles of Circles'))
+        self._circle_btn.props.icon_name = 'circle'
+        self._circle_btn.props.group = self._length_btn
+
+        #pressure
+        self._pressure_btn = RadioToolButton()
+        self._pressure_btn.connect('clicked',
+                               lambda w: self._update_combo(convert.pressure))
+        self._pressure_btn.set_tooltip(_('Pressure'))
+        self._pressure_btn.props.icon_name = 'pressure'
+        self._pressure_btn.props.group = self._length_btn
+
+        #force
+        self._force_btn = RadioToolButton()
+        self._force_btn.connect('clicked',
+                               lambda w: self._update_combo(convert.force))
+        self._force_btn.set_tooltip(_('Force'))
+        self._force_btn.props.icon_name = 'force'
+        self._force_btn.props.group = self._length_btn
+
+        #energy
+        self._energy_btn = RadioToolButton()
+        self._energy_btn.connect('clicked',
+                               lambda w: self._update_combo(convert.energy))
+        self._energy_btn.set_tooltip(_('Energy'))
+        self._energy_btn.props.icon_name = 'energy'
+        self._energy_btn.props.group = self._length_btn
+
+        #Storage
+        self._storage_btn = RadioToolButton()
+        self._storage_btn.connect('clicked',
+                               lambda w: self._update_combo(convert.storage))
+        self._storage_btn.set_tooltip(_('Digital Storage'))
+        self._storage_btn.props.icon_name = 'storage'
+        self._storage_btn.props.group = self._length_btn
+        
+
+
         toolbarbox.toolbar.insert(self._length_btn, -1)
         toolbarbox.toolbar.insert(self._volume_btn, -1)
         toolbarbox.toolbar.insert(self._area_btn, -1)
@@ -165,6 +208,12 @@ class ConvertActivity(activity.Activity):
         toolbarbox.toolbar.insert(self._speed_btn, -1)
         toolbarbox.toolbar.insert(self._time_btn, -1)
         toolbarbox.toolbar.insert(self._temp_btn, -1)
+        toolbarbox.toolbar.insert(self._circle_btn, -1)
+        toolbarbox.toolbar.insert(self._pressure_btn, -1)
+        toolbarbox.toolbar.insert(self._force_btn, -1)
+        toolbarbox.toolbar.insert(self._energy_btn, -1)
+        toolbarbox.toolbar.insert(self._storage_btn, -1)
+        
 
         separator = Gtk.SeparatorToolItem()
         separator.set_expand(True)
@@ -185,11 +234,17 @@ class ConvertActivity(activity.Activity):
             decimals = str(len(num_value.split('.')[-1]))
             fmt = '%.' + decimals + 'f'
             new_value = locale.format(fmt, float(num_value))
+            new_value = new_value.rstrip("0")
+            if new_value[-1] == '.':
+            	new_value = new_value[0:len(new_value)-1]
 
             convert_value = str(self.convert())
             decimals = str(len(convert_value.split('.')[-1]))
             fmt = '%.' + decimals + 'f'
             new_convert = locale.format(fmt, float(convert_value))
+            new_convert = new_convert.rstrip("0")
+            if new_convert[-1] == '.':
+            	new_convert = new_convert[0:len(new_convert)-1]
 
             text = '%s ~ %s' % (new_value, new_convert)
             self.label.set_text(text)
@@ -202,17 +257,45 @@ class ConvertActivity(activity.Activity):
         keys = self.dic.keys()
         keys.sort()
         for x in keys:
-            symbol = ''
-            if len(self.dic[x]) == 3:
-                symbol = self.dic[x][-1]
-                if symbol == 3:
-                    symbol = " " + u'\u00b3'
-                elif symbol == 2:
-                    symbol = " " + u'\u00b2'
-
-            self._liststore.append(['%s%s' % (x, symbol)])
-        self.combo1.set_active(-1)
-        self.combo2.set_active(-1)
+            self._liststore.append(['%s' % (x)])
+        if keys[0] == 'Cables':
+            self.combo1.set_active(12)
+            self.combo2.set_active(12)
+        elif keys[0] == 'Cubic Centimeter':
+            self.combo1.set_active(3)
+            self.combo2.set_active(3)
+        elif keys[0] == 'Acre':
+            self.combo1.set_active(4)
+            self.combo2.set_active(4)
+        elif keys[0] == 'Carat':
+            self.combo1.set_active(2)
+            self.combo2.set_active(2)
+        elif keys[0] == 'Centimeters/Minute':
+            self.combo1.set_active(9)
+            self.combo2.set_active(9)
+        elif keys[0] == 'Day':
+            self.combo1.set_active(8)
+            self.combo2.set_active(8)
+        elif keys[0] == 'Celsius':
+            self.combo1.set_active(2)
+            self.combo2.set_active(2)
+        elif keys[0] == 'Degrees':
+            self.combo1.set_active(1)
+            self.combo2.set_active(1)
+        elif keys[0] == 'Atmosphere (atm)':
+            self.combo1.set_active(2)
+            self.combo2.set_active(2)
+        elif keys[0] == 'Dyne (dyn)':
+            self.combo1.set_active(2)
+            self.combo2.set_active(2)
+        elif keys[0] == 'Calories (cal)':
+            self.combo1.set_active(2)
+            self.combo2.set_active(2)
+        elif keys[0] == 'Bit':
+            self.combo1.set_active(1)
+            self.combo2.set_active(1)
+        else:
+            pass
         self.show_all()
 
     def _get_active_text(self, combobox):
@@ -227,13 +310,15 @@ class ConvertActivity(activity.Activity):
         return text
 
     def _flip(self, widget):
+        value = self.label.get_text().split(' ~ ')
+        self.value_entry.set_text(value[1])
         active_combo1 = self.combo1.get_active()
         active_combo2 = self.combo2.get_active()
         self.combo1.set_active(active_combo2)
         self.combo2.set_active(active_combo1)
-        value = float(self.label.get_text().split(' ~ ')[1])
-        self.value_entry.set_text(str(value))
-        self._update_label(self.value_entry)
+        
+        
+
 
     def resize_label(self, widget, event):
         num_label = len(self.label.get_text())
@@ -260,3 +345,4 @@ class ConvertActivity(activity.Activity):
                 entry.emit_stop_by_name('insert-text')
                 return True
         return False
+
