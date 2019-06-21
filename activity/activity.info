@@ -2,6 +2,6 @@
 name = Convert
 activity_version = 2
 bundle_id = org.sugarlabs.Convert
-exec = sugar-activity activity.ConvertActivity -s
+exec = sugar-activity3 activity.ConvertActivity -s
 icon = icon
 license = GPLv3+
