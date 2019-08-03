@@ -48,46 +48,36 @@ class ConvertActivity(activity.Activity):
 
         hbox = Gtk.HBox()
         self._liststore = Gtk.ListStore(str)
+
+        # Source Unit and Value
         self.combo1 = Gtk.ComboBox.new_with_model_and_entry(self._liststore)
         cell = Gtk.CellRendererText()
         self.combo1.pack_start(cell, True)
         self.combo1.set_entry_text_column(0)
-        self.combo1.connect('changed', self._update_label)
+        self.combo1.connect('changed', self._source_update)
 
-        flip_btn = Gtk.Button()
-        flip_btn.connect('clicked', self._flip)
-        flip_btn.set_tooltip_text("Flip Units")
-        flip_btn.add(Gtk.Image.new_from_file('icons/flip.svg'))
+        self.source_value_entry = Gtk.Entry()
+        self.source_value_entry.set_placeholder_text("Enter source number")
+        self.source_value_entry.connect('insert-text', self._value_insert_text)
+        self.source_value_entry.connect('changed', self._source_update)
+
+        # Destination Value and Unit
+        self.destination_value_entry = Gtk.Entry()
+        self.destination_value_entry.set_placeholder_text("Enter destination number")
+        self.destination_value_entry.connect('insert-text', self._value_insert_text)
+        self.destination_value_entry.connect('changed', self._destination_update)
 
         self.combo2 = Gtk.ComboBox.new_with_model_and_entry(self._liststore)
         cell = Gtk.CellRendererText()
         self.combo2.pack_start(cell, True)
         self.combo2.set_entry_text_column(0)
-        self.combo2.connect('changed', self._update_label)
-
-        self.label_box = Gtk.HBox()
-
-        self.value_entry = Gtk.Entry()
-        self.value_entry.set_placeholder_text("Enter number")
-        self.value_entry.connect('insert-text', self._value_insert_text)
-        self.value_entry.connect('changed', self._update_label)
-
-        self.label = Gtk.Label()
-        self.label.set_selectable(True)
-        self.label._size = 12
-        self.label.connect('draw', self.resize_label)
+        self.combo2.connect('changed', self._destination_update)
 
         self._canvas.pack_start(hbox, False, False, 20)
         hbox.pack_start(self.combo1, False, True, 20)
-        hbox.pack_start(flip_btn, True, False, 20)
+        hbox.pack_start(self.source_value_entry, True, True, 5)
+        hbox.pack_start(self.destination_value_entry, True, True, 5)
         hbox.pack_end(self.combo2, False, True, 20)
-        value_box = Gtk.HBox()
-        convert_box = Gtk.HBox()
-        convert_box.pack_start(value_box, True, False, 0)
-        value_box.pack_start(self.value_entry, False, False, 0)
-        self._canvas.pack_start(convert_box, False, False, 5)
-        self._canvas.pack_start(self.label_box, True, False, 0)
-        self.label_box.add(self.label)
 
         self.set_canvas(self._canvas)
 
@@ -198,8 +188,6 @@ class ConvertActivity(activity.Activity):
         self._storage_btn.set_tooltip(_('Digital Storage'))
         self._storage_btn.props.icon_name = 'storage'
         self._storage_btn.props.group = self._length_btn
-        
-
 
         toolbarbox.toolbar.insert(self._length_btn, -1)
         toolbarbox.toolbar.insert(self._volume_btn, -1)
@@ -213,7 +201,6 @@ class ConvertActivity(activity.Activity):
         toolbarbox.toolbar.insert(self._force_btn, -1)
         toolbarbox.toolbar.insert(self._energy_btn, -1)
         toolbarbox.toolbar.insert(self._storage_btn, -1)
-        
 
         separator = Gtk.SeparatorToolItem()
         separator.set_expand(True)
@@ -227,29 +214,66 @@ class ConvertActivity(activity.Activity):
         self._update_combo(convert.length)
         self.show_all()
 
-    def _update_label(self, entry):
+    def _source_update(self, widget):
+        direction = 'source'
+        if isinstance(widget, Gtk.Entry):
+            self._update_value(widget, direction)
+        elif isinstance(widget, Gtk.ComboBox):
+            self._update_unit(widget, direction)
+
+    def _destination_update(self, widget):
+        direction = 'destination'
+        if isinstance(widget, Gtk.Entry):
+            self._update_value(widget, direction)
+        elif isinstance(widget, Gtk.ComboBox):
+            self._update_unit(widget, direction)
+
+    def _update_value(self, entry, direction):
         try:
-            num_value = str(self.value_entry.get_text())
-            num_value = str(num_value.replace(',', ''))
-            decimals = str(len(num_value.split('.')[-1]))
+            num_value = str(entry.get_text())
+            num_value = float(num_value.replace(',', ''))
+            decimals = str(len(str(num_value).split('.')[-1]))
             fmt = '%.' + decimals + 'f'
             new_value = locale.format(fmt, float(num_value))
             new_value = new_value.rstrip("0")
             if new_value[-1] == '.':
-            	new_value = new_value[0:len(new_value)-1]
+                new_value = new_value[0:len(new_value)-1]
 
-            convert_value = str(self.convert())
+            convert_value = str(self.convert(num_value, direction))
             decimals = str(len(convert_value.split('.')[-1]))
             fmt = '%.' + decimals + 'f'
             new_convert = locale.format(fmt, float(convert_value))
             new_convert = new_convert.rstrip("0")
             if new_convert[-1] == '.':
-            	new_convert = new_convert[0:len(new_convert)-1]
+                new_convert = new_convert[0:len(new_convert)-1]
 
-            text = '%s ~ %s' % (new_value, new_convert)
-            self.label.set_text(text)
+            self.change_result(new_value, new_convert, direction)
         except ValueError:
             pass
+
+    def _update_unit(self, combo, direction):
+        if direction == 'source':
+            self._update_value(self.source_value_entry, direction)
+        elif direction == 'destination':
+            self._update_value(self.destination_value_entry, direction)
+
+    def change_result(self, new_value, new_convert, direction):
+        if direction == 'source':
+            self.source_value_entry.handler_block_by_func(self._source_update)
+            self.source_value_entry.set_text(new_value)
+            self.source_value_entry.handler_unblock_by_func(self._source_update)
+
+            self.destination_value_entry.handler_block_by_func(self._destination_update)
+            self.destination_value_entry.set_text(new_convert)
+            self.destination_value_entry.handler_unblock_by_func(self._destination_update)
+        elif direction == 'destination':
+            self.destination_value_entry.handler_block_by_func(self._destination_update)
+            self.destination_value_entry.set_text(new_value)
+            self.destination_value_entry.handler_unblock_by_func(self._destination_update)
+
+            self.source_value_entry.handler_block_by_func(self._source_update)
+            self.source_value_entry.set_text(new_convert)
+            self.source_value_entry.handler_unblock_by_func(self._source_update)
 
     def _update_combo(self, data):
         self._liststore.clear()
@@ -309,40 +333,21 @@ class ConvertActivity(activity.Activity):
             text = text.split('<b>')[1].split('</b>')[0]
         return text
 
-    def _flip(self, widget):
-        value = self.label.get_text().split(' ~ ')
-        self.value_entry.set_text(value[1])
-        active_combo1 = self.combo1.get_active()
-        active_combo2 = self.combo2.get_active()
-        self.combo1.set_active(active_combo2)
-        self.combo2.set_active(active_combo1)
-        
-        
-
-
-    def resize_label(self, widget, event):
-        num_label = len(self.label.get_text())
-        try:
-            size = str((60 * SCREEN_WIDTH / 100) / num_label)
-            if not size == self.label._size:
-                self.label.modify_font(Pango.FontDescription(size))
-                self.label._size = size
-        except ZeroDivisionError:
-            pass
-
-    def convert(self):
-        number = float(self.value_entry.get_text().replace(',', ''))
-        unit = self._get_active_text(self.combo1)
-        to_unit = self._get_active_text(self.combo2)
-        return convert.convert(number, unit, to_unit, self.dic)
+    def convert(self, num_value, direction):
+        if direction == 'source':
+            unit = self._get_active_text(self.combo1)
+            to_unit = self._get_active_text(self.combo2)
+        elif direction == 'destination':
+            unit = self._get_active_text(self.combo2)
+            to_unit = self._get_active_text(self.combo1)
+        return convert.convert(num_value, unit, to_unit, self.dic)
 
     def _value_insert_text(self, entry, text, length, position):
         for char in text:
             if char == "-" and \
-               self.value_entry.get_text() is "" and len(text) == 1:
+               entry.get_text() is "" and len(text) == 1:
                 return False
             elif not re.match('[0-9,.]', char):
                 entry.emit_stop_by_name('insert-text')
                 return True
         return False
-
