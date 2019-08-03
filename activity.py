@@ -52,7 +52,7 @@ class ConvertActivity(activity.Activity):
         cell = Gtk.CellRendererText()
         self.combo1.pack_start(cell, True)
         self.combo1.set_entry_text_column(0)
-        self.combo1.connect('changed', self._update_label)
+        self.combo1.connect('changed', self._update_labels)
 
         flip_btn = Gtk.Button()
         flip_btn.connect('clicked', self._flip)
@@ -63,19 +63,23 @@ class ConvertActivity(activity.Activity):
         cell = Gtk.CellRendererText()
         self.combo2.pack_start(cell, True)
         self.combo2.set_entry_text_column(0)
-        self.combo2.connect('changed', self._update_label)
+        self.combo2.connect('changed', self._update_labels)
 
         self.label_box = Gtk.HBox()
 
         self.value_entry = Gtk.Entry()
         self.value_entry.set_placeholder_text("Enter number")
         self.value_entry.connect('insert-text', self._value_insert_text)
-        self.value_entry.connect('changed', self._update_label)
+        self.value_entry.connect('changed', self._update_labels)
 
         self.label = Gtk.Label()
         self.label.set_selectable(True)
         self.label._size = 12
         self.label.connect('draw', self.resize_label)
+
+        self.ratio_label = Gtk.Label()
+        self.ratio_label.set_selectable(True)
+        self.ratio_label.connect('draw', self.resize_label)
 
         self._canvas.pack_start(hbox, False, False, 20)
         hbox.pack_start(self.combo1, False, True, 20)
@@ -86,6 +90,7 @@ class ConvertActivity(activity.Activity):
         convert_box.pack_start(value_box, True, False, 0)
         value_box.pack_start(self.value_entry, False, False, 0)
         self._canvas.pack_start(convert_box, False, False, 5)
+        self._canvas.pack_start(self.ratio_label, False, False, 10)
         self._canvas.pack_start(self.label_box, True, False, 0)
         self.label_box.add(self.label)
 
@@ -227,24 +232,40 @@ class ConvertActivity(activity.Activity):
         self._update_combo(convert.length)
         self.show_all()
 
-    def _update_label(self, entry):
+    def format_values(self, value):
+        decimals = str(len(value.split('.')[-1]))
+        fmt = '%.' + decimals + 'f'
+        new_value = locale.format(fmt, float(value))
+        new_value = new_value.rstrip("0")
+        if new_value[-1] == '.':
+            new_value = new_value[0:len(new_value)-1]
+        return new_value
+
+    def _update_ratio_label(self):
+        try:
+            num_value = '1'
+            new_value = self.format_values(num_value)
+
+            convert_value = str(self.convert(float(num_value)))
+            new_convert = self.format_values(convert_value)
+
+            text = '%s %s ~ %s %s' % (new_value, self._get_active_text(self.combo1), new_convert, self._get_active_text(self.combo2))
+            self.ratio_label.set_text(text)
+        except ValueError:
+            pass
+
+    def _update_labels(self, entry):
+        self._update_conversion_label(entry)
+        self._update_ratio_label()
+
+    def _update_conversion_label(self, entry):
         try:
             num_value = str(self.value_entry.get_text())
             num_value = str(num_value.replace(',', ''))
-            decimals = str(len(num_value.split('.')[-1]))
-            fmt = '%.' + decimals + 'f'
-            new_value = locale.format(fmt, float(num_value))
-            new_value = new_value.rstrip("0")
-            if new_value[-1] == '.':
-            	new_value = new_value[0:len(new_value)-1]
+            new_value = self.format_values(num_value)
 
-            convert_value = str(self.convert())
-            decimals = str(len(convert_value.split('.')[-1]))
-            fmt = '%.' + decimals + 'f'
-            new_convert = locale.format(fmt, float(convert_value))
-            new_convert = new_convert.rstrip("0")
-            if new_convert[-1] == '.':
-            	new_convert = new_convert[0:len(new_convert)-1]
+            convert_value = str(self.convert(float(num_value)))
+            new_convert = self.format_values(convert_value)
 
             text = '%s ~ %s' % (new_value, new_convert)
             self.label.set_text(text)
@@ -330,8 +351,7 @@ class ConvertActivity(activity.Activity):
         except ZeroDivisionError:
             pass
 
-    def convert(self):
-        number = float(self.value_entry.get_text().replace(',', ''))
+    def convert(self, number):
         unit = self._get_active_text(self.combo1)
         to_unit = self._get_active_text(self.combo2)
         return convert.convert(number, unit, to_unit, self.dic)
