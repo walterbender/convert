@@ -238,7 +238,7 @@ class ConvertActivity(activity.Activity):
         new_value = locale.format(fmt, float(value))
         new_value = new_value.rstrip("0")
         if new_value[-1] == '.':
-            new_value = new_value[0:len(new_value)-1]
+            new_value = new_value[0:len(new_value) - 1]
         return new_value
 
     def _update_ratio_label(self):
@@ -249,7 +249,8 @@ class ConvertActivity(activity.Activity):
             convert_value = str(self.convert(float(num_value)))
             new_convert = self.format_values(convert_value)
 
-            text = '%s %s ~ %s %s' % (new_value, self._get_active_text(self.combo1), new_convert, self._get_active_text(self.combo2))
+            text = '%s %s ~ %s %s' % (new_value, self._get_active_text(self.combo1),
+                                      new_convert, self._get_active_text(self.combo2))
             self.ratio_label.set_text(text)
         except ValueError:
             pass
