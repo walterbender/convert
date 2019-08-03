@@ -36,6 +36,18 @@ from sugar3.graphics.style import FONT_SIZE, FONT_FACE
 from gettext import gettext as _
 
 
+class Conversion(Gtk.Label):
+    def __init__(self):
+        Gtk.Label.__init__(self)
+        self.set_selectable(True)
+
+    def set_text(self, text):
+        Gtk.Label.set_text(self, text)
+        length = len(text)
+        if length == 0:
+            return
+
+
 class Ratio(Gtk.Label):
     def __init__(self):
         Gtk.Label.__init__(self)
@@ -122,10 +134,14 @@ class ConvertActivity(activity.Activity):
         l_hbox.pack_end(self.to_unit, True, True, 5)
 
         self.ratio = Ratio()
+        self.conversion = Conversion()
+        self.conversion.modify_font(Pango.FontDescription(
+                       '%s' % (FONT_FACE)))
 
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         box.pack_start(u_hbox, False, False, 30)
         box.pack_start(l_hbox, False, False, 0)
+        box.pack_start(self.conversion, False, False, 20)
         box.pack_start(self.ratio, True, False, 0)
         self.set_canvas(box)
 
@@ -186,22 +202,47 @@ class ConvertActivity(activity.Activity):
         try:
             num_value = str(entry.get_text())
             num_value = float(num_value.replace(',', ''))
-            decimals = str(len(str(num_value).split('.')[-1]))
-            fmt = '%.' + decimals + 'f'
-            new_value = locale.format(fmt, float(num_value))
-            new_value = new_value.rstrip("0")
-            if new_value[-1] == '.':
-                new_value = new_value[0:len(new_value) - 1]
+            new_value = self.format_values(num_value)
             convert_value = str(self.convert(num_value, direction))
-            decimals = str(len(convert_value.split('.')[-1]))
-            fmt = '%.' + decimals + 'f'
-            new_convert = locale.format(fmt, float(convert_value))
-            new_convert = new_convert.rstrip("0")
-            if new_convert[-1] == '.':
-                new_convert = new_convert[0:len(new_convert) - 1]
+            new_convert = self.format_values(convert_value)
             self.change_result(new_value, new_convert, direction)
+
+            num_value = '1'
+            new_value = self.format_values(num_value)
+            convert_value = str(self.convert(float(num_value), direction))
+            new_convert = self.format_values(convert_value)
+            self.update_conversion_ratio(new_value, new_convert, direction)
+
         except ValueError:
             self.change_result('', '', direction)
+            self.update_conversion_ratio('', '', direction)
+
+    def update_conversion_ratio(self, value, convert, direction):
+        if direction == 'from':
+            if convert != '' and value != '':
+                text = '%s %s ~ %s %s' % (
+                    value, self._get_active_text(self.from_unit),
+                    convert, self._get_active_text(self.to_unit))
+                self.conversion.set_text(text)
+            else:
+                self.conversion.set_text('')
+        elif direction == 'to':
+            if convert != '' and value != '':
+                text = '%s %s ~ %s %s' % (
+                    convert, self._get_active_text(self.from_unit),
+                    value, self._get_active_text(self.to_unit))
+                self.conversion.set_text(text)
+            else:
+                self.conversion.set_text('')
+
+    def format_values(self, value):
+        decimals = str(len(str(value).split('.')[-1]))
+        fmt = '%.' + decimals + 'f'
+        new_value = locale.format(fmt, float(value))
+        new_value = new_value.rstrip("0")
+        if new_value[-1] == '.':
+            new_value = new_value[0:len(new_value) - 1]
+        return new_value
 
     def _update_unit(self, combo, direction):
         if direction == 'from':
