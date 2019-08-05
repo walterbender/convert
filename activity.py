@@ -46,7 +46,6 @@ class ConvertActivity(activity.Activity):
         # Canvas
         self._canvas = Gtk.VBox()
 
-        hbox = Gtk.HBox()
         self._liststore = Gtk.ListStore(str)
 
         # Source Unit and Value
@@ -73,11 +72,33 @@ class ConvertActivity(activity.Activity):
         self.combo2.set_entry_text_column(0)
         self.combo2.connect('changed', self._destination_update)
 
-        self._canvas.pack_start(hbox, False, False, 20)
-        hbox.pack_start(self.combo1, False, True, 20)
-        hbox.pack_start(self.source_value_entry, True, True, 5)
-        hbox.pack_start(self.destination_value_entry, True, True, 5)
-        hbox.pack_end(self.combo2, False, True, 20)
+        self.arrow_label = Gtk.Label()
+        self.arrow_label.set_text("=>")
+
+        l_hbox = Gtk.HBox()
+        u_hbox = Gtk.HBox()
+
+        label = Gtk.Label()
+        label.set_markup('<big>Source Value</big>')
+        u_hbox.pack_start(label, True, True, 5)
+        label = Gtk.Label()
+        label.set_markup('<big>Source Unit</big>')
+        u_hbox.pack_start(label, True, True, 20)
+        label = Gtk.Label()
+        label.set_markup('<big>Destination Value</big>')
+        u_hbox.pack_start(label, True, True, 20)
+        label = Gtk.Label()
+        label.set_markup('<big>Destination Unit</big>')
+        u_hbox.pack_start(label, True, True, 5)
+
+        l_hbox.pack_start(self.source_value_entry, True, True, 5)
+        l_hbox.pack_start(self.combo1, True, True, 5)
+        l_hbox.pack_start(self.arrow_label, False, False, 15)
+        l_hbox.pack_start(self.destination_value_entry, True, True, 5)
+        l_hbox.pack_end(self.combo2, True, True, 5)
+
+        self._canvas.pack_start(u_hbox, False, False, 20)
+        self._canvas.pack_start(l_hbox, False, False, 5)
 
         self.set_canvas(self._canvas)
 
@@ -238,7 +259,6 @@ class ConvertActivity(activity.Activity):
             new_value = new_value.rstrip("0")
             if new_value[-1] == '.':
                 new_value = new_value[0:len(new_value)-1]
-
             convert_value = str(self.convert(num_value, direction))
             decimals = str(len(convert_value.split('.')[-1]))
             fmt = '%.' + decimals + 'f'
@@ -246,10 +266,10 @@ class ConvertActivity(activity.Activity):
             new_convert = new_convert.rstrip("0")
             if new_convert[-1] == '.':
                 new_convert = new_convert[0:len(new_convert)-1]
-
             self.change_result(new_value, new_convert, direction)
         except ValueError:
-            pass
+            self.source_value_entry.set_text('')
+            self.destination_value_entry.set_text('')
 
     def _update_unit(self, combo, direction):
         if direction == 'source':
@@ -266,6 +286,8 @@ class ConvertActivity(activity.Activity):
             self.destination_value_entry.handler_block_by_func(self._destination_update)
             self.destination_value_entry.set_text(new_convert)
             self.destination_value_entry.handler_unblock_by_func(self._destination_update)
+
+            self.arrow_label.set_text("=>")
         elif direction == 'destination':
             self.destination_value_entry.handler_block_by_func(self._destination_update)
             self.destination_value_entry.set_text(new_value)
@@ -274,6 +296,8 @@ class ConvertActivity(activity.Activity):
             self.source_value_entry.handler_block_by_func(self._source_update)
             self.source_value_entry.set_text(new_convert)
             self.source_value_entry.handler_unblock_by_func(self._source_update)
+
+            self.arrow_label.set_text("<=")
 
     def _update_combo(self, data):
         self._liststore.clear()
