@@ -81,8 +81,14 @@ class ConvertActivity(activity.Activity):
         self.arrow_label.override_font(arrow_font)
         self.arrow_label.set_text("→")
 
+        self.label = Gtk.Label()
+        self.label.set_selectable(True)
+        self.label._size = 12
+        self.label.connect('draw', self.resize_label)
+
         l_hbox = Gtk.HBox()
         u_hbox = Gtk.HBox()
+        label_box = Gtk.HBox()
 
         self.label1 = Gtk.Label()
         self.label1.set_markup('<big>From value</big>')
@@ -102,9 +108,11 @@ class ConvertActivity(activity.Activity):
         l_hbox.pack_start(self.arrow_label, False, False, 15)
         l_hbox.pack_start(self.to_value_entry, True, True, 5)
         l_hbox.pack_end(self.combo2, True, True, 5)
+        label_box.add(self.label)
 
         self._canvas.pack_start(u_hbox, False, False, 30)
         self._canvas.pack_start(l_hbox, False, False, 0)
+        self._canvas.pack_start(label_box, True, False, 0)
 
         self.set_canvas(self._canvas)
 
@@ -241,6 +249,16 @@ class ConvertActivity(activity.Activity):
         self._update_combo(convert.length)
         self.show_all()
 
+    def resize_label(self, widget, event):
+        num_label = len(self.label.get_text())
+        try:
+            size = str((60 * SCREEN_WIDTH / 100) / num_label)
+            if not size == self.label._size:
+                self.label.modify_font(Pango.FontDescription(size))
+                self.label._size = size
+        except ZeroDivisionError:
+            pass
+
     def _from_update(self, widget):
         direction = 'from'
         if isinstance(widget, Gtk.Entry):
@@ -299,6 +317,11 @@ class ConvertActivity(activity.Activity):
             self.label2.set_markup('<big>From unit</big>')
             self.label3.set_markup('<big>To value</big>')
             self.label4.set_markup('<big>To unit</big>')
+            if new_convert != '' and new_value != '':
+                text = '%s %s ~ %s %s' % (new_value, self._get_active_text(self.combo1), new_convert, self._get_active_text(self.combo2))
+                self.label.set_text(text)
+            else:
+                self.label.set_text('')
 
         elif direction == 'to':
             self.from_value_entry.handler_block_by_func(self._from_update)
@@ -312,7 +335,11 @@ class ConvertActivity(activity.Activity):
             self.label2.set_markup('<big>To unit</big>')
             self.label3.set_markup('<big>From value</big>')
             self.label4.set_markup('<big>From unit</big>')
-
+            if new_convert != '' and new_value != '':
+                text = '%s %s ~ %s %s' % (new_convert, self._get_active_text(self.combo1), new_value, self._get_active_text(self.combo2))
+                self.label.set_text(text)
+            else:
+                self.label.set_text('')
     def _update_combo(self, data):
         self._liststore.clear()
         self.dic = data
