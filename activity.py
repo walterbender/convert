@@ -279,9 +279,11 @@ class ConvertActivity(activity.Activity):
 
     def change_result(self, new_convert, direction):
         if direction == 'from':
+            self.to_value_entry.handler_block_by_func(self._to_update)
             self.to_value_entry.handler_block_by_func(self._value_insert_text)
             self.to_value_entry.set_text(new_convert)
             self.to_value_entry.handler_unblock_by_func(self._value_insert_text)
+            self.to_value_entry.handler_unblock_by_func(self._to_update)
 
             self.arrow_label.set_text("→")
             self.label1.set_markup('<big>From value</big>')
@@ -290,9 +292,11 @@ class ConvertActivity(activity.Activity):
             self.label4.set_markup('<big>To unit</big>')
 
         elif direction == 'to':
+            self.from_value_entry.handler_block_by_func(self._from_update)
             self.from_value_entry.handler_block_by_func(self._value_insert_text)
             self.from_value_entry.set_text(new_convert)
             self.from_value_entry.handler_unblock_by_func(self._value_insert_text)
+            self.from_value_entry.handler_unblock_by_func(self._from_update)
 
             self.arrow_label.set_text("←")
             self.label1.set_markup('<big>To value</big>')
