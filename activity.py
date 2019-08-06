@@ -268,8 +268,7 @@ class ConvertActivity(activity.Activity):
                 new_convert = new_convert[0:len(new_convert)-1]
             self.change_result(new_value, new_convert, direction)
         except ValueError:
-            self.source_value_entry.set_text('')
-            self.destination_value_entry.set_text('')
+            self.change_result('', '', direction)
 
     def _update_unit(self, combo, direction):
         if direction == 'source':
@@ -279,24 +278,15 @@ class ConvertActivity(activity.Activity):
 
     def change_result(self, new_value, new_convert, direction):
         if direction == 'source':
-            self.source_value_entry.handler_block_by_func(self._source_update)
-            self.source_value_entry.set_text(new_value)
-            self.source_value_entry.handler_unblock_by_func(self._source_update)
-
-            self.destination_value_entry.handler_block_by_func(self._destination_update)
+            self.destination_value_entry.handler_block_by_func(self._value_insert_text)
             self.destination_value_entry.set_text(new_convert)
-            self.destination_value_entry.handler_unblock_by_func(self._destination_update)
-
+            self.destination_value_entry.handler_unblock_by_func(self._value_insert_text)
             self.arrow_label.set_text("=>")
+
         elif direction == 'destination':
-            self.destination_value_entry.handler_block_by_func(self._destination_update)
-            self.destination_value_entry.set_text(new_value)
-            self.destination_value_entry.handler_unblock_by_func(self._destination_update)
-
-            self.source_value_entry.handler_block_by_func(self._source_update)
+            self.source_value_entry.handler_block_by_func(self._value_insert_text)
             self.source_value_entry.set_text(new_convert)
-            self.source_value_entry.handler_unblock_by_func(self._source_update)
-
+            self.source_value_entry.handler_unblock_by_func(self._value_insert_text)
             self.arrow_label.set_text("<=")
 
     def _update_combo(self, data):
