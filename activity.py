@@ -97,8 +97,8 @@ class ConvertActivity(activity.Activity):
         l_hbox.pack_start(self.destination_value_entry, True, True, 5)
         l_hbox.pack_end(self.combo2, True, True, 5)
 
-        self._canvas.pack_start(u_hbox, False, False, 20)
-        self._canvas.pack_start(l_hbox, False, False, 5)
+        self._canvas.pack_start(u_hbox, False, False, 30)
+        self._canvas.pack_start(l_hbox, False, False, 0)
 
         self.set_canvas(self._canvas)
 
@@ -240,6 +240,8 @@ class ConvertActivity(activity.Activity):
         if isinstance(widget, Gtk.Entry):
             self._update_value(widget, direction)
         elif isinstance(widget, Gtk.ComboBox):
+            if self.arrow_label.get_text() == '<=':
+                direction = 'destination'
             self._update_unit(widget, direction)
 
     def _destination_update(self, widget):
@@ -247,6 +249,8 @@ class ConvertActivity(activity.Activity):
         if isinstance(widget, Gtk.Entry):
             self._update_value(widget, direction)
         elif isinstance(widget, Gtk.ComboBox):
+            if self.arrow_label.get_text() == '=>':
+                direction = 'source'
             self._update_unit(widget, direction)
 
     def _update_value(self, entry, direction):
