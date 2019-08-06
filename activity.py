@@ -48,33 +48,37 @@ class ConvertActivity(activity.Activity):
         self._canvas = Gtk.VBox()
 
         self._liststore = Gtk.ListStore(str)
+        arrow_font = Pango.FontDescription('sans bold 18')
+        input_font = Pango.FontDescription('sans 12')
 
         self.combo1 = Gtk.ComboBox.new_with_model_and_entry(self._liststore)
         cell = Gtk.CellRendererText()
         self.combo1.pack_start(cell, True)
         self.combo1.set_entry_text_column(0)
         self.combo1.connect('changed', self._from_update)
+        self.combo1.override_font(input_font)
 
         self.from_value_entry = Gtk.Entry()
         self.from_value_entry.set_placeholder_text("Enter source value")
         self.from_value_entry.connect('insert-text', self._value_insert_text)
         self.from_value_entry.connect('changed', self._from_update)
+        self.from_value_entry.override_font(input_font)
 
         self.to_value_entry = Gtk.Entry()
         self.to_value_entry.set_placeholder_text("Enter destination value")
         self.to_value_entry.connect('insert-text', self._value_insert_text)
         self.to_value_entry.connect('changed', self._to_update)
+        self.to_value_entry.override_font(input_font)
 
         self.combo2 = Gtk.ComboBox.new_with_model_and_entry(self._liststore)
         cell = Gtk.CellRendererText()
         self.combo2.pack_start(cell, True)
         self.combo2.set_entry_text_column(0)
         self.combo2.connect('changed', self._to_update)
+        self.combo2.override_font(input_font)
 
-
-        input_font = Pango.FontDescription('sans bold 18')
         self.arrow_label = Gtk.Label()
-        self.arrow_label.override_font(input_font)
+        self.arrow_label.override_font(arrow_font)
         self.arrow_label.set_text("→")
 
         l_hbox = Gtk.HBox()
