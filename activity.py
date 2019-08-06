@@ -263,7 +263,12 @@ class ConvertActivity(activity.Activity):
         try:
             num_value = str(entry.get_text())
             num_value = float(num_value.replace(',', ''))
-
+            decimals = str(len(str(num_value).split('.')[-1]))
+            fmt = '%.' + decimals + 'f'
+            new_value = locale.format(fmt, float(num_value))
+            new_value = new_value.rstrip("0")
+            if new_value[-1] == '.':
+                new_value = new_value[0:len(new_value)-1]
             convert_value = str(self.convert(num_value, direction))
             decimals = str(len(convert_value.split('.')[-1]))
             fmt = '%.' + decimals + 'f'
@@ -271,9 +276,9 @@ class ConvertActivity(activity.Activity):
             new_convert = new_convert.rstrip("0")
             if new_convert[-1] == '.':
                 new_convert = new_convert[0:len(new_convert)-1]
-            self.change_result(new_convert, direction)
+            self.change_result(new_value, new_convert, direction)
         except ValueError:
-            self.change_result('', direction)
+            self.change_result('', '', direction)
 
     def _update_unit(self, combo, direction):
         if direction == 'from':
@@ -281,7 +286,7 @@ class ConvertActivity(activity.Activity):
         elif direction == 'to':
             self._update_value(self.to_value_entry, direction)
 
-    def change_result(self, new_convert, direction):
+    def change_result(self, new_value, new_convert, direction):
         if direction == 'from':
             self.to_value_entry.handler_block_by_func(self._to_update)
             self.to_value_entry.handler_block_by_func(self._value_insert_text)
