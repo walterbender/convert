@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Copyright (C) 2012 Cristhofer Travieso <cristhofert97@gmail.com>
 #
 # This program is free software; you can redistribute it and/or modify
@@ -48,53 +49,54 @@ class ConvertActivity(activity.Activity):
 
         self._liststore = Gtk.ListStore(str)
 
-        # Source Unit and Value
         self.combo1 = Gtk.ComboBox.new_with_model_and_entry(self._liststore)
         cell = Gtk.CellRendererText()
         self.combo1.pack_start(cell, True)
         self.combo1.set_entry_text_column(0)
-        self.combo1.connect('changed', self._source_update)
+        self.combo1.connect('changed', self._from_update)
 
-        self.source_value_entry = Gtk.Entry()
-        self.source_value_entry.set_placeholder_text("Enter source number")
-        self.source_value_entry.connect('insert-text', self._value_insert_text)
-        self.source_value_entry.connect('changed', self._source_update)
+        self.from_value_entry = Gtk.Entry()
+        self.from_value_entry.set_placeholder_text("Enter source value")
+        self.from_value_entry.connect('insert-text', self._value_insert_text)
+        self.from_value_entry.connect('changed', self._from_update)
 
-        # Destination Value and Unit
-        self.destination_value_entry = Gtk.Entry()
-        self.destination_value_entry.set_placeholder_text("Enter destination number")
-        self.destination_value_entry.connect('insert-text', self._value_insert_text)
-        self.destination_value_entry.connect('changed', self._destination_update)
+        self.to_value_entry = Gtk.Entry()
+        self.to_value_entry.set_placeholder_text("Enter destination value")
+        self.to_value_entry.connect('insert-text', self._value_insert_text)
+        self.to_value_entry.connect('changed', self._to_update)
 
         self.combo2 = Gtk.ComboBox.new_with_model_and_entry(self._liststore)
         cell = Gtk.CellRendererText()
         self.combo2.pack_start(cell, True)
         self.combo2.set_entry_text_column(0)
-        self.combo2.connect('changed', self._destination_update)
+        self.combo2.connect('changed', self._to_update)
 
+
+        input_font = Pango.FontDescription('sans bold 18')
         self.arrow_label = Gtk.Label()
-        self.arrow_label.set_text("=>")
+        self.arrow_label.override_font(input_font)
+        self.arrow_label.set_text("→")
 
         l_hbox = Gtk.HBox()
         u_hbox = Gtk.HBox()
 
-        label = Gtk.Label()
-        label.set_markup('<big>Source Value</big>')
-        u_hbox.pack_start(label, True, True, 5)
-        label = Gtk.Label()
-        label.set_markup('<big>Source Unit</big>')
-        u_hbox.pack_start(label, True, True, 20)
-        label = Gtk.Label()
-        label.set_markup('<big>Destination Value</big>')
-        u_hbox.pack_start(label, True, True, 20)
-        label = Gtk.Label()
-        label.set_markup('<big>Destination Unit</big>')
-        u_hbox.pack_start(label, True, True, 5)
+        self.label1 = Gtk.Label()
+        self.label1.set_markup('<big>From value</big>')
+        u_hbox.pack_start(self.label1, True, True, 5)
+        self.label2 = Gtk.Label()
+        self.label2.set_markup('<big>From unit</big>')
+        u_hbox.pack_start(self.label2, True, True, 20)
+        self.label3 = Gtk.Label()
+        self.label3.set_markup('<big>To value</big>')
+        u_hbox.pack_start(self.label3, True, True, 20)
+        self.label4 = Gtk.Label()
+        self.label4.set_markup('<big>To unit</big>')
+        u_hbox.pack_start(self.label4, True, True, 5)
 
-        l_hbox.pack_start(self.source_value_entry, True, True, 5)
+        l_hbox.pack_start(self.from_value_entry, True, True, 5)
         l_hbox.pack_start(self.combo1, True, True, 5)
         l_hbox.pack_start(self.arrow_label, False, False, 15)
-        l_hbox.pack_start(self.destination_value_entry, True, True, 5)
+        l_hbox.pack_start(self.to_value_entry, True, True, 5)
         l_hbox.pack_end(self.combo2, True, True, 5)
 
         self._canvas.pack_start(u_hbox, False, False, 30)
@@ -235,22 +237,22 @@ class ConvertActivity(activity.Activity):
         self._update_combo(convert.length)
         self.show_all()
 
-    def _source_update(self, widget):
-        direction = 'source'
+    def _from_update(self, widget):
+        direction = 'from'
         if isinstance(widget, Gtk.Entry):
             self._update_value(widget, direction)
         elif isinstance(widget, Gtk.ComboBox):
-            if self.arrow_label.get_text() == '<=':
-                direction = 'destination'
+            if self.arrow_label.get_text() == '←':
+                direction = 'to'
             self._update_unit(widget, direction)
 
-    def _destination_update(self, widget):
-        direction = 'destination'
+    def _to_update(self, widget):
+        direction = 'to'
         if isinstance(widget, Gtk.Entry):
             self._update_value(widget, direction)
         elif isinstance(widget, Gtk.ComboBox):
-            if self.arrow_label.get_text() == '=>':
-                direction = 'source'
+            if self.arrow_label.get_text() == '→':
+                direction = 'from'
             self._update_unit(widget, direction)
 
     def _update_value(self, entry, direction):
@@ -275,23 +277,33 @@ class ConvertActivity(activity.Activity):
             self.change_result('', '', direction)
 
     def _update_unit(self, combo, direction):
-        if direction == 'source':
-            self._update_value(self.source_value_entry, direction)
-        elif direction == 'destination':
-            self._update_value(self.destination_value_entry, direction)
+        if direction == 'from':
+            self._update_value(self.from_value_entry, direction)
+        elif direction == 'to':
+            self._update_value(self.to_value_entry, direction)
 
     def change_result(self, new_value, new_convert, direction):
-        if direction == 'source':
-            self.destination_value_entry.handler_block_by_func(self._value_insert_text)
-            self.destination_value_entry.set_text(new_convert)
-            self.destination_value_entry.handler_unblock_by_func(self._value_insert_text)
-            self.arrow_label.set_text("=>")
+        if direction == 'from':
+            self.to_value_entry.handler_block_by_func(self._value_insert_text)
+            self.to_value_entry.set_text(new_convert)
+            self.to_value_entry.handler_unblock_by_func(self._value_insert_text)
 
-        elif direction == 'destination':
-            self.source_value_entry.handler_block_by_func(self._value_insert_text)
-            self.source_value_entry.set_text(new_convert)
-            self.source_value_entry.handler_unblock_by_func(self._value_insert_text)
-            self.arrow_label.set_text("<=")
+            self.arrow_label.set_text("→")
+            self.label1.set_markup('<big>From value</big>')
+            self.label2.set_markup('<big>From unit</big>')
+            self.label3.set_markup('<big>To value</big>')
+            self.label4.set_markup('<big>To unit</big>')
+
+        elif direction == 'to':
+            self.from_value_entry.handler_block_by_func(self._value_insert_text)
+            self.from_value_entry.set_text(new_convert)
+            self.from_value_entry.handler_unblock_by_func(self._value_insert_text)
+
+            self.arrow_label.set_text("←")
+            self.label1.set_markup('<big>To value</big>')
+            self.label2.set_markup('<big>To unit</big>')
+            self.label3.set_markup('<big>From value</big>')
+            self.label4.set_markup('<big>From unit</big>')
 
     def _update_combo(self, data):
         self._liststore.clear()
@@ -352,10 +364,10 @@ class ConvertActivity(activity.Activity):
         return text
 
     def convert(self, num_value, direction):
-        if direction == 'source':
+        if direction == 'from':
             unit = self._get_active_text(self.combo1)
             to_unit = self._get_active_text(self.combo2)
-        elif direction == 'destination':
+        elif direction == 'to':
             unit = self._get_active_text(self.combo2)
             to_unit = self._get_active_text(self.combo1)
         return convert.convert(num_value, unit, to_unit, self.dic)
