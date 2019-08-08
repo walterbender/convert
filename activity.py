@@ -65,7 +65,6 @@ class ConvertActivity(activity.Activity):
         self.from_value_entry.override_font(input_font)
 
         self.to_value_entry = Gtk.Entry()
-        self.to_value_entry.set_placeholder_text("Enter value")
         self.to_value_entry.connect('insert-text', self._value_insert_text)
         self.to_value_entry.connect('changed', self._to_update)
         self.to_value_entry.override_font(input_font)
