@@ -55,25 +55,25 @@ class ConvertActivity(activity.Activity):
         cell = Gtk.CellRendererText()
         self.from_unit.pack_start(cell, True)
         self.from_unit.set_entry_text_column(0)
-        self.from_unit.connect('changed', self._from_update)
+        self.from_unit.connect('changed', self._from_changed_cb)
         self.from_unit.override_font(input_font)
 
         self.from_value = Gtk.Entry()
         self.from_value.set_placeholder_text("Enter value")
         self.from_value.connect('insert-text', self._value_insert_text)
-        self.from_value.connect('changed', self._from_update)
+        self.from_value.connect('changed', self._from_changed_cb)
         self.from_value.override_font(input_font)
 
         self.to_value = Gtk.Entry()
         self.to_value.connect('insert-text', self._value_insert_text)
-        self.to_value.connect('changed', self._to_update)
+        self.to_value.connect('changed', self._to_changed_cb)
         self.to_value.override_font(input_font)
 
         self.to_unit = Gtk.ComboBox.new_with_model_and_entry(self._liststore)
         cell = Gtk.CellRendererText()
         self.to_unit.pack_start(cell, True)
         self.to_unit.set_entry_text_column(0)
-        self.to_unit.connect('changed', self._to_update)
+        self.to_unit.connect('changed', self._to_changed_cb)
         self.to_unit.override_font(input_font)
 
         self.arrow = Gtk.Label()
@@ -258,7 +258,7 @@ class ConvertActivity(activity.Activity):
         except ZeroDivisionError:
             pass
 
-    def _from_update(self, widget):
+    def _from_changed_cb(self, widget):
         direction = 'from'
         if isinstance(widget, Gtk.Entry):
             self._update_value(widget, direction)
@@ -267,7 +267,7 @@ class ConvertActivity(activity.Activity):
                 direction = 'to'
             self._update_unit(widget, direction)
 
-    def _to_update(self, widget):
+    def _to_changed_cb(self, widget):
         direction = 'to'
         if isinstance(widget, Gtk.Entry):
             self._update_value(widget, direction)
@@ -305,11 +305,11 @@ class ConvertActivity(activity.Activity):
 
     def change_result(self, new_value, new_convert, direction):
         if direction == 'from':
-            self.to_value.handler_block_by_func(self._to_update)
+            self.to_value.handler_block_by_func(self._to_changed_cb)
             self.to_value.handler_block_by_func(self._value_insert_text)
             self.to_value.set_text(new_convert)
             self.to_value.handler_unblock_by_func(self._value_insert_text)
-            self.to_value.handler_unblock_by_func(self._to_update)
+            self.to_value.handler_unblock_by_func(self._to_changed_cb)
 
             self.arrow.set_text("→")
             self.label1.set_markup('<big>From value</big>')
@@ -323,11 +323,11 @@ class ConvertActivity(activity.Activity):
                 self.ratio.set_text('')
 
         elif direction == 'to':
-            self.from_value.handler_block_by_func(self._from_update)
+            self.from_value.handler_block_by_func(self._from_changed_cb)
             self.from_value.handler_block_by_func(self._value_insert_text)
             self.from_value.set_text(new_convert)
             self.from_value.handler_unblock_by_func(self._value_insert_text)
-            self.from_value.handler_unblock_by_func(self._from_update)
+            self.from_value.handler_unblock_by_func(self._from_changed_cb)
 
             self.arrow.set_text("←")
             self.label1.set_markup('<big>To value</big>')
