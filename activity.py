@@ -44,9 +44,6 @@ class ConvertActivity(activity.Activity):
         self.max_participants = 1
         self.dic = {}
 
-        # Canvas
-        self._canvas = Gtk.VBox()
-
         self._liststore = Gtk.ListStore(str)
         arrow_font = Pango.FontDescription('sans bold 18')
         input_font = Pango.FontDescription('sans 12')
@@ -85,9 +82,9 @@ class ConvertActivity(activity.Activity):
         self.ratio._size = 12
         self.ratio.connect('draw', self._ratio_draw_cb)
 
-        l_hbox = Gtk.HBox()
-        u_hbox = Gtk.HBox()
-        label_box = Gtk.HBox()
+        l_hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
+        u_hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
+        label_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
 
         self.label1 = Gtk.Label()
         self.label1.set_markup('<big>From value</big>')
@@ -109,11 +106,11 @@ class ConvertActivity(activity.Activity):
         l_hbox.pack_end(self.to_unit, True, True, 5)
         label_box.add(self.ratio)
 
-        self._canvas.pack_start(u_hbox, False, False, 30)
-        self._canvas.pack_start(l_hbox, False, False, 0)
-        self._canvas.pack_start(label_box, True, False, 0)
-
-        self.set_canvas(self._canvas)
+        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        box.pack_start(u_hbox, False, False, 30)
+        box.pack_start(l_hbox, False, False, 0)
+        box.pack_start(label_box, True, False, 0)
+        self.set_canvas(box)
 
         # Toolbar
         toolbarbox = ToolbarBox()
