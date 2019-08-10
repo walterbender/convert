@@ -58,16 +58,16 @@ class ConvertActivity(activity.Activity):
         self.from_unit.connect('changed', self._from_update)
         self.from_unit.override_font(input_font)
 
-        self.from_value_entry = Gtk.Entry()
-        self.from_value_entry.set_placeholder_text("Enter value")
-        self.from_value_entry.connect('insert-text', self._value_insert_text)
-        self.from_value_entry.connect('changed', self._from_update)
-        self.from_value_entry.override_font(input_font)
+        self.from_value = Gtk.Entry()
+        self.from_value.set_placeholder_text("Enter value")
+        self.from_value.connect('insert-text', self._value_insert_text)
+        self.from_value.connect('changed', self._from_update)
+        self.from_value.override_font(input_font)
 
-        self.to_value_entry = Gtk.Entry()
-        self.to_value_entry.connect('insert-text', self._value_insert_text)
-        self.to_value_entry.connect('changed', self._to_update)
-        self.to_value_entry.override_font(input_font)
+        self.to_value = Gtk.Entry()
+        self.to_value.connect('insert-text', self._value_insert_text)
+        self.to_value.connect('changed', self._to_update)
+        self.to_value.override_font(input_font)
 
         self.to_unit = Gtk.ComboBox.new_with_model_and_entry(self._liststore)
         cell = Gtk.CellRendererText()
@@ -102,10 +102,10 @@ class ConvertActivity(activity.Activity):
         self.label4.set_markup('<big>To unit</big>')
         u_hbox.pack_start(self.label4, True, True, 5)
 
-        l_hbox.pack_start(self.from_value_entry, True, True, 5)
+        l_hbox.pack_start(self.from_value, True, True, 5)
         l_hbox.pack_start(self.from_unit, True, True, 5)
         l_hbox.pack_start(self.arrow_label, False, False, 15)
-        l_hbox.pack_start(self.to_value_entry, True, True, 5)
+        l_hbox.pack_start(self.to_value, True, True, 5)
         l_hbox.pack_end(self.to_unit, True, True, 5)
         label_box.add(self.label)
 
@@ -299,17 +299,17 @@ class ConvertActivity(activity.Activity):
 
     def _update_unit(self, combo, direction):
         if direction == 'from':
-            self._update_value(self.from_value_entry, direction)
+            self._update_value(self.from_value, direction)
         elif direction == 'to':
-            self._update_value(self.to_value_entry, direction)
+            self._update_value(self.to_value, direction)
 
     def change_result(self, new_value, new_convert, direction):
         if direction == 'from':
-            self.to_value_entry.handler_block_by_func(self._to_update)
-            self.to_value_entry.handler_block_by_func(self._value_insert_text)
-            self.to_value_entry.set_text(new_convert)
-            self.to_value_entry.handler_unblock_by_func(self._value_insert_text)
-            self.to_value_entry.handler_unblock_by_func(self._to_update)
+            self.to_value.handler_block_by_func(self._to_update)
+            self.to_value.handler_block_by_func(self._value_insert_text)
+            self.to_value.set_text(new_convert)
+            self.to_value.handler_unblock_by_func(self._value_insert_text)
+            self.to_value.handler_unblock_by_func(self._to_update)
 
             self.arrow_label.set_text("→")
             self.label1.set_markup('<big>From value</big>')
@@ -323,11 +323,11 @@ class ConvertActivity(activity.Activity):
                 self.label.set_text('')
 
         elif direction == 'to':
-            self.from_value_entry.handler_block_by_func(self._from_update)
-            self.from_value_entry.handler_block_by_func(self._value_insert_text)
-            self.from_value_entry.set_text(new_convert)
-            self.from_value_entry.handler_unblock_by_func(self._value_insert_text)
-            self.from_value_entry.handler_unblock_by_func(self._from_update)
+            self.from_value.handler_block_by_func(self._from_update)
+            self.from_value.handler_block_by_func(self._value_insert_text)
+            self.from_value.set_text(new_convert)
+            self.from_value.handler_unblock_by_func(self._value_insert_text)
+            self.from_value.handler_unblock_by_func(self._from_update)
 
             self.arrow_label.set_text("←")
             self.label1.set_markup('<big>To value</big>')
