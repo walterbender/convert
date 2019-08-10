@@ -60,12 +60,12 @@ class ConvertActivity(activity.Activity):
 
         self.from_value = Gtk.Entry()
         self.from_value.set_placeholder_text("Enter value")
-        self.from_value.connect('insert-text', self._value_insert_text)
+        self.from_value.connect('insert-text', self._insert_text_cb)
         self.from_value.connect('changed', self._from_changed_cb)
         self.from_value.override_font(input_font)
 
         self.to_value = Gtk.Entry()
-        self.to_value.connect('insert-text', self._value_insert_text)
+        self.to_value.connect('insert-text', self._insert_text_cb)
         self.to_value.connect('changed', self._to_changed_cb)
         self.to_value.override_font(input_font)
 
@@ -306,9 +306,9 @@ class ConvertActivity(activity.Activity):
     def change_result(self, new_value, new_convert, direction):
         if direction == 'from':
             self.to_value.handler_block_by_func(self._to_changed_cb)
-            self.to_value.handler_block_by_func(self._value_insert_text)
+            self.to_value.handler_block_by_func(self._insert_text_cb)
             self.to_value.set_text(new_convert)
-            self.to_value.handler_unblock_by_func(self._value_insert_text)
+            self.to_value.handler_unblock_by_func(self._insert_text_cb)
             self.to_value.handler_unblock_by_func(self._to_changed_cb)
 
             self.arrow.set_text("→")
@@ -324,9 +324,9 @@ class ConvertActivity(activity.Activity):
 
         elif direction == 'to':
             self.from_value.handler_block_by_func(self._from_changed_cb)
-            self.from_value.handler_block_by_func(self._value_insert_text)
+            self.from_value.handler_block_by_func(self._insert_text_cb)
             self.from_value.set_text(new_convert)
-            self.from_value.handler_unblock_by_func(self._value_insert_text)
+            self.from_value.handler_unblock_by_func(self._insert_text_cb)
             self.from_value.handler_unblock_by_func(self._from_changed_cb)
 
             self.arrow.set_text("←")
@@ -406,7 +406,7 @@ class ConvertActivity(activity.Activity):
             to_unit = self._get_active_text(self.from_unit)
         return convert.convert(num_value, unit, to_unit, self.dic)
 
-    def _value_insert_text(self, entry, text, length, position):
+    def _insert_text_cb(self, entry, text, length, position):
         for char in text:
             if char == "-" and \
                entry.get_text() is "" and len(text) == 1:
