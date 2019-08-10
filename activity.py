@@ -291,14 +291,14 @@ class ConvertActivity(activity.Activity):
             new_value = locale.format(fmt, float(num_value))
             new_value = new_value.rstrip("0")
             if new_value[-1] == '.':
-                new_value = new_value[0:len(new_value)-1]
+                new_value = new_value[0:len(new_value) - 1]
             convert_value = str(self.convert(num_value, direction))
             decimals = str(len(convert_value.split('.')[-1]))
             fmt = '%.' + decimals + 'f'
             new_convert = locale.format(fmt, float(convert_value))
             new_convert = new_convert.rstrip("0")
             if new_convert[-1] == '.':
-                new_convert = new_convert[0:len(new_convert)-1]
+                new_convert = new_convert[0:len(new_convert) - 1]
             self.change_result(new_value, new_convert, direction)
         except ValueError:
             self.change_result('', '', direction)
@@ -323,7 +323,9 @@ class ConvertActivity(activity.Activity):
             self.label3.set_markup('<big>To value</big>')
             self.label4.set_markup('<big>To unit</big>')
             if new_convert != '' and new_value != '':
-                text = '%s %s ~ %s %s' % (new_value, self._get_active_text(self.from_unit), new_convert, self._get_active_text(self.to_unit))
+                text = '%s %s ~ %s %s' % (
+                    new_value, self._get_active_text(self.from_unit),
+                    new_convert, self._get_active_text(self.to_unit))
                 self.ratio.set_text(text)
             else:
                 self.ratio.set_text('')
@@ -341,10 +343,13 @@ class ConvertActivity(activity.Activity):
             self.label3.set_markup('<big>From value</big>')
             self.label4.set_markup('<big>From unit</big>')
             if new_convert != '' and new_value != '':
-                text = '%s %s ~ %s %s' % (new_convert, self._get_active_text(self.from_unit), new_value, self._get_active_text(self.to_unit))
+                text = '%s %s ~ %s %s' % (
+                    new_convert, self._get_active_text(self.from_unit),
+                    new_value, self._get_active_text(self.to_unit))
                 self.ratio.set_text(text)
             else:
                 self.ratio.set_text('')
+
     def _update_combo(self, data):
         self._liststore.clear()
         self.dic = data
