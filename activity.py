@@ -80,10 +80,10 @@ class ConvertActivity(activity.Activity):
         self.arrow.override_font(arrow_font)
         self.arrow.set_text("→")
 
-        self.label = Gtk.Label()
-        self.label.set_selectable(True)
-        self.label._size = 12
-        self.label.connect('draw', self.resize_label)
+        self.ratio = Gtk.Label()
+        self.ratio.set_selectable(True)
+        self.ratio._size = 12
+        self.ratio.connect('draw', self.resize_label)
 
         l_hbox = Gtk.HBox()
         u_hbox = Gtk.HBox()
@@ -107,7 +107,7 @@ class ConvertActivity(activity.Activity):
         l_hbox.pack_start(self.arrow, False, False, 15)
         l_hbox.pack_start(self.to_value, True, True, 5)
         l_hbox.pack_end(self.to_unit, True, True, 5)
-        label_box.add(self.label)
+        label_box.add(self.ratio)
 
         self._canvas.pack_start(u_hbox, False, False, 30)
         self._canvas.pack_start(l_hbox, False, False, 0)
@@ -249,12 +249,12 @@ class ConvertActivity(activity.Activity):
         self.show_all()
 
     def resize_label(self, widget, event):
-        num_label = len(self.label.get_text())
+        num_label = len(self.ratio.get_text())
         try:
             size = str((60 * SCREEN_WIDTH / 100) / num_label)
-            if not size == self.label._size:
-                self.label.modify_font(Pango.FontDescription(size))
-                self.label._size = size
+            if not size == self.ratio._size:
+                self.ratio.modify_font(Pango.FontDescription(size))
+                self.ratio._size = size
         except ZeroDivisionError:
             pass
 
@@ -318,9 +318,9 @@ class ConvertActivity(activity.Activity):
             self.label4.set_markup('<big>To unit</big>')
             if new_convert != '' and new_value != '':
                 text = '%s %s ~ %s %s' % (new_value, self._get_active_text(self.from_unit), new_convert, self._get_active_text(self.to_unit))
-                self.label.set_text(text)
+                self.ratio.set_text(text)
             else:
-                self.label.set_text('')
+                self.ratio.set_text('')
 
         elif direction == 'to':
             self.from_value.handler_block_by_func(self._from_update)
@@ -336,9 +336,9 @@ class ConvertActivity(activity.Activity):
             self.label4.set_markup('<big>From unit</big>')
             if new_convert != '' and new_value != '':
                 text = '%s %s ~ %s %s' % (new_convert, self._get_active_text(self.from_unit), new_value, self._get_active_text(self.to_unit))
-                self.label.set_text(text)
+                self.ratio.set_text(text)
             else:
-                self.label.set_text('')
+                self.ratio.set_text('')
     def _update_combo(self, data):
         self._liststore.clear()
         self.dic = data
