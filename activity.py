@@ -83,7 +83,7 @@ class ConvertActivity(activity.Activity):
         self.ratio = Gtk.Label()
         self.ratio.set_selectable(True)
         self.ratio._size = 12
-        self.ratio.connect('draw', self.resize_label)
+        self.ratio.connect('draw', self._ratio_draw_cb)
 
         l_hbox = Gtk.HBox()
         u_hbox = Gtk.HBox()
@@ -248,7 +248,7 @@ class ConvertActivity(activity.Activity):
         self._update_combo(convert.length)
         self.show_all()
 
-    def resize_label(self, widget, event):
+    def _ratio_draw_cb(self, widget, cr):
         num_label = len(self.ratio.get_text())
         try:
             size = str((60 * SCREEN_WIDTH / 100) / num_label)
