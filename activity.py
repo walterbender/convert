@@ -42,10 +42,10 @@ class Ratio(Gtk.Label):
         Gtk.Label.__init__(self)
         self.set_selectable(True)
         self._size = 12  # TODO: use style.FONT_SIZE
-        self.connect('draw', self.__draw_cb)
 
-    def __draw_cb(self, widget, cr):
-        length = len(widget.get_text())
+    def set_text(self, text):
+        Gtk.Label.set_text(self, text)
+        length = len(text)
         if length == 0:
             return
 
