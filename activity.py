@@ -76,9 +76,9 @@ class ConvertActivity(activity.Activity):
         self.to_unit.connect('changed', self._to_update)
         self.to_unit.override_font(input_font)
 
-        self.arrow_label = Gtk.Label()
-        self.arrow_label.override_font(arrow_font)
-        self.arrow_label.set_text("→")
+        self.arrow = Gtk.Label()
+        self.arrow.override_font(arrow_font)
+        self.arrow.set_text("→")
 
         self.label = Gtk.Label()
         self.label.set_selectable(True)
@@ -104,7 +104,7 @@ class ConvertActivity(activity.Activity):
 
         l_hbox.pack_start(self.from_value, True, True, 5)
         l_hbox.pack_start(self.from_unit, True, True, 5)
-        l_hbox.pack_start(self.arrow_label, False, False, 15)
+        l_hbox.pack_start(self.arrow, False, False, 15)
         l_hbox.pack_start(self.to_value, True, True, 5)
         l_hbox.pack_end(self.to_unit, True, True, 5)
         label_box.add(self.label)
@@ -263,7 +263,7 @@ class ConvertActivity(activity.Activity):
         if isinstance(widget, Gtk.Entry):
             self._update_value(widget, direction)
         elif isinstance(widget, Gtk.ComboBox):
-            if self.arrow_label.get_text() == '←':
+            if self.arrow.get_text() == '←':
                 direction = 'to'
             self._update_unit(widget, direction)
 
@@ -272,7 +272,7 @@ class ConvertActivity(activity.Activity):
         if isinstance(widget, Gtk.Entry):
             self._update_value(widget, direction)
         elif isinstance(widget, Gtk.ComboBox):
-            if self.arrow_label.get_text() == '→':
+            if self.arrow.get_text() == '→':
                 direction = 'from'
             self._update_unit(widget, direction)
 
@@ -311,7 +311,7 @@ class ConvertActivity(activity.Activity):
             self.to_value.handler_unblock_by_func(self._value_insert_text)
             self.to_value.handler_unblock_by_func(self._to_update)
 
-            self.arrow_label.set_text("→")
+            self.arrow.set_text("→")
             self.label1.set_markup('<big>From value</big>')
             self.label2.set_markup('<big>From unit</big>')
             self.label3.set_markup('<big>To value</big>')
@@ -329,7 +329,7 @@ class ConvertActivity(activity.Activity):
             self.from_value.handler_unblock_by_func(self._value_insert_text)
             self.from_value.handler_unblock_by_func(self._from_update)
 
-            self.arrow_label.set_text("←")
+            self.arrow.set_text("←")
             self.label1.set_markup('<big>To value</big>')
             self.label2.set_markup('<big>To unit</big>')
             self.label3.set_markup('<big>From value</big>')
