@@ -51,12 +51,12 @@ class ConvertActivity(activity.Activity):
         arrow_font = Pango.FontDescription('sans bold 18')
         input_font = Pango.FontDescription('sans 12')
 
-        self.combo1 = Gtk.ComboBox.new_with_model_and_entry(self._liststore)
+        self.from_unit = Gtk.ComboBox.new_with_model_and_entry(self._liststore)
         cell = Gtk.CellRendererText()
-        self.combo1.pack_start(cell, True)
-        self.combo1.set_entry_text_column(0)
-        self.combo1.connect('changed', self._from_update)
-        self.combo1.override_font(input_font)
+        self.from_unit.pack_start(cell, True)
+        self.from_unit.set_entry_text_column(0)
+        self.from_unit.connect('changed', self._from_update)
+        self.from_unit.override_font(input_font)
 
         self.from_value_entry = Gtk.Entry()
         self.from_value_entry.set_placeholder_text("Enter value")
@@ -69,12 +69,12 @@ class ConvertActivity(activity.Activity):
         self.to_value_entry.connect('changed', self._to_update)
         self.to_value_entry.override_font(input_font)
 
-        self.combo2 = Gtk.ComboBox.new_with_model_and_entry(self._liststore)
+        self.to_unit = Gtk.ComboBox.new_with_model_and_entry(self._liststore)
         cell = Gtk.CellRendererText()
-        self.combo2.pack_start(cell, True)
-        self.combo2.set_entry_text_column(0)
-        self.combo2.connect('changed', self._to_update)
-        self.combo2.override_font(input_font)
+        self.to_unit.pack_start(cell, True)
+        self.to_unit.set_entry_text_column(0)
+        self.to_unit.connect('changed', self._to_update)
+        self.to_unit.override_font(input_font)
 
         self.arrow_label = Gtk.Label()
         self.arrow_label.override_font(arrow_font)
@@ -103,10 +103,10 @@ class ConvertActivity(activity.Activity):
         u_hbox.pack_start(self.label4, True, True, 5)
 
         l_hbox.pack_start(self.from_value_entry, True, True, 5)
-        l_hbox.pack_start(self.combo1, True, True, 5)
+        l_hbox.pack_start(self.from_unit, True, True, 5)
         l_hbox.pack_start(self.arrow_label, False, False, 15)
         l_hbox.pack_start(self.to_value_entry, True, True, 5)
-        l_hbox.pack_end(self.combo2, True, True, 5)
+        l_hbox.pack_end(self.to_unit, True, True, 5)
         label_box.add(self.label)
 
         self._canvas.pack_start(u_hbox, False, False, 30)
@@ -317,7 +317,7 @@ class ConvertActivity(activity.Activity):
             self.label3.set_markup('<big>To value</big>')
             self.label4.set_markup('<big>To unit</big>')
             if new_convert != '' and new_value != '':
-                text = '%s %s ~ %s %s' % (new_value, self._get_active_text(self.combo1), new_convert, self._get_active_text(self.combo2))
+                text = '%s %s ~ %s %s' % (new_value, self._get_active_text(self.from_unit), new_convert, self._get_active_text(self.to_unit))
                 self.label.set_text(text)
             else:
                 self.label.set_text('')
@@ -335,7 +335,7 @@ class ConvertActivity(activity.Activity):
             self.label3.set_markup('<big>From value</big>')
             self.label4.set_markup('<big>From unit</big>')
             if new_convert != '' and new_value != '':
-                text = '%s %s ~ %s %s' % (new_convert, self._get_active_text(self.combo1), new_value, self._get_active_text(self.combo2))
+                text = '%s %s ~ %s %s' % (new_convert, self._get_active_text(self.from_unit), new_value, self._get_active_text(self.to_unit))
                 self.label.set_text(text)
             else:
                 self.label.set_text('')
@@ -347,41 +347,41 @@ class ConvertActivity(activity.Activity):
         for x in keys:
             self._liststore.append(['%s' % (x)])
         if keys[0] == 'Cables':
-            self.combo1.set_active(12)
-            self.combo2.set_active(12)
+            self.from_unit.set_active(12)
+            self.to_unit.set_active(12)
         elif keys[0] == 'Cubic Centimeter':
-            self.combo1.set_active(3)
-            self.combo2.set_active(3)
+            self.from_unit.set_active(3)
+            self.to_unit.set_active(3)
         elif keys[0] == 'Acre':
-            self.combo1.set_active(4)
-            self.combo2.set_active(4)
+            self.from_unit.set_active(4)
+            self.to_unit.set_active(4)
         elif keys[0] == 'Carat':
-            self.combo1.set_active(2)
-            self.combo2.set_active(2)
+            self.from_unit.set_active(2)
+            self.to_unit.set_active(2)
         elif keys[0] == 'Centimeters/Minute':
-            self.combo1.set_active(9)
-            self.combo2.set_active(9)
+            self.from_unit.set_active(9)
+            self.to_unit.set_active(9)
         elif keys[0] == 'Day':
-            self.combo1.set_active(8)
-            self.combo2.set_active(8)
+            self.from_unit.set_active(8)
+            self.to_unit.set_active(8)
         elif keys[0] == 'Celsius':
-            self.combo1.set_active(2)
-            self.combo2.set_active(2)
+            self.from_unit.set_active(2)
+            self.to_unit.set_active(2)
         elif keys[0] == 'Degrees':
-            self.combo1.set_active(1)
-            self.combo2.set_active(1)
+            self.from_unit.set_active(1)
+            self.to_unit.set_active(1)
         elif keys[0] == 'Atmosphere (atm)':
-            self.combo1.set_active(2)
-            self.combo2.set_active(2)
+            self.from_unit.set_active(2)
+            self.to_unit.set_active(2)
         elif keys[0] == 'Dyne (dyn)':
-            self.combo1.set_active(2)
-            self.combo2.set_active(2)
+            self.from_unit.set_active(2)
+            self.to_unit.set_active(2)
         elif keys[0] == 'Calories (cal)':
-            self.combo1.set_active(2)
-            self.combo2.set_active(2)
+            self.from_unit.set_active(2)
+            self.to_unit.set_active(2)
         elif keys[0] == 'Bit':
-            self.combo1.set_active(1)
-            self.combo2.set_active(1)
+            self.from_unit.set_active(1)
+            self.to_unit.set_active(1)
         else:
             pass
         self.show_all()
@@ -399,11 +399,11 @@ class ConvertActivity(activity.Activity):
 
     def convert(self, num_value, direction):
         if direction == 'from':
-            unit = self._get_active_text(self.combo1)
-            to_unit = self._get_active_text(self.combo2)
+            unit = self._get_active_text(self.from_unit)
+            to_unit = self._get_active_text(self.to_unit)
         elif direction == 'to':
-            unit = self._get_active_text(self.combo2)
-            to_unit = self._get_active_text(self.combo1)
+            unit = self._get_active_text(self.to_unit)
+            to_unit = self._get_active_text(self.from_unit)
         return convert.convert(num_value, unit, to_unit, self.dic)
 
     def _value_insert_text(self, entry, text, length, position):
