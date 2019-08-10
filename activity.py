@@ -37,6 +37,24 @@ from gettext import gettext as _
 SCREEN_WIDTH = Gdk.Screen.width()
 
 
+class Ratio(Gtk.Label):
+    def __init__(self):
+        Gtk.Label.__init__(self)
+        self.set_selectable(True)
+        self._size = 12  # TODO: use style.FONT_SIZE
+        self.connect('draw', self.__draw_cb)
+
+    def __draw_cb(self, widget, cr):
+        length = len(widget.get_text())
+        if length == 0:
+            return
+
+        size = str((60 * SCREEN_WIDTH / 100) / length)
+        if not size == self._size:
+            self.modify_font(Pango.FontDescription(size))
+            self._size = size
+
+
 class ConvertActivity(activity.Activity):
     def __init__(self, handle):
         activity.Activity.__init__(self, handle, True)
@@ -77,10 +95,7 @@ class ConvertActivity(activity.Activity):
         self.arrow.override_font(arrow_font)
         self.arrow.set_text("→")
 
-        self.ratio = Gtk.Label()
-        self.ratio.set_selectable(True)
-        self.ratio._size = 12
-        self.ratio.connect('draw', self._ratio_draw_cb)
+        self.ratio = Ratio()
 
         l_hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
         u_hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
@@ -244,16 +259,6 @@ class ConvertActivity(activity.Activity):
         self.set_toolbar_box(toolbarbox)
         self._update_combo(convert.length)
         self.show_all()
-
-    def _ratio_draw_cb(self, widget, cr):
-        num_label = len(self.ratio.get_text())
-        try:
-            size = str((60 * SCREEN_WIDTH / 100) / num_label)
-            if not size == self.ratio._size:
-                self.ratio.modify_font(Pango.FontDescription(size))
-                self.ratio._size = size
-        except ZeroDivisionError:
-            pass
 
     def _from_changed_cb(self, widget):
         direction = 'from'
