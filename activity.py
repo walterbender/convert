@@ -31,6 +31,7 @@ from sugar3.activity.widgets import StopButton
 from sugar3.activity.widgets import ActivityToolbarButton
 from sugar3.graphics.toolbarbox import ToolbarBox
 from sugar3.graphics.radiotoolbutton import RadioToolButton
+from sugar3.graphics.style import FONT_SIZE, FONT_FACE
 
 from gettext import gettext as _
 
@@ -41,7 +42,7 @@ class Ratio(Gtk.Label):
     def __init__(self):
         Gtk.Label.__init__(self)
         self.set_selectable(True)
-        self._size = 12  # TODO: use style.FONT_SIZE
+        self._size = -1
 
     def set_text(self, text):
         Gtk.Label.set_text(self, text)
@@ -49,9 +50,10 @@ class Ratio(Gtk.Label):
         if length == 0:
             return
 
-        size = str((60 * SCREEN_WIDTH / 100) / length)
+        size = (60 * SCREEN_WIDTH / 100) / length + int(FONT_SIZE * 1.2)
         if not size == self._size:
-            self.modify_font(Pango.FontDescription(size))
+            self.modify_font(Pango.FontDescription(
+                '%s %d' % (FONT_FACE, size)))
             self._size = size
 
 
@@ -63,8 +65,10 @@ class ConvertActivity(activity.Activity):
         self.dic = {}
 
         self._liststore = Gtk.ListStore(str)
-        arrow_font = Pango.FontDescription('sans bold 18')
-        input_font = Pango.FontDescription('sans 12')
+        arrow_font = Pango.FontDescription(
+            '%s %d' % (FONT_FACE, int(FONT_SIZE * 1.8)))
+        input_font = Pango.FontDescription(
+            '%s %d' % (FONT_FACE, int(FONT_SIZE * 1.2)))
 
         self.from_unit = Gtk.ComboBox.new_with_model_and_entry(self._liststore)
         cell = Gtk.CellRendererText()
