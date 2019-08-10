@@ -258,9 +258,15 @@ class ConvertActivity(activity.Activity):
         stopbtn = StopButton(self)
         toolbarbox.toolbar.insert(stopbtn, -1)
 
+        self.connect('size-allocate', self._size_allocate_cb)
+
         self.set_toolbar_box(toolbarbox)
         self._update_combo(convert.length)
         self.show_all()
+
+    def _size_allocate_cb(self, widget, allocation):
+        global SCREEN_WIDTH
+        SCREEN_WIDTH = int(allocation.width)
 
     def _from_changed_cb(self, widget):
         direction = 'from'
