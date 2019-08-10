@@ -103,7 +103,6 @@ class ConvertActivity(activity.Activity):
 
         l_hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
         u_hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
-        label_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
 
         self.label1 = Gtk.Label()
         self.label1.set_markup('<big>From value</big>')
@@ -123,12 +122,11 @@ class ConvertActivity(activity.Activity):
         l_hbox.pack_start(self.arrow, False, False, 15)
         l_hbox.pack_start(self.to_value, True, True, 5)
         l_hbox.pack_end(self.to_unit, True, True, 5)
-        label_box.add(self.ratio)
 
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         box.pack_start(u_hbox, False, False, 30)
         box.pack_start(l_hbox, False, False, 0)
-        box.pack_start(label_box, True, False, 0)
+        box.pack_start(self.ratio, True, False, 0)
         self.set_canvas(box)
 
         # Toolbar
