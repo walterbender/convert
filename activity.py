@@ -35,8 +35,6 @@ from sugar3.graphics.style import FONT_SIZE, FONT_FACE
 
 from gettext import gettext as _
 
-SCREEN_WIDTH = Gdk.Screen.width()
-
 
 class Ratio(Gtk.Label):
     def __init__(self):
@@ -50,7 +48,8 @@ class Ratio(Gtk.Label):
         if length == 0:
             return
 
-        size = (60 * SCREEN_WIDTH / 100) / length + int(FONT_SIZE * 1.2)
+        width = self.get_allocation().width
+        size = (60 * width / 100) / length + int(FONT_SIZE * 1.2)
         if not size == self._size:
             self.modify_font(Pango.FontDescription(
                 '%s %d' % (FONT_FACE, size)))
@@ -258,15 +257,9 @@ class ConvertActivity(activity.Activity):
         stopbtn = StopButton(self)
         toolbarbox.toolbar.insert(stopbtn, -1)
 
-        self.connect('size-allocate', self._size_allocate_cb)
-
         self.set_toolbar_box(toolbarbox)
         self._update_combo(convert.length)
         self.show_all()
-
-    def _size_allocate_cb(self, widget, allocation):
-        global SCREEN_WIDTH
-        SCREEN_WIDTH = allocation.width
 
     def _from_changed_cb(self, widget):
         direction = 'from'
