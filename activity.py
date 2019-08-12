@@ -266,7 +266,7 @@ class ConvertActivity(activity.Activity):
 
     def _size_allocate_cb(self, widget, allocation):
         global SCREEN_WIDTH
-        SCREEN_WIDTH = int(allocation.width)
+        SCREEN_WIDTH = allocation.width
 
     def _from_changed_cb(self, widget):
         direction = 'from'
