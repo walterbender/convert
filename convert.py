@@ -19,7 +19,7 @@ import math
 
 length = {
     # TRANS: https://en.wikipedia.org/wiki/Metre
-    _('Meters (m)'): (1, 1), # SI UNIT
+    _('Meters (m)'): (1, 1),  # SI UNIT
     # TRANS: https://en.wikipedia.org/wiki/Kilometre
     _('Kilometers (km)'): (1000, 0.001),
     # TRANS: https://en.wikipedia.org/wiki/Centimetre
@@ -60,7 +60,7 @@ length = {
 
 area = {
     # TRANS: https://en.wikipedia.org/wiki/Metre
-    _('Square Meter'): (1, 1, 2), # SI UNIT
+    _('Square Meter'): (1, 1, 2),  # SI UNIT
     _('Square feet'): (0.092903, 10.763915051182416, 2),
     # TRANS: https://en.wikipedia.org/wiki/Yard
     _('Square Yard'): (0.836127, 1.1959905612424908, 2),
@@ -84,7 +84,7 @@ weight = {
     # TRANS: https://en.wikipedia.org/wiki/Gram
     _('Gram'): (1, 1),
     # TRANS: https://en.wikipedia.org/wiki/Kilogram
-    _('Kilogram'): (1000, 0.001), #SI UNIT
+    _('Kilogram'): (1000, 0.001),  # SI UNIT
     # TRANS: https://en.wikipedia.org/wiki/Kilogram#SI_multiples
     _('Milligram'): (0.001, 1000.0000000000001),
     # TRANS: https://en.wikipedia.org/wiki/Ton
@@ -98,7 +98,7 @@ weight = {
 }
 
 volume = {
-    _('Cubic Meter'): (1, 1, 3), # SI UNIT
+    _('Cubic Meter'): (1, 1, 3),  # SI UNIT
     _('Cubic feet'): (0.0283168, 35.31472482766414, 3),
     _('Cubic Yard'): (0.764555, 1.307950376362721, 3),
     _('Cubic Inch'): (0.0000163871, 61023.61003472243, 3),
@@ -109,7 +109,7 @@ volume = {
     # TRANS: https://en.wikipedia.org/wiki/Litre
     _('Liter'): (0.001, 1000),
     # TRANS: https://en.wikipedia.org/wiki/Litre
-    _('Milliliter'): (0.000001, 1000000), #Its only mililitre not cube.
+    _('Milliliter'): (0.000001, 1000000),  # Its only mililitre not cube.
     # TRANS: https://en.wikipedia.org/wiki/Pint
     _('Pint'): (0.000473176, 2113.378531455526),
     # TRANS: https://en.wikipedia.org/wiki/Quart
@@ -135,7 +135,7 @@ speed = {
     # TRANS: https://en.wikipedia.org/wiki/Mach_number
     _('Mach'): (1194.24460432, 0.00083734939759),
     # TRANS: https://en.wikipedia.org/wiki/Metre_per_second
-    _('Meters/Second'): (3.59712230216, 0.278), #SI UNIT
+    _('Meters/Second'): (3.59712230216, 0.278),  # SI UNIT
 }
 
 time = {
@@ -152,7 +152,7 @@ time = {
     # TRANS: https://en.wikipedia.org/wiki/Minute
     _('Minute'): (0.0006944444444444445, 1440),
     # TRANS: https://en.wikipedia.org/wiki/Second
-    _('Second'): (0.000011574074074074073, 86400), # SI UNIT
+    _('Second'): (0.000011574074074074073, 86400),  # SI UNIT
     # TRANS: https://en.wikipedia.org/wiki/Millisecond
     _('Millisecond'): (1.1574074074074074e-8, 86400000),
     # TRANS: https://en.wikipedia.org/wiki/Microsecond
@@ -167,18 +167,18 @@ temp = {
     # TRANS: https://en.wikipedia.org/wiki/Celsius
     _('Celsius'): (1, 1),
     # TRANS: https://en.wikipedia.org/wiki/Kelvin
-    _('Kelvin'): (274.15, -272.15), #SI UNIT
+    _('Kelvin'): (274.15, -272.15),  # SI UNIT
     # TRANS: https://en.wikipedia.org/wiki/Fahrenheit
     _('Fahrenheit'): (-17.22222222222222, 33.8),
 }
 
 circle = {
     _('Degrees'): (1, 1),
-    _('Radians'): (0.0174533, 57.2958), 
+    _('Radians'): (0.0174533, 57.2958),
 }
 
 pressure = {
-    _('Pascal (Pa)'): (1, 1), #SI unit
+    _('Pascal (Pa)'): (1, 1),  # SI unit
     _('Bar'): (100000, 1e-5),
     _('Atmosphere (atm)'): (101325, 9.869232667e-6),
     _('Torr'): (133.322, 7.500637554192e-3),
@@ -186,23 +186,23 @@ pressure = {
 }
 
 force = {
-    _('Newton (N)'): (1, 1), #SI UNIT
+    _('Newton (N)'): (1, 1),  # SI UNIT
     _('Dyne (dyn)'): (1e-5, 100000),
     _('Poundal (pdl)'): (0.138255028, 7.233009999462732),
     _('Kilogram-force (kp)'): (9.80665, 0.101971621297793),
 }
 
 energy = {
-    _('Joules (J)'): (1,1), #SI unit
+    _('Joules (J)'): (1, 1),  # SI unit
     _('KiloJoule (KJ)'): (1000, 1e-3),
-    _('Calories (cal)') : (4.184, 0.239005736137667),
+    _('Calories (cal)'): (4.184, 0.239005736137667),
     _('KiloCalories (KCal)'): (4184, 0.000239005736138),
     _('Watt hour'): (3600, 2.7777777777e-4),
     _('Electronvolt (eV)'): (1.6022e-19, 6.242e18),
 }
 
 storage = {
-    _('Byte'): (1, 1), #SI UNIT
+    _('Byte'): (1, 1),  # SI UNIT
     _('Bit'): (0.125, 8),
     _('Kilobyte (KB)'): (1e3, 1e-3),
     _('Megabyte (MB)'): (1e6, 1e-6),
@@ -210,6 +210,7 @@ storage = {
     _('Terabyte (TB)'): (1e12, 1e-12),
     _('Petabyte (PB)'): (1e15, 1e-15),
 }
+
 
 def convert(number, unit, to_unit, dic):
     if dic == temp:
@@ -239,8 +240,8 @@ def convert(number, unit, to_unit, dic):
         else:
             pass
     else:
-    	if unit == to_unit:
-    		return number
-    	else:
-    		main_unit = number*dic[unit][0]
-    		return main_unit * dic[to_unit][1]
+        if unit == to_unit:
+            return number
+        else:
+            main_unit = number * dic[unit][0]
+            return main_unit * dic[to_unit][1]

@@ -24,7 +24,6 @@ gi.require_version('Gtk', '3.0')
 
 from gi.repository import Gtk
 from gi.repository import Pango
-from gi.repository import Gdk
 
 from sugar3.activity import activity
 from sugar3.activity.widgets import StopButton
@@ -141,96 +140,96 @@ class ConvertActivity(activity.Activity):
 
         # RadioToolButton
         self._length_btn = RadioToolButton()
-        self._length_btn.connect('clicked',
-                                 lambda w: self._update_combo(convert.length))
+        self._length_btn.connect(
+            'clicked', lambda w: self._update_combo(convert.length))
         # TRANS: https://en.wikipedia.org/wiki/Length
         self._length_btn.set_tooltip(_('Length'))
         self._length_btn.props.icon_name = 'length'
 
         self._volume_btn = RadioToolButton()
-        self._volume_btn.connect('clicked',
-                                 lambda w: self._update_combo(convert.volume))
+        self._volume_btn.connect(
+            'clicked', lambda w: self._update_combo(convert.volume))
         # TRANS: https://en.wikipedia.org/wiki/Volume
         self._volume_btn.set_tooltip(_('Volume'))
         self._volume_btn.props.icon_name = 'volume'
         self._volume_btn.props.group = self._length_btn
 
         self._area_btn = RadioToolButton()
-        self._area_btn.connect('clicked',
-                               lambda w: self._update_combo(convert.area))
+        self._area_btn.connect(
+            'clicked', lambda w: self._update_combo(convert.area))
         # TRANS: https://en.wikipedia.org/wiki/Area
         self._area_btn.set_tooltip(_('Area'))
         self._area_btn.props.icon_name = 'area'
         self._area_btn.props.group = self._length_btn
 
         self._weight_btn = RadioToolButton()
-        self._weight_btn.connect('clicked',
-                                 lambda w: self._update_combo(convert.weight))
+        self._weight_btn.connect(
+            'clicked', lambda w: self._update_combo(convert.weight))
         # TRANS: https://en.wikipedia.org/wiki/Weight
         self._weight_btn.set_tooltip(_('Weight'))
         self._weight_btn.props.icon_name = 'weight'
         self._weight_btn.props.group = self._length_btn
 
         self._speed_btn = RadioToolButton()
-        self._speed_btn.connect('clicked',
-                                lambda w: self._update_combo(convert.speed))
+        self._speed_btn.connect(
+            'clicked', lambda w: self._update_combo(convert.speed))
         # TRANS: https://en.wikipedia.org/wiki/Speed
         self._speed_btn.set_tooltip(_('Speed'))
         self._speed_btn.props.icon_name = 'speed'
         self._speed_btn.props.group = self._length_btn
 
         self._time_btn = RadioToolButton()
-        self._time_btn.connect('clicked',
-                               lambda w: self._update_combo(convert.time))
+        self._time_btn.connect(
+            'clicked', lambda w: self._update_combo(convert.time))
         # TRANS: https://en.wikipedia.org/wiki/Time
         self._time_btn.set_tooltip(_('Time'))
         self._time_btn.props.icon_name = 'time'
         self._time_btn.props.group = self._length_btn
 
         self._temp_btn = RadioToolButton()
-        self._temp_btn.connect('clicked',
-                               lambda w: self._update_combo(convert.temp))
+        self._temp_btn.connect(
+            'clicked', lambda w: self._update_combo(convert.temp))
         # TRANS: https://en.wikipedia.org/wiki/Temperature
         self._temp_btn.set_tooltip(_('Temperature'))
         self._temp_btn.props.icon_name = 'temp'
         self._temp_btn.props.group = self._length_btn
 
-        #Circle
+        # Circle
         self._circle_btn = RadioToolButton()
-        self._circle_btn.connect('clicked',
-                               lambda w: self._update_combo(convert.circle))
+        self._circle_btn.connect(
+            'clicked', lambda w: self._update_combo(convert.circle))
         self._circle_btn.set_tooltip(_('Angles of Circles'))
         self._circle_btn.props.icon_name = 'circle'
         self._circle_btn.props.group = self._length_btn
 
-        #pressure
+        # Pressure
         self._pressure_btn = RadioToolButton()
-        self._pressure_btn.connect('clicked',
-                               lambda w: self._update_combo(convert.pressure))
+        self._pressure_btn.connect(
+            'clicked', lambda w: self._update_combo(convert.pressure))
         self._pressure_btn.set_tooltip(_('Pressure'))
         self._pressure_btn.props.icon_name = 'pressure'
         self._pressure_btn.props.group = self._length_btn
 
-        #force
+        # Force
         self._force_btn = RadioToolButton()
-        self._force_btn.connect('clicked',
-                               lambda w: self._update_combo(convert.force))
+        self._force_btn.connect(
+            'clicked', lambda w: self._update_combo(convert.force))
         self._force_btn.set_tooltip(_('Force'))
         self._force_btn.props.icon_name = 'force'
         self._force_btn.props.group = self._length_btn
 
-        #energy
+        # Energy
         self._energy_btn = RadioToolButton()
-        self._energy_btn.connect('clicked',
-                               lambda w: self._update_combo(convert.energy))
+        self._energy_btn.connect(
+            'clicked', lambda w: self._update_combo(convert.energy))
         self._energy_btn.set_tooltip(_('Energy'))
         self._energy_btn.props.icon_name = 'energy'
         self._energy_btn.props.group = self._length_btn
 
-        #Storage
+        # Digital Storage
         self._storage_btn = RadioToolButton()
-        self._storage_btn.connect('clicked',
-                               lambda w: self._update_combo(convert.storage))
+        self._storage_btn.connect(
+            'clicked', lambda w: self._update_combo(convert.storage))
         self._storage_btn.set_tooltip(_('Digital Storage'))
         self._storage_btn.props.icon_name = 'storage'
         self._storage_btn.props.group = self._length_btn
