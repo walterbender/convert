@@ -70,8 +70,7 @@ class ConvertActivity(activity.Activity):
             '%s %d' % (FONT_FACE, int(FONT_SIZE * 1.2)))
 
         self.from_unit = Gtk.ComboBox.new_with_model_and_entry(self._liststore)
-        cell = Gtk.CellRendererText()
-        self.from_unit.pack_start(cell, True)
+        self.from_unit.pack_start(Gtk.CellRendererText(), True)
         self.from_unit.set_entry_text_column(0)
         self.from_unit.connect('changed', self._from_changed_cb)
         self.from_unit.override_font(input_font)
@@ -88,8 +87,7 @@ class ConvertActivity(activity.Activity):
         self.to_value.override_font(input_font)
 
         self.to_unit = Gtk.ComboBox.new_with_model_and_entry(self._liststore)
-        cell = Gtk.CellRendererText()
-        self.to_unit.pack_start(cell, True)
+        self.to_unit.pack_start(Gtk.CellRendererText(), True)
         self.to_unit.set_entry_text_column(0)
         self.to_unit.connect('changed', self._to_changed_cb)
         self.to_unit.override_font(input_font)
