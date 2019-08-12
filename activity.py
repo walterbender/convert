@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Copyright (C) 2012 Cristhofer Travieso <cristhofert97@gmail.com>
 #
 # This program is free software; you can redistribute it and/or modify
@@ -30,10 +31,29 @@ from sugar3.activity.widgets import StopButton
 from sugar3.activity.widgets import ActivityToolbarButton
 from sugar3.graphics.toolbarbox import ToolbarBox
 from sugar3.graphics.radiotoolbutton import RadioToolButton
+from sugar3.graphics.style import FONT_SIZE, FONT_FACE
 
 from gettext import gettext as _
 
-SCREEN_WIDTH = Gdk.Screen.width()
+
+class Ratio(Gtk.Label):
+    def __init__(self):
+        Gtk.Label.__init__(self)
+        self.set_selectable(True)
+        self._size = -1
+
+    def set_text(self, text):
+        Gtk.Label.set_text(self, text)
+        length = len(text)
+        if length == 0:
+            return
+
+        width = self.get_allocation().width
+        size = (60 * width / 100) / length + int(FONT_SIZE * 1.2)
+        if not size == self._size:
+            self.modify_font(Pango.FontDescription(
+                '%s %d' % (FONT_FACE, size)))
+            self._size = size
 
 
 class ConvertActivity(activity.Activity):
@@ -43,53 +63,69 @@ class ConvertActivity(activity.Activity):
         self.max_participants = 1
         self.dic = {}
 
-        # Canvas
-        self._canvas = Gtk.VBox()
-
-        hbox = Gtk.HBox()
         self._liststore = Gtk.ListStore(str)
-        self.combo1 = Gtk.ComboBox.new_with_model_and_entry(self._liststore)
-        cell = Gtk.CellRendererText()
-        self.combo1.pack_start(cell, True)
-        self.combo1.set_entry_text_column(0)
-        self.combo1.connect('changed', self._update_label)
 
-        flip_btn = Gtk.Button()
-        flip_btn.connect('clicked', self._flip)
-        flip_btn.set_tooltip_text("Flip Units")
-        flip_btn.add(Gtk.Image.new_from_file('icons/flip.svg'))
+        self.label1 = Gtk.Label()
+        self.label1.set_markup('<big>From value</big>')
+        self.label2 = Gtk.Label()
+        self.label2.set_markup('<big>From unit</big>')
+        self.label3 = Gtk.Label()
+        self.label3.set_markup('<big>To value</big>')
+        self.label4 = Gtk.Label()
+        self.label4.set_markup('<big>To unit</big>')
 
-        self.combo2 = Gtk.ComboBox.new_with_model_and_entry(self._liststore)
-        cell = Gtk.CellRendererText()
-        self.combo2.pack_start(cell, True)
-        self.combo2.set_entry_text_column(0)
-        self.combo2.connect('changed', self._update_label)
+        u_hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
+        u_hbox.pack_start(self.label1, True, True, 5)
+        u_hbox.pack_start(self.label2, True, True, 20)
+        u_hbox.pack_start(self.label3, True, True, 20)
+        u_hbox.pack_start(self.label4, True, True, 5)
 
-        self.label_box = Gtk.HBox()
+        arrow_font = Pango.FontDescription(
+            '%s %d' % (FONT_FACE, int(FONT_SIZE * 1.8)))
+        input_font = Pango.FontDescription(
+            '%s %d' % (FONT_FACE, int(FONT_SIZE * 1.2)))
 
-        self.value_entry = Gtk.Entry()
-        self.value_entry.set_placeholder_text("Enter number")
-        self.value_entry.connect('insert-text', self._value_insert_text)
-        self.value_entry.connect('changed', self._update_label)
+        self.from_value = Gtk.Entry()
+        self.from_value.set_placeholder_text("Enter value")
+        self.from_value.connect('insert-text', self._insert_text_cb)
+        self.from_value.connect('changed', self._from_changed_cb)
+        self.from_value.override_font(input_font)
 
-        self.label = Gtk.Label()
-        self.label.set_selectable(True)
-        self.label._size = 12
-        self.label.connect('draw', self.resize_label)
+        self.from_unit = Gtk.ComboBox.new_with_model_and_entry(self._liststore)
+        self.from_unit.pack_start(Gtk.CellRendererText(), True)
+        self.from_unit.set_entry_text_column(0)
+        self.from_unit.connect('changed', self._from_changed_cb)
+        self.from_unit.override_font(input_font)
 
-        self._canvas.pack_start(hbox, False, False, 20)
-        hbox.pack_start(self.combo1, False, True, 20)
-        hbox.pack_start(flip_btn, True, False, 20)
-        hbox.pack_end(self.combo2, False, True, 20)
-        value_box = Gtk.HBox()
-        convert_box = Gtk.HBox()
-        convert_box.pack_start(value_box, True, False, 0)
-        value_box.pack_start(self.value_entry, False, False, 0)
-        self._canvas.pack_start(convert_box, False, False, 5)
-        self._canvas.pack_start(self.label_box, True, False, 0)
-        self.label_box.add(self.label)
+        self.arrow = Gtk.Label()
+        self.arrow.override_font(arrow_font)
+        self.arrow.set_text("→")
 
-        self.set_canvas(self._canvas)
+        self.to_value = Gtk.Entry()
+        self.to_value.connect('insert-text', self._insert_text_cb)
+        self.to_value.connect('changed', self._to_changed_cb)
+        self.to_value.override_font(input_font)
+
+        self.to_unit = Gtk.ComboBox.new_with_model_and_entry(self._liststore)
+        self.to_unit.pack_start(Gtk.CellRendererText(), True)
+        self.to_unit.set_entry_text_column(0)
+        self.to_unit.connect('changed', self._to_changed_cb)
+        self.to_unit.override_font(input_font)
+
+        l_hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
+        l_hbox.pack_start(self.from_value, True, True, 5)
+        l_hbox.pack_start(self.from_unit, True, True, 5)
+        l_hbox.pack_start(self.arrow, False, False, 15)
+        l_hbox.pack_start(self.to_value, True, True, 5)
+        l_hbox.pack_end(self.to_unit, True, True, 5)
+
+        self.ratio = Ratio()
+
+        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        box.pack_start(u_hbox, False, False, 30)
+        box.pack_start(l_hbox, False, False, 0)
+        box.pack_start(self.ratio, True, False, 0)
+        self.set_canvas(box)
 
         # Toolbar
         toolbarbox = ToolbarBox()
@@ -198,8 +234,6 @@ class ConvertActivity(activity.Activity):
         self._storage_btn.set_tooltip(_('Digital Storage'))
         self._storage_btn.props.icon_name = 'storage'
         self._storage_btn.props.group = self._length_btn
-        
-
 
         toolbarbox.toolbar.insert(self._length_btn, -1)
         toolbarbox.toolbar.insert(self._volume_btn, -1)
@@ -213,7 +247,6 @@ class ConvertActivity(activity.Activity):
         toolbarbox.toolbar.insert(self._force_btn, -1)
         toolbarbox.toolbar.insert(self._energy_btn, -1)
         toolbarbox.toolbar.insert(self._storage_btn, -1)
-        
 
         separator = Gtk.SeparatorToolItem()
         separator.set_expand(True)
@@ -227,29 +260,91 @@ class ConvertActivity(activity.Activity):
         self._update_combo(convert.length)
         self.show_all()
 
-    def _update_label(self, entry):
+    def _from_changed_cb(self, widget):
+        direction = 'from'
+        if isinstance(widget, Gtk.Entry):
+            self._update_value(widget, direction)
+        elif isinstance(widget, Gtk.ComboBox):
+            if self.arrow.get_text() == '←':
+                direction = 'to'
+            self._update_unit(widget, direction)
+
+    def _to_changed_cb(self, widget):
+        direction = 'to'
+        if isinstance(widget, Gtk.Entry):
+            self._update_value(widget, direction)
+        elif isinstance(widget, Gtk.ComboBox):
+            if self.arrow.get_text() == '→':
+                direction = 'from'
+            self._update_unit(widget, direction)
+
+    def _update_value(self, entry, direction):
         try:
-            num_value = str(self.value_entry.get_text())
-            num_value = str(num_value.replace(',', ''))
-            decimals = str(len(num_value.split('.')[-1]))
+            num_value = str(entry.get_text())
+            num_value = float(num_value.replace(',', ''))
+            decimals = str(len(str(num_value).split('.')[-1]))
             fmt = '%.' + decimals + 'f'
             new_value = locale.format(fmt, float(num_value))
             new_value = new_value.rstrip("0")
             if new_value[-1] == '.':
-            	new_value = new_value[0:len(new_value)-1]
-
-            convert_value = str(self.convert())
+                new_value = new_value[0:len(new_value) - 1]
+            convert_value = str(self.convert(num_value, direction))
             decimals = str(len(convert_value.split('.')[-1]))
             fmt = '%.' + decimals + 'f'
             new_convert = locale.format(fmt, float(convert_value))
             new_convert = new_convert.rstrip("0")
             if new_convert[-1] == '.':
-            	new_convert = new_convert[0:len(new_convert)-1]
-
-            text = '%s ~ %s' % (new_value, new_convert)
-            self.label.set_text(text)
+                new_convert = new_convert[0:len(new_convert) - 1]
+            self.change_result(new_value, new_convert, direction)
         except ValueError:
-            pass
+            self.change_result('', '', direction)
+
+    def _update_unit(self, combo, direction):
+        if direction == 'from':
+            self._update_value(self.from_value, direction)
+        elif direction == 'to':
+            self._update_value(self.to_value, direction)
+
+    def change_result(self, new_value, new_convert, direction):
+        if direction == 'from':
+            self.to_value.handler_block_by_func(self._to_changed_cb)
+            self.to_value.handler_block_by_func(self._insert_text_cb)
+            self.to_value.set_text(new_convert)
+            self.to_value.handler_unblock_by_func(self._insert_text_cb)
+            self.to_value.handler_unblock_by_func(self._to_changed_cb)
+
+            self.arrow.set_text("→")
+            self.label1.set_markup('<big>From value</big>')
+            self.label2.set_markup('<big>From unit</big>')
+            self.label3.set_markup('<big>To value</big>')
+            self.label4.set_markup('<big>To unit</big>')
+            if new_convert != '' and new_value != '':
+                text = '%s %s ~ %s %s' % (
+                    new_value, self._get_active_text(self.from_unit),
+                    new_convert, self._get_active_text(self.to_unit))
+                self.ratio.set_text(text)
+            else:
+                self.ratio.set_text('')
+
+        elif direction == 'to':
+            self.from_value.handler_block_by_func(self._from_changed_cb)
+            self.from_value.handler_block_by_func(self._insert_text_cb)
+            self.from_value.set_text(new_convert)
+            self.from_value.handler_unblock_by_func(self._insert_text_cb)
+            self.from_value.handler_unblock_by_func(self._from_changed_cb)
+
+            self.arrow.set_text("←")
+            self.label1.set_markup('<big>To value</big>')
+            self.label2.set_markup('<big>To unit</big>')
+            self.label3.set_markup('<big>From value</big>')
+            self.label4.set_markup('<big>From unit</big>')
+            if new_convert != '' and new_value != '':
+                text = '%s %s ~ %s %s' % (
+                    new_convert, self._get_active_text(self.from_unit),
+                    new_value, self._get_active_text(self.to_unit))
+                self.ratio.set_text(text)
+            else:
+                self.ratio.set_text('')
 
     def _update_combo(self, data):
         self._liststore.clear()
@@ -259,41 +354,41 @@ class ConvertActivity(activity.Activity):
         for x in keys:
             self._liststore.append(['%s' % (x)])
         if keys[0] == 'Cables':
-            self.combo1.set_active(12)
-            self.combo2.set_active(12)
+            self.from_unit.set_active(12)
+            self.to_unit.set_active(12)
         elif keys[0] == 'Cubic Centimeter':
-            self.combo1.set_active(3)
-            self.combo2.set_active(3)
+            self.from_unit.set_active(3)
+            self.to_unit.set_active(3)
         elif keys[0] == 'Acre':
-            self.combo1.set_active(4)
-            self.combo2.set_active(4)
+            self.from_unit.set_active(4)
+            self.to_unit.set_active(4)
         elif keys[0] == 'Carat':
-            self.combo1.set_active(2)
-            self.combo2.set_active(2)
+            self.from_unit.set_active(2)
+            self.to_unit.set_active(2)
         elif keys[0] == 'Centimeters/Minute':
-            self.combo1.set_active(9)
-            self.combo2.set_active(9)
+            self.from_unit.set_active(9)
+            self.to_unit.set_active(9)
         elif keys[0] == 'Day':
-            self.combo1.set_active(8)
-            self.combo2.set_active(8)
+            self.from_unit.set_active(8)
+            self.to_unit.set_active(8)
         elif keys[0] == 'Celsius':
-            self.combo1.set_active(2)
-            self.combo2.set_active(2)
+            self.from_unit.set_active(2)
+            self.to_unit.set_active(2)
         elif keys[0] == 'Degrees':
-            self.combo1.set_active(1)
-            self.combo2.set_active(1)
+            self.from_unit.set_active(1)
+            self.to_unit.set_active(1)
         elif keys[0] == 'Atmosphere (atm)':
-            self.combo1.set_active(2)
-            self.combo2.set_active(2)
+            self.from_unit.set_active(2)
+            self.to_unit.set_active(2)
         elif keys[0] == 'Dyne (dyn)':
-            self.combo1.set_active(2)
-            self.combo2.set_active(2)
+            self.from_unit.set_active(2)
+            self.to_unit.set_active(2)
         elif keys[0] == 'Calories (cal)':
-            self.combo1.set_active(2)
-            self.combo2.set_active(2)
+            self.from_unit.set_active(2)
+            self.to_unit.set_active(2)
         elif keys[0] == 'Bit':
-            self.combo1.set_active(1)
-            self.combo2.set_active(1)
+            self.from_unit.set_active(1)
+            self.to_unit.set_active(1)
         else:
             pass
         self.show_all()
@@ -309,40 +404,21 @@ class ConvertActivity(activity.Activity):
             text = text.split('<b>')[1].split('</b>')[0]
         return text
 
-    def _flip(self, widget):
-        value = self.label.get_text().split(' ~ ')
-        self.value_entry.set_text(value[1])
-        active_combo1 = self.combo1.get_active()
-        active_combo2 = self.combo2.get_active()
-        self.combo1.set_active(active_combo2)
-        self.combo2.set_active(active_combo1)
-        
-        
+    def convert(self, num_value, direction):
+        if direction == 'from':
+            unit = self._get_active_text(self.from_unit)
+            to_unit = self._get_active_text(self.to_unit)
+        elif direction == 'to':
+            unit = self._get_active_text(self.to_unit)
+            to_unit = self._get_active_text(self.from_unit)
+        return convert.convert(num_value, unit, to_unit, self.dic)
 
-
-    def resize_label(self, widget, event):
-        num_label = len(self.label.get_text())
-        try:
-            size = str((60 * SCREEN_WIDTH / 100) / num_label)
-            if not size == self.label._size:
-                self.label.modify_font(Pango.FontDescription(size))
-                self.label._size = size
-        except ZeroDivisionError:
-            pass
-
-    def convert(self):
-        number = float(self.value_entry.get_text().replace(',', ''))
-        unit = self._get_active_text(self.combo1)
-        to_unit = self._get_active_text(self.combo2)
-        return convert.convert(number, unit, to_unit, self.dic)
-
-    def _value_insert_text(self, entry, text, length, position):
+    def _insert_text_cb(self, entry, text, length, position):
         for char in text:
             if char == "-" and \
-               self.value_entry.get_text() is "" and len(text) == 1:
+               entry.get_text() is "" and len(text) == 1:
                 return False
             elif not re.match('[0-9,.]', char):
                 entry.emit_stop_by_name('insert-text')
                 return True
         return False
-
