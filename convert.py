@@ -80,23 +80,6 @@ area = {
     _('Acre'): (4046.86, 0.00024710516301527604),
 }
 
-weight = {
-    # TRANS: https://en.wikipedia.org/wiki/Gram
-    _('Gram'): (1, 1),
-    # TRANS: https://en.wikipedia.org/wiki/Kilogram
-    _('Kilogram'): (1000, 0.001),  # SI UNIT
-    # TRANS: https://en.wikipedia.org/wiki/Kilogram#SI_multiples
-    _('Milligram'): (0.001, 1000.0000000000001),
-    # TRANS: https://en.wikipedia.org/wiki/Ton
-    _('Ton'): (1000000, 0.000001),
-    # TRANS: https://en.wikipedia.org/wiki/Pound_(mass)
-    _('Pound'): (453.592, 0.0022046244201837776),
-    # TRANS: https://en.wikipedia.org/wiki/Ounce
-    _('Ounce'): (28.3495, 0.03527399072294044),
-    # TRANS: https://en.wikipedia.org/wiki/Carat_(mass)
-    _('Carat'): (0.2, 5),
-}
-
 volume = {
     _('Cubic Meter'): (1, 1, 3),  # SI UNIT
     _('Cubic feet'): (0.0283168, 35.31472482766414, 3),
@@ -116,6 +99,23 @@ volume = {
     _('Quart'): (0.000946353, 1056.6881491367385),
     # TRANS: https://en.wikipedia.org/wiki/Gallon
     _('Gallon'): (0.00378541, 264.172176857989),
+}
+
+weight = {
+    # TRANS: https://en.wikipedia.org/wiki/Gram
+    _('Gram'): (1, 1),
+    # TRANS: https://en.wikipedia.org/wiki/Kilogram
+    _('Kilogram'): (1000, 0.001),  # SI UNIT
+    # TRANS: https://en.wikipedia.org/wiki/Kilogram#SI_multiples
+    _('Milligram'): (0.001, 1000.0000000000001),
+    # TRANS: https://en.wikipedia.org/wiki/Ton
+    _('Ton'): (1000000, 0.000001),
+    # TRANS: https://en.wikipedia.org/wiki/Pound_(mass)
+    _('Pound'): (453.592, 0.0022046244201837776),
+    # TRANS: https://en.wikipedia.org/wiki/Ounce
+    _('Ounce'): (28.3495, 0.03527399072294044),
+    # TRANS: https://en.wikipedia.org/wiki/Carat_(mass)
+    _('Carat'): (0.2, 5),
 }
 
 speed = {
@@ -209,6 +209,89 @@ storage = {
     _('Gigabyte (GB)'): (1e9, 1e-9),
     _('Terabyte (TB)'): (1e12, 1e-12),
     _('Petabyte (PB)'): (1e15, 1e-15),
+}
+
+dimensions = [
+    'length',
+    'area',
+    'volume',
+    'weight',
+    'speed',
+    'time',
+    'temperature',
+    'pressure',
+    'circle',
+    'force',
+    'energy',
+    'storage',
+]
+
+dimension_tooltips = {
+    # TRANS: https://en.wikipedia.org/wiki/Length
+    'length': _('Length'),
+
+    # TRANS: https://en.wikipedia.org/wiki/Area
+    'area': _('Area'),
+
+    # TRANS: https://en.wikipedia.org/wiki/Volume
+    'volume': _('Volume'),
+
+    # TRANS: https://en.wikipedia.org/wiki/Weight
+    'weight': _('Weight'),
+
+    # TRANS: https://en.wikipedia.org/wiki/Speed
+    'speed': _('Speed'),
+
+    # TRANS: https://en.wikipedia.org/wiki/Time
+    'time': _('Time'),
+
+    # TRANS: https://en.wikipedia.org/wiki/Temperature
+    'temperature': _('Temperature'),
+
+    # Circle
+    'circle': _('Angles of Circles'),
+
+    # Pressure
+    'pressure': _('Pressure'),
+
+    # Force
+    'force': _('Force'),
+
+    # Energy
+    'energy': _('Energy'),
+
+    # Digital Storage
+    'storage': _('Digital Storage'),
+}
+
+dimension_units = {
+    'length': length,
+    'area': area,
+    'volume': volume,
+    'weight': weight,
+    'speed': speed,
+    'time': time,
+    'temperature': temp,
+    'pressure': pressure,
+    'circle': circle,
+    'force': force,
+    'energy': energy,
+    'storage': storage
+}
+
+dimension_default_unit = {
+    'length': _('Meters (m)'),
+    'area': _('Square Meter'),
+    'volume': _('Cubic Meter'),
+    'weight': _('Kilogram'),
+    'speed': _('Meters/Second'),
+    'time': _('Second'),
+    'temperature': _('Kelvin'),
+    'pressure': _('Pascal (Pa)'),
+    'circle': _('Radians'),
+    'force': _('Newton (N)'),
+    'energy': _('Joules (J)'),
+    'storage': _('Byte'),
 }
 
 
