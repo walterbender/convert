@@ -18,6 +18,7 @@
 import locale
 import convert
 import re
+import json
 
 import gi
 gi.require_version('Gtk', '3.0')
@@ -60,7 +61,7 @@ class ConvertActivity(activity.Activity):
         activity.Activity.__init__(self, handle, True)
 
         self.max_participants = 1
-        self.dic = {}
+        self.units = {}
 
         self._liststore = Gtk.ListStore(str)
 
@@ -93,6 +94,7 @@ class ConvertActivity(activity.Activity):
         self.from_unit = Gtk.ComboBox.new_with_model_and_entry(self._liststore)
         self.from_unit.pack_start(Gtk.CellRendererText(), True)
         self.from_unit.set_entry_text_column(0)
+        self.from_unit.set_id_column(0)
         self.from_unit.connect('changed', self._from_changed_cb)
         self.from_unit.override_font(input_font)
 
@@ -108,6 +110,7 @@ class ConvertActivity(activity.Activity):
         self.to_unit = Gtk.ComboBox.new_with_model_and_entry(self._liststore)
         self.to_unit.pack_start(Gtk.CellRendererText(), True)
         self.to_unit.set_entry_text_column(0)
+        self.to_unit.set_id_column(0)
         self.to_unit.connect('changed', self._to_changed_cb)
         self.to_unit.override_font(input_font)
 
@@ -138,114 +141,16 @@ class ConvertActivity(activity.Activity):
         separator.set_draw(True)
         toolbarbox.toolbar.insert(separator, -1)
 
-        # RadioToolButton
-        self._length_btn = RadioToolButton()
-        self._length_btn.connect(
-            'clicked', lambda w: self._update_combo(convert.length))
-        # TRANS: https://en.wikipedia.org/wiki/Length
-        self._length_btn.set_tooltip(_('Length'))
-        self._length_btn.props.icon_name = 'length'
-
-        self._volume_btn = RadioToolButton()
-        self._volume_btn.connect(
-            'clicked', lambda w: self._update_combo(convert.volume))
-        # TRANS: https://en.wikipedia.org/wiki/Volume
-        self._volume_btn.set_tooltip(_('Volume'))
-        self._volume_btn.props.icon_name = 'volume'
-        self._volume_btn.props.group = self._length_btn
-
-        self._area_btn = RadioToolButton()
-        self._area_btn.connect(
-            'clicked', lambda w: self._update_combo(convert.area))
-        # TRANS: https://en.wikipedia.org/wiki/Area
-        self._area_btn.set_tooltip(_('Area'))
-        self._area_btn.props.icon_name = 'area'
-        self._area_btn.props.group = self._length_btn
-
-        self._weight_btn = RadioToolButton()
-        self._weight_btn.connect(
-            'clicked', lambda w: self._update_combo(convert.weight))
-        # TRANS: https://en.wikipedia.org/wiki/Weight
-        self._weight_btn.set_tooltip(_('Weight'))
-        self._weight_btn.props.icon_name = 'weight'
-        self._weight_btn.props.group = self._length_btn
-
-        self._speed_btn = RadioToolButton()
-        self._speed_btn.connect(
-            'clicked', lambda w: self._update_combo(convert.speed))
-        # TRANS: https://en.wikipedia.org/wiki/Speed
-        self._speed_btn.set_tooltip(_('Speed'))
-        self._speed_btn.props.icon_name = 'speed'
-        self._speed_btn.props.group = self._length_btn
-
-        self._time_btn = RadioToolButton()
-        self._time_btn.connect(
-            'clicked', lambda w: self._update_combo(convert.time))
-        # TRANS: https://en.wikipedia.org/wiki/Time
-        self._time_btn.set_tooltip(_('Time'))
-        self._time_btn.props.icon_name = 'time'
-        self._time_btn.props.group = self._length_btn
-
-        self._temp_btn = RadioToolButton()
-        self._temp_btn.connect(
-            'clicked', lambda w: self._update_combo(convert.temp))
-        # TRANS: https://en.wikipedia.org/wiki/Temperature
-        self._temp_btn.set_tooltip(_('Temperature'))
-        self._temp_btn.props.icon_name = 'temp'
-        self._temp_btn.props.group = self._length_btn
-
-        # Circle
-        self._circle_btn = RadioToolButton()
-        self._circle_btn.connect(
-            'clicked', lambda w: self._update_combo(convert.circle))
-        self._circle_btn.set_tooltip(_('Angles of Circles'))
-        self._circle_btn.props.icon_name = 'circle'
-        self._circle_btn.props.group = self._length_btn
-
-        # Pressure
-        self._pressure_btn = RadioToolButton()
-        self._pressure_btn.connect(
-            'clicked', lambda w: self._update_combo(convert.pressure))
-        self._pressure_btn.set_tooltip(_('Pressure'))
-        self._pressure_btn.props.icon_name = 'pressure'
-        self._pressure_btn.props.group = self._length_btn
-
-        # Force
-        self._force_btn = RadioToolButton()
-        self._force_btn.connect(
-            'clicked', lambda w: self._update_combo(convert.force))
-        self._force_btn.set_tooltip(_('Force'))
-        self._force_btn.props.icon_name = 'force'
-        self._force_btn.props.group = self._length_btn
-
-        # Energy
-        self._energy_btn = RadioToolButton()
-        self._energy_btn.connect(
-            'clicked', lambda w: self._update_combo(convert.energy))
-        self._energy_btn.set_tooltip(_('Energy'))
-        self._energy_btn.props.icon_name = 'energy'
-        self._energy_btn.props.group = self._length_btn
-
-        # Digital Storage
-        self._storage_btn = RadioToolButton()
-        self._storage_btn.connect(
-            'clicked', lambda w: self._update_combo(convert.storage))
-        self._storage_btn.set_tooltip(_('Digital Storage'))
-        self._storage_btn.props.icon_name = 'storage'
-        self._storage_btn.props.group = self._length_btn
-
-        toolbarbox.toolbar.insert(self._length_btn, -1)
-        toolbarbox.toolbar.insert(self._volume_btn, -1)
-        toolbarbox.toolbar.insert(self._area_btn, -1)
-        toolbarbox.toolbar.insert(self._weight_btn, -1)
-        toolbarbox.toolbar.insert(self._speed_btn, -1)
-        toolbarbox.toolbar.insert(self._time_btn, -1)
-        toolbarbox.toolbar.insert(self._temp_btn, -1)
-        toolbarbox.toolbar.insert(self._circle_btn, -1)
-        toolbarbox.toolbar.insert(self._pressure_btn, -1)
-        toolbarbox.toolbar.insert(self._force_btn, -1)
-        toolbarbox.toolbar.insert(self._energy_btn, -1)
-        toolbarbox.toolbar.insert(self._storage_btn, -1)
+        self.dimensions = {}
+        for name in convert.dimensions:
+            button = RadioToolButton()
+            button.set_tooltip(convert.dimension_tooltips[name])
+            button.props.icon_name = name
+            if len(self.dimensions) > 0:
+                button.props.group = self.dimensions['length']
+            button.connect('clicked', self.set_dimension, name)
+            toolbarbox.toolbar.insert(button, -1)
+            self.dimensions[name] = button
 
         separator = Gtk.SeparatorToolItem()
         separator.set_expand(True)
@@ -256,7 +161,7 @@ class ConvertActivity(activity.Activity):
         toolbarbox.toolbar.insert(stopbtn, -1)
 
         self.set_toolbar_box(toolbarbox)
-        self._update_combo(convert.length)
+        self.set_dimension(None, 'length')
         self.show_all()
 
     def _from_changed_cb(self, widget):
@@ -345,56 +250,24 @@ class ConvertActivity(activity.Activity):
             else:
                 self.ratio.set_text('')
 
-    def _update_combo(self, data):
-        self._liststore.clear()
-        self.dic = data
-        keys = self.dic.keys()
+    def set_dimension(self, widget, name):
+        self.dimension = name
+
+        self.units = convert.dimension_units[name]
+        keys = list(self.units.keys())
         keys.sort()
+
+        self._liststore.clear()
         for x in keys:
             self._liststore.append(['%s' % (x)])
-        if keys[0] == 'Cables':
-            self.from_unit.set_active(12)
-            self.to_unit.set_active(12)
-        elif keys[0] == 'Cubic Centimeter':
-            self.from_unit.set_active(3)
-            self.to_unit.set_active(3)
-        elif keys[0] == 'Acre':
-            self.from_unit.set_active(4)
-            self.to_unit.set_active(4)
-        elif keys[0] == 'Carat':
-            self.from_unit.set_active(2)
-            self.to_unit.set_active(2)
-        elif keys[0] == 'Centimeters/Minute':
-            self.from_unit.set_active(9)
-            self.to_unit.set_active(9)
-        elif keys[0] == 'Day':
-            self.from_unit.set_active(8)
-            self.to_unit.set_active(8)
-        elif keys[0] == 'Celsius':
-            self.from_unit.set_active(2)
-            self.to_unit.set_active(2)
-        elif keys[0] == 'Degrees':
-            self.from_unit.set_active(1)
-            self.to_unit.set_active(1)
-        elif keys[0] == 'Atmosphere (atm)':
-            self.from_unit.set_active(2)
-            self.to_unit.set_active(2)
-        elif keys[0] == 'Dyne (dyn)':
-            self.from_unit.set_active(2)
-            self.to_unit.set_active(2)
-        elif keys[0] == 'Calories (cal)':
-            self.from_unit.set_active(2)
-            self.to_unit.set_active(2)
-        elif keys[0] == 'Bit':
-            self.from_unit.set_active(1)
-            self.to_unit.set_active(1)
-        else:
-            pass
-        self.show_all()
+
+        unit = convert.dimension_default_unit[name]
+        self.from_unit.set_active_id(unit)
+        self.to_unit.set_active_id(unit)
 
     def _get_active_text(self, combobox):
         active = combobox.get_active()
-        keys = self.dic.keys()
+        keys = list(self.units.keys())
         keys.sort()
         if active < 0:
             active = 0
@@ -410,7 +283,7 @@ class ConvertActivity(activity.Activity):
         elif direction == 'to':
             unit = self._get_active_text(self.to_unit)
             to_unit = self._get_active_text(self.from_unit)
-        return convert.convert(num_value, unit, to_unit, self.dic)
+        return convert.convert(num_value, unit, to_unit, self.units)
 
     def _insert_text_cb(self, entry, text, length, position):
         for char in text:
@@ -421,3 +294,19 @@ class ConvertActivity(activity.Activity):
                 entry.emit_stop_by_name('insert-text')
                 return True
         return False
+
+    def write_file(self, file_path):
+        state = {
+            'dimension': self.dimension,
+            'from-unit': self.from_unit.get_active_id(),
+            'to-unit': self.to_unit.get_active_id()
+        }
+        self.metadata['state'] = json.dumps(state)
+        file(file_path, 'w').close()
+
+    def read_file(self, file_path):
+        if 'state' in self.metadata:
+            state = json.loads(self.metadata['state'])
+            self.dimensions[state['dimension']].set_active(True)
+            self.from_unit.set_active_id(state['from-unit'])
+            self.to_unit.set_active_id(state['to-unit'])
