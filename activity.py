@@ -64,10 +64,32 @@ class ConvertActivity(activity.Activity):
         self.dic = {}
 
         self._liststore = Gtk.ListStore(str)
+
+        self.label1 = Gtk.Label()
+        self.label1.set_markup('<big>From value</big>')
+        self.label2 = Gtk.Label()
+        self.label2.set_markup('<big>From unit</big>')
+        self.label3 = Gtk.Label()
+        self.label3.set_markup('<big>To value</big>')
+        self.label4 = Gtk.Label()
+        self.label4.set_markup('<big>To unit</big>')
+
+        u_hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
+        u_hbox.pack_start(self.label1, True, True, 5)
+        u_hbox.pack_start(self.label2, True, True, 20)
+        u_hbox.pack_start(self.label3, True, True, 20)
+        u_hbox.pack_start(self.label4, True, True, 5)
+
         arrow_font = Pango.FontDescription(
             '%s %d' % (FONT_FACE, int(FONT_SIZE * 1.8)))
         input_font = Pango.FontDescription(
             '%s %d' % (FONT_FACE, int(FONT_SIZE * 1.2)))
+
+        self.from_value = Gtk.Entry()
+        self.from_value.set_placeholder_text("Enter value")
+        self.from_value.connect('insert-text', self._insert_text_cb)
+        self.from_value.connect('changed', self._from_changed_cb)
+        self.from_value.override_font(input_font)
 
         self.from_unit = Gtk.ComboBox.new_with_model_and_entry(self._liststore)
         self.from_unit.pack_start(Gtk.CellRendererText(), True)
@@ -75,11 +97,9 @@ class ConvertActivity(activity.Activity):
         self.from_unit.connect('changed', self._from_changed_cb)
         self.from_unit.override_font(input_font)
 
-        self.from_value = Gtk.Entry()
-        self.from_value.set_placeholder_text("Enter value")
-        self.from_value.connect('insert-text', self._insert_text_cb)
-        self.from_value.connect('changed', self._from_changed_cb)
-        self.from_value.override_font(input_font)
+        self.arrow = Gtk.Label()
+        self.arrow.override_font(arrow_font)
+        self.arrow.set_text("→")
 
         self.to_value = Gtk.Entry()
         self.to_value.connect('insert-text', self._insert_text_cb)
@@ -92,33 +112,14 @@ class ConvertActivity(activity.Activity):
         self.to_unit.connect('changed', self._to_changed_cb)
         self.to_unit.override_font(input_font)
 
-        self.arrow = Gtk.Label()
-        self.arrow.override_font(arrow_font)
-        self.arrow.set_text("→")
-
-        self.ratio = Ratio()
-
         l_hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
-        u_hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
-
-        self.label1 = Gtk.Label()
-        self.label1.set_markup('<big>From value</big>')
-        u_hbox.pack_start(self.label1, True, True, 5)
-        self.label2 = Gtk.Label()
-        self.label2.set_markup('<big>From unit</big>')
-        u_hbox.pack_start(self.label2, True, True, 20)
-        self.label3 = Gtk.Label()
-        self.label3.set_markup('<big>To value</big>')
-        u_hbox.pack_start(self.label3, True, True, 20)
-        self.label4 = Gtk.Label()
-        self.label4.set_markup('<big>To unit</big>')
-        u_hbox.pack_start(self.label4, True, True, 5)
-
         l_hbox.pack_start(self.from_value, True, True, 5)
         l_hbox.pack_start(self.from_unit, True, True, 5)
         l_hbox.pack_start(self.arrow, False, False, 15)
         l_hbox.pack_start(self.to_value, True, True, 5)
         l_hbox.pack_end(self.to_unit, True, True, 5)
+
+        self.ratio = Ratio()
 
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         box.pack_start(u_hbox, False, False, 30)
