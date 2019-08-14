@@ -296,10 +296,16 @@ class ConvertActivity(activity.Activity):
         return False
 
     def write_file(self, file_path):
+        direction = 'from'
+        if self.arrow.get_text() == '←':
+            direction = 'to'
         state = {
             'dimension': self.dimension,
             'from-unit': self.from_unit.get_active_id(),
-            'to-unit': self.to_unit.get_active_id()
+            'from-value': self.from_value.get_text(),
+            'to-unit': self.to_unit.get_active_id(),
+            'to-value': self.to_value.get_text(),
+            'direction': direction,
         }
         self.metadata['state'] = json.dumps(state)
         file(file_path, 'w').close()
@@ -308,5 +314,13 @@ class ConvertActivity(activity.Activity):
         if 'state' in self.metadata:
             state = json.loads(self.metadata['state'])
             self.dimensions[state['dimension']].set_active(True)
-            self.from_unit.set_active_id(state['from-unit'])
+
             self.to_unit.set_active_id(state['to-unit'])
+            self.from_unit.set_active_id(state['from-unit'])
+
+            if state['direction'] == 'to':
+                self.to_value.set_text(state['to-value'])
+                self.from_value.set_text(state['from-value'])
+            else:
+                self.from_value.set_text(state['from-value'])
+                self.to_value.set_text(state['to-value'])
