@@ -40,12 +40,11 @@ class Conversion(Gtk.Label):
     def __init__(self):
         Gtk.Label.__init__(self)
         self.set_selectable(True)
+        self.modify_font(Pango.FontDescription(
+                       '%s %d' % (FONT_FACE, int(FONT_SIZE * 1.2))))
 
     def set_text(self, text):
         Gtk.Label.set_text(self, text)
-        length = len(text)
-        if length == 0:
-            return
 
 
 class Ratio(Gtk.Label):
@@ -135,8 +134,6 @@ class ConvertActivity(activity.Activity):
 
         self.ratio = Ratio()
         self.conversion = Conversion()
-        self.conversion.modify_font(Pango.FontDescription(
-                       '%s' % (FONT_FACE)))
 
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         box.pack_start(u_hbox, False, False, 30)
@@ -228,14 +225,14 @@ class ConvertActivity(activity.Activity):
         text = self.conversion.get_text()
         if direction == 'from':
             if convert != '' and value != '':
-                text = '%s %s ~ %s %s' % (
+                text = '%s %s : %s %s' % (
                     value, self._get_active_text(self.from_unit),
                     convert, self._get_active_text(self.to_unit))
             else:
                 pass
         elif direction == 'to':
             if convert != '' and value != '':
-                text = '%s %s ~ %s %s' % (
+                text = '%s %s : %s %s' % (
                     convert, self._get_active_text(self.from_unit),
                     value, self._get_active_text(self.to_unit))
             else:
