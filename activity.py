@@ -43,9 +43,6 @@ class Conversion(Gtk.Label):
         self.modify_font(Pango.FontDescription(
                        '%s %d' % (FONT_FACE, int(FONT_SIZE * 1.2))))
 
-    def set_text(self, text):
-        Gtk.Label.set_text(self, text)
-
 
 class Ratio(Gtk.Label):
     def __init__(self):
