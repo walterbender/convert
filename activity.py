@@ -158,7 +158,7 @@ class ConvertActivity(activity.Activity):
             button.props.icon_name = name
             if len(self.dimensions) > 0:
                 button.props.group = self.dimensions['length']
-            button.connect('clicked', self.set_dimension, name)
+            button.connect('clicked', self._set_dimension, name)
             toolbarbox.toolbar.insert(button, -1)
             self.dimensions[name] = button
 
@@ -171,8 +171,8 @@ class ConvertActivity(activity.Activity):
         toolbarbox.toolbar.insert(stopbtn, -1)
 
         self.set_toolbar_box(toolbarbox)
-        self.set_dimension(None, 'length')
-        self.update_conversion(value='1', convert='1', direction='from')
+        self._set_dimension(None, 'length')
+        self._update_conversion(value='1', convert='1', direction='from')
         self.show_all()
 
     def _from_changed_cb(self, widget):
@@ -184,8 +184,8 @@ class ConvertActivity(activity.Activity):
                 direction = 'to'
             self._update_unit(widget, direction)
             num_value = '1'
-            convert_value = str(self.convert(float(num_value), direction))
-            self.update_conversion(num_value, convert_value, direction)
+            convert_value = str(self._convert(float(num_value), direction))
+            self._update_conversion(num_value, convert_value, direction)
 
     def _to_changed_cb(self, widget):
         direction = 'to'
@@ -196,29 +196,29 @@ class ConvertActivity(activity.Activity):
                 direction = 'from'
             self._update_unit(widget, direction)
             num_value = '1'
-            convert_value = str(self.convert(float(num_value), direction))
-            self.update_conversion(num_value, convert_value, direction)
+            convert_value = str(self._convert(float(num_value), direction))
+            self._update_conversion(num_value, convert_value, direction)
 
     def _update_value(self, entry, direction):
         try:
             num_value = str(entry.get_text())
             num_value = float(num_value.replace(',', ''))
-            new_value = self.format_values(num_value)
-            convert_value = str(self.convert(num_value, direction))
-            new_convert = self.format_values(convert_value)
-            self.change_result(new_value, new_convert, direction)
+            new_value = self._format_values(num_value)
+            convert_value = str(self._convert(num_value, direction))
+            new_convert = self._format_values(convert_value)
+            self._update_result(new_value, new_convert, direction)
 
             num_value = '1'
-            new_value = self.format_values(num_value)
-            convert_value = str(self.convert(float(num_value), direction))
-            new_convert = self.format_values(convert_value)
-            self.update_conversion(new_value, new_convert, direction)
+            new_value = self._format_values(num_value)
+            convert_value = str(self._convert(float(num_value), direction))
+            new_convert = self._format_values(convert_value)
+            self._update_conversion(new_value, new_convert, direction)
 
         except ValueError:
-            self.change_result('', '', direction)
-            self.update_conversion('', '', direction)
+            self._update_result('', '', direction)
+            self._update_conversion('', '', direction)
 
-    def update_conversion(self, value, convert, direction):
+    def _update_conversion(self, value, convert, direction):
         text = self.conversion.get_text()
         if direction == 'from':
             if convert != '' and value != '':
@@ -236,7 +236,7 @@ class ConvertActivity(activity.Activity):
                 pass
         self.conversion.set_text(text)
 
-    def format_values(self, value):
+    def _format_values(self, value):
         decimals = str(len(str(value).split('.')[-1]))
         fmt = '%.' + decimals + 'f'
         new_value = locale.format(fmt, float(value))
@@ -251,7 +251,7 @@ class ConvertActivity(activity.Activity):
         elif direction == 'to':
             self._update_value(self.to_value, direction)
 
-    def change_result(self, new_value, new_convert, direction):
+    def _update_result(self, new_value, new_convert, direction):
         if direction == 'from':
             self.to_value.handler_block_by_func(self._to_changed_cb)
             self.to_value.handler_block_by_func(self._insert_text_cb)
@@ -292,7 +292,7 @@ class ConvertActivity(activity.Activity):
             else:
                 self.result.set_text('')
 
-    def set_dimension(self, widget, name):
+    def _set_dimension(self, widget, name):
         self.dimension = name
 
         self.units = convert.dimension_units[name]
@@ -318,7 +318,7 @@ class ConvertActivity(activity.Activity):
             text = text.split('<b>')[1].split('</b>')[0]
         return text
 
-    def convert(self, num_value, direction):
+    def _convert(self, num_value, direction):
         if direction == 'from':
             unit = self._get_active_text(self.from_unit)
             to_unit = self._get_active_text(self.to_unit)
@@ -368,7 +368,7 @@ class ConvertActivity(activity.Activity):
                 self.to_value.set_text(state['to-value'])
 
             num_value = '1'
-            new_value = self.format_values(num_value)
-            convert_value = str(self.convert(float(num_value), state['direction']))
-            new_convert = self.format_values(convert_value)
-            self.update_conversion(new_value, new_convert, state['direction'])
+            new_value = self._format_values(num_value)
+            convert_value = str(self._convert(float(num_value), state['direction']))
+            new_convert = self._format_values(convert_value)
+            self._update_conversion(new_value, new_convert, state['direction'])
