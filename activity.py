@@ -172,7 +172,7 @@ class ConvertActivity(activity.Activity):
 
         self.set_toolbar_box(toolbarbox)
         self.set_dimension(None, 'length')
-        self.update_conversion_ratio(value='1', convert='1', direction='from')
+        self.update_conversion(value='1', convert='1', direction='from')
         self.show_all()
 
     def _from_changed_cb(self, widget):
@@ -185,7 +185,7 @@ class ConvertActivity(activity.Activity):
             self._update_unit(widget, direction)
             num_value = '1'
             convert_value = str(self.convert(float(num_value), direction))
-            self.update_conversion_ratio(num_value, convert_value, direction)
+            self.update_conversion(num_value, convert_value, direction)
 
     def _to_changed_cb(self, widget):
         direction = 'to'
@@ -197,7 +197,7 @@ class ConvertActivity(activity.Activity):
             self._update_unit(widget, direction)
             num_value = '1'
             convert_value = str(self.convert(float(num_value), direction))
-            self.update_conversion_ratio(num_value, convert_value, direction)
+            self.update_conversion(num_value, convert_value, direction)
 
     def _update_value(self, entry, direction):
         try:
@@ -212,13 +212,13 @@ class ConvertActivity(activity.Activity):
             new_value = self.format_values(num_value)
             convert_value = str(self.convert(float(num_value), direction))
             new_convert = self.format_values(convert_value)
-            self.update_conversion_ratio(new_value, new_convert, direction)
+            self.update_conversion(new_value, new_convert, direction)
 
         except ValueError:
             self.change_result('', '', direction)
-            self.update_conversion_ratio('', '', direction)
+            self.update_conversion('', '', direction)
 
-    def update_conversion_ratio(self, value, convert, direction):
+    def update_conversion(self, value, convert, direction):
         text = self.conversion.get_text()
         if direction == 'from':
             if convert != '' and value != '':
@@ -371,4 +371,4 @@ class ConvertActivity(activity.Activity):
             new_value = self.format_values(num_value)
             convert_value = str(self.convert(float(num_value), state['direction']))
             new_convert = self.format_values(convert_value)
-            self.update_conversion_ratio(new_value, new_convert, state['direction'])
+            self.update_conversion(new_value, new_convert, state['direction'])
