@@ -44,7 +44,7 @@ class Conversion(Gtk.Label):
                        '%s %d' % (FONT_FACE, int(FONT_SIZE * 1.2))))
 
 
-class Ratio(Gtk.Label):
+class Result(Gtk.Label):
     def __init__(self):
         Gtk.Label.__init__(self)
         self.set_selectable(True)
@@ -129,14 +129,14 @@ class ConvertActivity(activity.Activity):
         l_hbox.pack_start(self.to_value, True, True, 5)
         l_hbox.pack_end(self.to_unit, True, True, 5)
 
-        self.ratio = Ratio()
+        self.result = Result()
         self.conversion = Conversion()
 
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         box.pack_start(u_hbox, False, False, 30)
         box.pack_start(l_hbox, False, False, 0)
         box.pack_start(self.conversion, False, False, 20)
-        box.pack_start(self.ratio, True, False, 0)
+        box.pack_start(self.result, True, False, 0)
         self.set_canvas(box)
 
         # Toolbar
@@ -268,9 +268,9 @@ class ConvertActivity(activity.Activity):
                 text = '%s %s ~ %s %s' % (
                     new_value, self._get_active_text(self.from_unit),
                     new_convert, self._get_active_text(self.to_unit))
-                self.ratio.set_text(text)
+                self.result.set_text(text)
             else:
-                self.ratio.set_text('')
+                self.result.set_text('')
 
         elif direction == 'to':
             self.from_value.handler_block_by_func(self._from_changed_cb)
@@ -288,9 +288,9 @@ class ConvertActivity(activity.Activity):
                 text = '%s %s ~ %s %s' % (
                     new_convert, self._get_active_text(self.from_unit),
                     new_value, self._get_active_text(self.to_unit))
-                self.ratio.set_text(text)
+                self.result.set_text(text)
             else:
-                self.ratio.set_text('')
+                self.result.set_text('')
 
     def set_dimension(self, widget, name):
         self.dimension = name
